@@ -175,7 +175,7 @@ the four deep dives, the header/footer, and one media query that collapses the s
 
 ## 4. The pages, file by file
 
-### `site/index.html` — *Ambrogio — the agent orchestrator of tazlab.net*
+### `site/index.html` — *Ambrogio — the Personal Agent Orchestrator of tazlab.net*
 
 The main page. Five lines and four cards, nothing else:
 

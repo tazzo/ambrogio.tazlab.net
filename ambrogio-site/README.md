@@ -1,7 +1,7 @@
 # ambrogio-site
 
 The source of [ambrogio.tazlab.net](https://ambrogio.tazlab.net/) — the presentation site
-for **Ambrogio**, the agent orchestrator of tazlab.net.
+for **Ambrogio**, the Personal Agent Orchestrator of tazlab.net.
 
 Plain static HTML and one stylesheet, served by nginx. No database, no backend, no
 JavaScript, nothing computed at request time: the pod holds static files only.
