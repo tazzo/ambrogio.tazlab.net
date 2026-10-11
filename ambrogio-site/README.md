@@ -16,7 +16,7 @@ site/
   hands.html          deep dive: the hands, the budget and the silence
   conversation.html   deep dive: the conversation
   styles.css          the one stylesheet, hand-written, no framework, no CDN
-  logo.png            the mark — byte-identical to ambrogio/v2/api/ambrogio-mark.png
+  logo.png            the mark — ambrogio/v2/api/android-chrome-512x512.png, drawn at 40 px
   favicon.ico         the tab — the engine's own three-frame icon
   fonts/inter.woff2   the one typeface, self-hosted (see fonts/LICENSE-inter.txt)
 Dockerfile
@@ -33,9 +33,11 @@ the pages, §5 the pod). Two points worth keeping in the source:
   `--fg #e8e6e3`, `--dim #8a8f98`, `--line #2a2e36`, `--accent #7aa2f7`. Do not invent a
   colour here: the mark sits on that ground;
 - **the mark is the operator's art, unmodified.** `site/logo.png` is a byte-for-byte copy of
-  `ambrogio/v2/api/ambrogio-mark.png` (27,638 bytes, sha256
-  `7c37248e6cbfb2a5a00b92a22b8c93aa93591743757ad0b21319d92a10a5f0e6`); it is not redrawn and
-  not re-coloured. Same file, same art, as the engine's own bar.
+  `ambrogio/v2/api/android-chrome-512x512.png`, the largest raster the Ambrogio icon set holds
+  (512×512, 121,589 bytes, sha256
+  `626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9`); it is not redrawn and
+  not re-coloured, and `.brand img` draws it at 40 px — the header's mark, not the tab's. Same
+  art as the engine's own bar, which embeds the 192 of the same set.
 
 Every UI string is English.
 

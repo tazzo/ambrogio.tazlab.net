@@ -22,7 +22,7 @@ The delivery lane is already mapped and re-verified against the live repositorie
 | the two smaller services | `tazlab-k8s/apps/base/mnemosyne-mcp/deployment.yaml:52-58`, `tazlab-k8s/apps/base/hindsight/deployment-dashboard.yaml:60-66` |
 | the publish workflow | `blog-src/.github/workflows/publish.yml:4-6,22-25,28-30`; `wiki.tazlab.net/.github/workflows/publish.yml` (same shape) |
 | the Flux half | `tazlab-k8s/infrastructure/automation/hugo-wiki/automation.yaml:7-8,19-23,31,43-48`; `tazlab-k8s/clusters/tazlab-k8s/apps-static-wiki.yaml:4-10,17-19` |
-| the mark | `ambrogio/v2/api/ambrogio-mark.png` (27638 B, sha256 `7c37248e…`), and `ambrogio/REPORT-task32-the-new-icons.md` §2–§4 |
+| the mark | `ambrogio/v2/api/android-chrome-512x512.png` (121589 B, sha256 `626654ac…`), and `ambrogio/REPORT-task32-the-new-icons.md` §2–§4 |
 | the product's colours and face | `ambrogio/v2/api/ui/app.css:15-16,24` |
 | the product's own account | `ambrogio/README.md` §2 (queues), §3 (urgency), §4 (the two doors), §5 (the review), §6 (the trace), §7 (the sandbox), §9 (what is not done) |
 
@@ -88,14 +88,18 @@ just the pitch.
 
 The logo is the file the Ambrogio project already uses, copied byte for byte:
 
-- source: `ambrogio/v2/api/ambrogio-mark.png` — 192×192 RGBA PNG, **27638 B**, sha256
-  `7c37248e6cbfb2a5a00b92a22b8c93aa93591743757ad0b21319d92a10a5f0e6`;
+- source: `ambrogio/v2/api/android-chrome-512x512.png` — 512×512 RGBA PNG, **121589 B**, sha256
+  `626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9`;
 - destination: `site/logo.png`, identical bytes;
-- it is the file the engine's own bar embeds, and it is **byte-identical to
-  `android-chrome-192x192.png`** (`ambrogio/REPORT-task32-the-new-icons.md` §2, §4);
-- 192 px is the right source: the header draws it in a **28 px box**, so `192/28 = 6.9` covers
-  every realistic device-pixel ratio, and the engine's own comment is written for the 192
-  (`REPORT-task32-the-new-icons.md` §4);
+- it is the **largest raster the icon set holds**, and the set holds no SVG. The same bytes
+  stand in the zip as `web/icon-512x512.png`, `web/safari-pinned-tab.png`,
+  `android/playstore-icon.png` and `macos/AppIcon.appiconset/icon-512.png`
+  (`ambrogio/REPORT-task32-the-new-icons.md` §2, §4). The engine's own bar embeds the 192 of
+  the same set (`ambrogio-mark.png`, drawn in a 20 px box); the site draws the mark larger and
+  so takes the set's largest;
+- 512 px is the right source: the header draws it in a **40 px box**, so `512/40 = 12.8` covers
+  every realistic device-pixel ratio, and 40 px still fits inside the header's own 62 px
+  `min-height`, so the mark grows without moving anything else on the page;
 - **not re-coloured, not redrawn.** The operator's word is that the delivered colours read on
   both a dark and a light ground (`REPORT-task32-the-new-icons.md` §4); a redraw or a
   `markderive` pass would be a *different* mark, which is not ours to make;

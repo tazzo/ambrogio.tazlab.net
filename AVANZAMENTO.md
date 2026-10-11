@@ -72,6 +72,22 @@ they land; never rewrite history, append.
   `.github/workflows/publish.yml` still match PROGETTO §5.1 and §5.5 byte for byte
   (`Dockerfile` 244 B sha256 `cbd0b103…`).
 
+- **[step #49] The mark is the icon set's largest, drawn as a header mark.** `site/logo.png` is
+  now `ambrogio/v2/api/android-chrome-512x512.png` — 512×512, **121,589 B**, sha256
+  `626654ac…`, byte-compared with the file in the Ambrogio repository. It replaces the 192
+  (`7c37248e…`, 27,638 B) the site had been serving drawn small. The set carries **no SVG**, and
+  the 1024 exists only in the zip's iOS/macOS app-icon sets and was left there: at 40 CSS px the
+  512 already covers the drawn pixels six times over, so 195 KB more would buy none. `.brand img`
+  draws it at **40 px** (was 28) — inside the header's own 62 px `min-height`, so the bar does not
+  grow — and the markup on all five pages carries the file's own `512×512`. `favicon.ico` is
+  untouched (15,086 B, `b88644a5…`). Measured on the live hostname: **40×40 CSS px at 320 and at
+  1440**, header still 63 px, no horizontal overflow either, desktop page height unchanged at
+  **1295** — the mark grew and nothing else moved. The lane carried it: push `73e8ad0` → Actions
+  run #6 → `ambrogio-site-6-73e8ad07…` → the ImageUpdateAutomation's commit `2f1c985` in
+  `tazlab-k8s` → the pod rolled; `https://ambrogio.tazlab.net/logo.png` answers 121,589 B with
+  that digest. `verify-logo.sh` runs the four checks; the citation check's digest moved to the
+  512 (PROGETTO §3.1).
+
 ## Next
 
 1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the
@@ -89,7 +105,8 @@ they land; never rewrite history, append.
 - ~~Logo asset: the operator supplies or approves the mark before it is embedded.~~
   **Closed [step #45]:** the mark exists — `ambrogio/v2/api/ambrogio-mark.png` (27638 B,
   sha256 `7c37248e…`), the file the engine's own bar embeds; the site copies it unmodified
-  (PROGETTO §3.1).
+  (PROGETTO §3.1). **Superseded [step #49]:** the site now copies the icon set's largest,
+  `android-chrome-512x512.png` (121,589 B, sha256 `626654ac…`), drawn at 40 px.
 - ~~Font choice (default: Inter) to be confirmed at build time.~~
   **Closed [step #45]:** Inter, the variable WOFF2, self-hosted; the site copies no existing
   site's font (the blog uses a Google CDN, the wiki a system stack — both rejected) (PROGETTO

@@ -50,24 +50,25 @@ check blog-src/assets/css/custom.css 28
 check blog-src/layouts/partials/extend-head.html 1,2,3
 check wiki.tazlab.net/publish/themes/PaperMod/assets/css/core/reset.css 27
 check ambrogio/v2/api/ambrogio-mark.png
+check ambrogio/v2/api/android-chrome-512x512.png
 check ambrogio/v2/api/ui/app.css 15,16,24
 check ambrogio/REPORT-task32-the-new-icons.md
 check ambrogio/README.md
 check ambrogio/VOCABULARY.md
 check ambrogio-site/PROGETTO.md
 
-# the mark's digest, as PROGETTO.md §3.1 states it
-want=7c37248e6cbfb2a5a00b92a22b8c93aa93591743757ad0b21319d92a10a5f0e6
-got=$(sha256sum "$W/ambrogio/v2/api/ambrogio-mark.png" | cut -d' ' -f1)
+# the mark's digest, as PROGETTO.md §3.1 states it — the 512 the site takes
+want=626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+got=$(sha256sum "$W/ambrogio/v2/api/android-chrome-512x512.png" | cut -d' ' -f1)
 checked=$((checked + 1))
 if [ "$want" != "$got" ]; then
-  echo "DIGEST MISMATCH  ambrogio-mark.png  want $want  got $got"
+  echo "DIGEST MISMATCH  android-chrome-512x512.png  want $want  got $got"
   missing=$((missing + 1))
 fi
 
 # the digest PROGETTO.md itself declares for the mark must be the one in the file
 checked=$((checked + 1))
-if ! grep -q "7c37248e6cbfb2a5a00b92a22b8c93aa93591743757ad0b21319d92a10a5f0e6" \
+if ! grep -q "626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9" \
         "$W/ambrogio-site/PROGETTO.md"; then
   echo "PROGETTO.md does not name the mark's digest"
   missing=$((missing + 1))

@@ -184,7 +184,21 @@ identical (the same convention the Flux automation uses for its own commits).
 | the favicon stays as it is | `favicon.ico` 15,086 B / `b88644a5…`, live `200 image/x-icon 15086`, untouched in the diff |
 | the change stays the logo's own rules | the diff is one binary, one attribute on five pages, and the `.brand img` rule — nothing else |
 
-## Limits and what a later step could pick up
+## The documents that named the old file
+
+- **The project's own documents named the old file, and were cut over with it.** `PROGETTO.md`
+  §3.1 (`source: … ambrogio-mark.png — 192×192 … 27638 B`, `the header draws it in a 28 px box`)
+  and its source table (§"What was read", the `the mark` row), `ambrogio-site/README.md` (the
+  layout line and the "the mark is the operator's art" bullet), and `verify-project.sh`'s digest
+  check (it asserted `7c37248e…` of `ambrogio-mark.png` **and** that PROGETTO names it) all
+  stated the 192 as the site's source. They now state the 512 and its digest, and
+  `verify-project.sh` checks `626654ac…` of `v2/api/android-chrome-512x512.png` — it exits 0
+  (`checked 32 citations, 0 missing`). `AVANZAMENTO.md` keeps its step #46 line as written (it
+  was true then), gains a step #49 entry, and its closed logo question carries a
+  `Superseded [step #49]` sentence. The engine's own bar still embeds the 192
+  (`v2/api/ambrogio-mark.png`, drawn in a 20 px box) — unchanged, and out of this step's way.
+
+## What is left
 
 - **The other four pages were not photographed at 320/1440** — they carry the same header, the
   same stylesheet, and the same file, and the phone/desktop shots are of `/`; the byte-level
@@ -193,6 +207,3 @@ identical (the same convention the Flux automation uses for its own commits).
   hero scale (a landing block, a card icon at 3× DPR), the 1024 that lives in `app-icons.zip`
   (`ios/AppIcon.appiconset/icon-1024.png`) would have to be added to `v2/api/` first — the site
   can only take what the set carries.
-- The site's own `README.md` and `PROGETTO.md` describe the header ("the mark taken from the
-  Ambrogio repository") but state no size, so nothing there became stale; the stylesheet now
-  carries the number and the provenance.
