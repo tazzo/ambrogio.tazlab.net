@@ -1,7 +1,12 @@
 # REPORT — step #47: the whole chain, from the commit to the pod answering at ambrogio.tazlab.net
 
 Date: 2026-10-11. Role: worker-external (review).
-Tree: `/workspace/ambrogio-site` (the site's repository, HEAD `602bf05` on `main`) and its
+**§6 was added by the step that closed finding 1** (the publish-branch fix): it records the
+change made to `.github/workflows/publish.yml`, the deletion of the vestigial `origin/master`
+ref, and the second full pass of the chain that the closing push ran (run #2 →
+`ambrogio-site-2-a5ae413…` → the Automation's commit `8287717` → the pod on the new digest).
+Tree: `/workspace/ambrogio-site` (the site's repository, on branch `main` — `602bf05` when this
+review opened, `a5ae413` when the fix landed) and its
 sibling `/workspace/tazlab-k8s` (reached through the in-tree symlink `tazlab-k8s`), the cluster
 repository Flux reads.
 Cluster: context `admin@tazlab-k8s`, server v1.35.0; `flux` 2.9.0, `kubectl` v1.31.14.
@@ -355,11 +360,10 @@ the foreign Go test had finished, a plain `pgrep -c chrome` on the box read **0*
    explicitly as `main:master` — `origin/main` and `origin/master` are both `d8a3bee`, and run
    #1 ran on branch `master`. The three reference lanes have no such gap: their checkout is on
    `master` (`blog-src`, `wiki.tazlab.net`, `teaching.tazlab.net` all report branch `master`
-   tracking `refs/heads/master`), so a plain push triggers the build. **Fix** (not applied —
-   this step is a review): make the carried branch the one the workflow expects
-   (`git branch -m main master`, then push `master`), or add `main` to `on.push.branches`.
-   Today there is also one local-only commit on `main` (`602bf05`, the step-46 report and
-   `verify-lane.sh`), consistent with the repository's convention of committing work locally.
+   tracking `refs/heads/master`), so a plain push triggers the build.
+   **CLOSED by the fix below (§6)**: `publish.yml` now fires on `main`, the branch the checkout
+   carries and this repository's default, and the vestigial `origin/master` ref — the artifact
+   of the `main:master` push — is gone. Proven by run #2 firing on `main`.
 
 2. **`docker` needs `sudo`, and the container needs `--security-opt apparmor=unconfined`** on
    this nested host (its AppArmor policy cannot load `docker-default`). `docker.io` was installed
@@ -392,10 +396,109 @@ the foreign Go test had finished, a plain `pgrep -c chrome` on the box read **0*
 
 **Nothing in the chain itself failed.** There was no red condition to explain: the workflow ran
 green, the ImageRepository/ImagePolicy/ImageUpdateAutomation are all `Ready=True`, the
-Kustomization applied, the Deployment is 1/1, the Watchtower-free pod runs the exact digest the
+Kustomization applied, the Deployment is 1/1, the pod runs the exact digest the
 Action pushed, the Service answers, the Ingress is TLS-terminated with a valid Let's Encrypt
 certificate for the hostname, and the browser renders all five pages at both widths with the logo
 and the stylesheet loaded.
+
+---
+
+## 6. The fix applied by step #48: the publish branch now matches the checkout
+
+**What changed.**
+
+1. `.github/workflows/publish.yml` — the trigger is now the branch the checkout carries, which is
+   also this repository's default branch, with a comment naming the reason:
+
+```
+on:
+  # `main` is this repository's default branch and the branch the checkout carries; the
+  # wiki, the blog and the teaching site are published on push to the branch they carry,
+  # and this site used to watch `master` while every push went to `main` — a push that
+  # published nothing (step 47, finding 1).  Keep this name in step with the default
+  # branch: `gh api repos/tazzo/ambrogio.tazlab.net --jq .default_branch`.
+  push:
+    branches:
+      - main
+```
+
+2. The vestigial `origin/master` ref is gone. It existed only because the step-46 publish was
+   pushed as `main:master`; it pointed at an ancestor of `main` (`d8a3bee`), nothing tracked or
+   consumed it, and while it lived there were two names for one branch, one of which the workflow
+   ignored — a push there would have been published nothing, the same defect from the other side.
+
+```
+$ git push origin --delete master
+ - [deleted]         master
+$ git ls-remote --heads origin
+a5ae413a0c0ef67edb8cf3318a811a31b3ec1ccb        refs/heads/main      # the only branch, and the default
+$ curl -s https://api.github.com/repos/tazzo/ambrogio.tazlab.net | jq -r .default_branch
+main
+```
+
+The repository's other local-only commits went with it: `git push origin main` carried `602bf05`
+(the step-46 report and `verify-lane.sh`), `b6fcaab` (this review) and `a5ae413` (the fix) to
+`origin/main`, so local `main` and `origin/main` are one line again. The convention is now:
+everything lives on `main`, and pushing `main` is what publishes.
+
+**The proof: an ordinary push on `main` ran the whole chain again.** The push of `a5ae413` — the
+commit that carries the fix — fired run #2 by itself, because GitHub evaluates the workflow of
+the pushed commit, so the same push that fixes the trigger is also its first use:
+
+```
+$ curl -s https://api.github.com/repos/tazzo/ambrogio.tazlab.net/actions/runs
+2  Publish Ambrogio Site | event: push | branch: main | sha: a5ae413 | run_number: 2 | completed | success | 21:44:14Z  (38177595383)
+1  Publish Ambrogio Site | event: push | branch: master | sha: d8a3bee | run_number: 1 | completed | success | 21:18:15Z
+```
+
+and it published the tag the chain expects:
+
+```
+$ curl -s 'https://hub.docker.com/v2/repositories/tazzo/tazlab-ambrogio-site/tags'
+ambrogio-site-2-a5ae413a0c0ef67edb8cf3318a811a31b3ec1ccb  digest sha256:252cc464…f3a18  26,169,378 B  21:44:34Z
+ambrogio-site-1-d8a3bee3ba3ef7087ff14b480d38064bec6fa416  digest sha256:b05f71ac…56679  26,169,377 B  21:19:30Z
+latest                                                    digest sha256:252cc464…f3a18  26,169,378 B  21:44:31Z
+```
+
+Flux read it, resolved it, and committed it, exactly as it did the first time:
+
+```
+$ kubectl -n flux-system get imagerepository ambrogio-site -o jsonpath='{.status.lastScanResult.tagCount}:{.status.lastScanResult.scanTime}'
+3:2026-10-11T21:44:53Z
+$ kubectl -n flux-system get imagepolicy ambrogio-site -o jsonpath='{.status.latestRef.tag}'
+ambrogio-site-2-a5ae413a0c0ef67edb8cf3318a811a31b3ec1ccb
+$ kubectl -n flux-system get imageupdateautomation ambrogio-site -o jsonpath='{.status.lastPushCommit}:{.status.lastPushTime}:{.status.conditions[0].message}'
+828771705f5c9fc670bf6cf1fb84ab7bea4acb83:2026-10-11T21:44:56Z:repository up-to-date
+$ git -C /workspace/tazlab-k8s log --oneline -2 origin/master
+8287717 chore: self-update ambrogio-site image [skip ci]
+7c61115 chore: self-update ambrogio-site image [skip ci]
+$ git -C /workspace/tazlab-k8s show origin/master:apps/base/ambrogio-site/ambrogio-site.yaml | grep 'image: tazzo'
+image: tazzo/tazlab-ambrogio-site:ambrogio-site-2-a5ae413a0c0ef67edb8cf3318a811a31b3ec1ccb # {"$imagepolicy": "flux-system:ambrogio-site"}
+```
+
+and the cluster rolled onto it — the Kustomization applied the new revision, the Deployment took
+the new tag, the pod runs the new digest, ready and answering:
+
+```
+$ kubectl -n flux-system get kustomization apps-ambrogio-site -o jsonpath='{.status.conditions[?(@.type=="Ready")].message}'
+Applied revision: master@sha1:828771705f5c9fc670bf6cf1fb84ab7bea4acb83
+$ kubectl -n ambrogio-site get deploy ambrogio-site -o jsonpath='{.spec.template.spec.containers[0].image}'
+tazzo/tazlab-ambrogio-site:ambrogio-site-2-a5ae413a0c0ef67edb8cf3318a811a31b3ec1ccb
+$ kubectl -n ambrogio-site get pod -l app=ambrogio-site -o jsonpath='{.items[0].status.containerStatuses[0].imageID}'
+docker.io/tazzo/tazlab-ambrogio-site@sha256:252cc464111ba0e26774945d266541951ce684d605c039e0521cde03a66f3a18
+$ kubectl -n ambrogio-site get deploy ambrogio-site -o jsonpath='{.status.readyReplicas}/{.status.replicas}'    → 1/1
+$ curl -s -o /dev/null -w '%{http_code} %{ssl_verify_result} %{size_download}' https://ambrogio.tazlab.net/   → 200 0 3928
+```
+
+The pod's digest (`sha256:252cc464…`) is, byte for byte, the registry's digest for the tag run #2
+published, so the second pass of the chain closes end to end exactly as the first one did. The
+image is one byte larger than run #1's (26,169,378 vs 26,169,377) because it was rebuilt; the
+site's own files are unchanged.
+
+Because the publish branch watches *every* push to `main`, so does this repository's
+documentation: a docs-only commit mints a tag and rolls the pod — the same behaviour the wiki,
+the blog and the teaching site have. If that is ever unwanted the fix is a `paths-ignore` on the
+workflow, not a change of branch; it is not applied here.
 
 ---
 
@@ -409,6 +512,9 @@ $ sh /workspace/ambrogio-site/verify-lane.sh
 == 4. live and registry live https 200 0; registry tags 2
 VERIFY-LANE: OK          (exit 0)
 ```
+
+(The run above is the one this review made; the registry carries 3 tags since the fix's own
+publish — §6. `verify-lane.sh` only requires a non-zero count.)
 
 ## The single command that reproduces the browser half
 
@@ -424,6 +530,16 @@ a page overflows horizontally, or this task's Chrome is still running when it re
 ## Verdict
 
 **The chain is whole**: the commit publishes an image whose bytes the pod is running, and the
-pages answer over HTTPS and render correctly at phone and desktop widths — the one thing to fix
-is the branch the publish workflow watches (`master`) versus the branch this checkout carries
-(`main`), which journals nothing today but will swallow the next plain push.
+pages answer over HTTPS and render correctly at phone and desktop widths.
+
+The one defect this review found — the publish workflow watching `master` while every push went
+to `main` — is **closed** (§6): `publish.yml` now watches `main`, the branch the checkout carries
+and the repository's default; the vestigial `origin/master` ref is deleted; and the closing push
+itself (`a5ae413`) fired run #2 on `main`, published `ambrogio-site-2-a5ae413…`, and was read,
+resolved, committed and rolled onto by Flux without a hand touching anything — the second full
+pass of the chain, on the branch a worker will actually push.
+
+What is open, and was open before this lane existed: the pre-existing `pgadmin` PatchTransformer
+path that keeps `kubectl kustomize infrastructure/cluster-instances` from building under the
+default load restrictions (finding 3 of §5), and the observation that a docs-only push now mints
+an image tag, as it does for the wiki, the blog and the teaching site.
