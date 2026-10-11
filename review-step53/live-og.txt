@@ -1,0 +1,61 @@
+the Open Graph block, read from the live URL after the push (2026-10-11, ~23:44Z)
+
+$ curl -sS https://ambrogio.tazlab.net/ | sed -n '1,16p'
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambrogio — the Personal Agent Orchestrator of tazlab.net</title>
+<meta name="description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta property="og:title" content="Ambrogio — the Personal Agent Orchestrator of tazlab.net">
+<meta property="og:description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+<meta property="og:url" content="https://ambrogio.tazlab.net/">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+
+$ curl -sS https://ambrogio.tazlab.net/ | grep 'property="og:'
+    <meta property="og:title" content="Ambrogio — the Personal Agent Orchestrator of tazlab.net">
+    <meta property="og:description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+    <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+    <meta property="og:url" content="https://ambrogio.tazlab.net/">
+    <meta property="og:type" content="website">
+
+$ curl -sS https://ambrogio.tazlab.net/queues.html | grep 'property="og:'
+    <meta property="og:title" content="The queues, and who accepts them — Ambrogio">
+    <meta property="og:description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, and a step ceiling declared when the operator accepts it.">
+    <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+    <meta property="og:url" content="https://ambrogio.tazlab.net/queues.html">
+    <meta property="og:type" content="website">
+
+$ curl -sS https://ambrogio.tazlab.net/doors.html | grep 'property="og:'
+    <meta property="og:title" content="The two doors, and the sandbox — Ambrogio">
+    <meta property="og:description" content="One door for the operator and a smaller one for the agents, and every worker started inside a per-role Landlock sandbox.">
+    <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+    <meta property="og:url" content="https://ambrogio.tazlab.net/doors.html">
+    <meta property="og:type" content="website">
+
+$ curl -sS https://ambrogio.tazlab.net/agents.html | grep 'property="og:'
+    <meta property="og:title" content="The agents, the budget and the silence — Ambrogio">
+    <meta property="og:description" content="An agent is a live run; the pool counts slots per lane, a step declares its budget, and an agent that goes quiet is stopped and its trace kept.">
+    <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+    <meta property="og:url" content="https://ambrogio.tazlab.net/agents.html">
+    <meta property="og:type" content="website">
+
+$ curl -sS https://ambrogio.tazlab.net/conversation.html | grep 'property="og:'
+    <meta property="og:title" content="The conversation — Ambrogio">
+    <meta property="og:description" content="A conversation is a queue you talk to: its steps are the operator's messages, each answer is that step's brief, and the chain in the database is the transcript.">
+    <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+    <meta property="og:url" content="https://ambrogio.tazlab.net/conversation.html">
+    <meta property="og:type" content="website">
+
+$ sh review-step53/verify-live-og.sh   -> rc 0
+/                    200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/queues.html         200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/doors.html          200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/agents.html         200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/conversation.html   200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+og:image target     200 121589  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+VERIFY-LIVE-OG: OK

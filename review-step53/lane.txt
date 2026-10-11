@@ -1,0 +1,32 @@
+the lane that carried the Open Graph block (2026-10-11)
+
+$ git -C /workspace/ambrogio-site push origin main
+    d2645ca..2f43f92  main -> main
+
+$ gh run view 38185074098 -R tazzo/ambrogio.tazlab.net
+    Publish Ambrogio Site   push  main   run number 11   head_sha 2f43f927db...
+    conclusion: success
+      steps: Checkout code / The repository's own checks / Login to Docker Hub / Build and push
+             -> all success
+
+$ curl 'https://hub.docker.com/v2/repositories/tazzo/tazlab-ambrogio-site/tags?page_size=2&ordering=last_updated'
+    ambrogio-site-11-2f43f927dbb5d84bfeda79bf4ba5c3e521df4d57   2026-10-11T23:39:23Z   <- this run
+    latest                                                      2026-10-11T23:39:21Z
+
+$ git -C /workspace/tazlab-k8s log --oneline origin/master -1
+    c05d286 chore: self-update ambrogio-site image [skip ci]
+$ git -C /workspace/tazlab-k8s show origin/master:apps/base/ambrogio-site/ambrogio-site.yaml | grep 'image: tazzo'
+    image: tazzo/tazlab-ambrogio-site:ambrogio-site-11-2f43f927dbb5d84bfeda79bf4ba5c3e521df4d57 # {"$imagepolicy": "flux-system:ambrogio-site"}
+
+$ sh review-step53/verify-live-og.sh   (23:43:51Z)   -> rc 0
+/                    200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/queues.html         200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/doors.html          200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/agents.html         200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+/conversation.html   200  og properties 5  og:image https://ambrogio.tazlab.net/logo.png
+og:image target     200 121589  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+VERIFY-LIVE-OG: OK
+
+So: push 2f43f92 (23:38Z) -> Actions run #11 builds and pushes the tag (23:39Z) ->
+Flux ImageUpdateAutomation commits c05d286 into tazlab-k8s -> the pod rolls -> the live
+pages carry the block by 23:43:51Z, about five minutes after the push.

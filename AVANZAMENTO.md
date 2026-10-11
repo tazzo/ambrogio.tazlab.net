@@ -121,6 +121,19 @@ they land; never rewrite history, append.
   measured on the live hostname, `/` carries *Personal Agent Orchestrator* and no *Agent
   orchestrator*, and the five pages answer **200** (`review-step52/`).
 
+- **[step #53] The five pages carry an Open Graph block.** The head of every page gained
+  `og:title`, `og:description` and `og:image` — the three the assignment names — and `og:url`
+  and `og:type`, the two the Open Graph protocol also requires, so the block is valid rather
+  than three-fifths of one (`ambrogio-site/site/index.html:8-12`, `queues.html:8-12`,
+  `doors.html:8-12`, `agents.html:8-12`, `conversation.html:8-12`). `og:title` is the page's own
+  `<title>` and `og:description` its own meta description, so each page has one source of truth;
+  `og:image` is `https://ambrogio.tazlab.net/logo.png`, the 512×512 the header already draws;
+  `og:url` is the page's own address. Nothing else moved: no `<script>` was added (still 0 on
+  all five), and `verify-project.sh --in-repo` (8 checked, 0 missing) and `verify-logo-files.sh`
+  (OK) pass on the pushed tree. Measured on the live hostname: the five pages carry the five
+  properties and `logo.png` answers **200 121589** with the pinned digest
+  `626654ac…` (`review-step53/`).
+
 ## Next
 
 1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the

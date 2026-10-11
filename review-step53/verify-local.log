@@ -1,0 +1,59 @@
+the two checks the publish workflow runs, the local Open Graph check, and the change
+(2026-10-11, on the tree that was pushed as 2f43f92)
+
+$ sh verify-project.sh --in-repo   -> rc 0
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+
+$ sh verify-logo-files.sh   -> rc 0
+== 1. the mark in the site
+site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+icon set       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+cmp            site/logo.png == ambrogio/v2/api/android-chrome-512x512.png  (byte for byte)
+PROGETTO.md    names the same digest
+== 2. the markup, on the five pages
+pages          5 of 5 carry the file's own 512x512
+== 3. the drawn height the stylesheet states
+logo drawn     40 px tall (and as wide), expected 40
+== 4. the favicon left alone
+favicon.ico    15086 bytes  b88644a59fa5dad99bf7aa9371ee52b8e2da5d24f1e6f31d45943500bf40377f
+favicon        unchanged (still the tab's favicon.ico)
+VERIFY-LOGO-FILES: OK
+
+$ sh review-step53/verify-og.sh   -> rc 0
+index.html           og:title present  og:description present  og:image present  og:url present  og:type present  scripts 0
+queues.html          og:title present  og:description present  og:image present  og:url present  og:type present  scripts 0
+doors.html           og:title present  og:description present  og:image present  og:url present  og:type present  scripts 0
+agents.html          og:title present  og:description present  og:image present  og:url present  og:type present  scripts 0
+conversation.html    og:title present  og:description present  og:image present  og:url present  og:type present  scripts 0
+VERIFY-OG: OK
+
+$ git show --format='%H %s' --stat 2f43f92
+2f43f927dbb5d84bfeda79bf4ba5c3e521df4d57 the five pages carry an Open Graph block: og:title, og:description, og:image
+
+ ambrogio-site/site/agents.html       | 5 +++++
+ ambrogio-site/site/conversation.html | 5 +++++
+ ambrogio-site/site/doors.html        | 5 +++++
+ ambrogio-site/site/index.html        | 5 +++++
+ ambrogio-site/site/queues.html       | 5 +++++
+ 5 files changed, 25 insertions(+)
+
+$ git diff d2645ca 2f43f92 -- ambrogio-site/site/index.html
+diff --git a/ambrogio-site/site/index.html b/ambrogio-site/site/index.html
+index 37e3b59..d6fbf2c 100644
+--- a/ambrogio-site/site/index.html
++++ b/ambrogio-site/site/index.html
+@@ -5,6 +5,11 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Ambrogio — the Personal Agent Orchestrator of tazlab.net</title>
+ <meta name="description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
++<meta property="og:title" content="Ambrogio — the Personal Agent Orchestrator of tazlab.net">
++<meta property="og:description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
++<meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
++<meta property="og:url" content="https://ambrogio.tazlab.net/">
++<meta property="og:type" content="website">
+ <link rel="icon" href="favicon.ico">
+ <link rel="stylesheet" href="styles.css">
+ </head>
