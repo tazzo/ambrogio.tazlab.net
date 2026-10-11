@@ -1,0 +1,98 @@
+{
+ "phone-320": {
+  "viewport": {
+   "w": 320,
+   "h": 640,
+   "dpr": 1
+  },
+  "natural": [
+   512,
+   512
+  ],
+  "attrs": [
+   "512",
+   "512"
+  ],
+  "rect": {
+   "w": 40,
+   "h": 40,
+   "top": 11,
+   "left": 22
+  },
+  "css": {
+   "w": "40px",
+   "h": "40px"
+  },
+  "headerH": 63,
+  "wrapH": 62,
+  "brandW": 234.39,
+  "nameW": 184.39,
+  "brandRight": 256.39,
+  "wrapRight": 320,
+  "doc": {
+   "scrollW": 320,
+   "clientW": 320,
+   "scrollH": 2461
+  },
+  "bodyStyle": {
+   "font": "Inter, system-ui, -app",
+   "bg": "rgb(20, 22, 26)",
+   "size": "16px"
+  },
+  "images": [
+   "logo.png:512x512"
+  ],
+  "logoTransfer": [
+   "logo.png:300"
+  ],
+  "complete": true
+ },
+ "desktop-1440": {
+  "viewport": {
+   "w": 1440,
+   "h": 900,
+   "dpr": 1.25
+  },
+  "natural": [
+   512,
+   512
+  ],
+  "attrs": [
+   "512",
+   "512"
+  ],
+  "rect": {
+   "w": 40,
+   "h": 40,
+   "top": 11,
+   "left": 212
+  },
+  "css": {
+   "w": "40px",
+   "h": "40px"
+  },
+  "headerH": 63,
+  "wrapH": 62,
+  "brandW": 234.17,
+  "nameW": 184.17,
+  "brandRight": 446.17,
+  "wrapRight": 1250,
+  "doc": {
+   "scrollW": 1440,
+   "clientW": 1440,
+   "scrollH": 1295
+  },
+  "bodyStyle": {
+   "font": "Inter, system-ui, -app",
+   "bg": "rgb(20, 22, 26)",
+   "size": "17px"
+  },
+  "images": [
+   "logo.png:512x512"
+  ],
+  "logoTransfer": [
+   "logo.png:0"
+  ],
+  "complete": true
+ }
+}
