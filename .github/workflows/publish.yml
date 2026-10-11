@@ -1,9 +1,14 @@
 name: Publish Ambrogio Site
 
 on:
+  # `main` is this repository's default branch and the branch the checkout carries; the
+  # wiki, the blog and the teaching site are published on push to the branch they carry,
+  # and this site used to watch `master` while every push went to `main` — a push that
+  # published nothing (step 47, finding 1).  Keep this name in step with the default
+  # branch: `gh api repos/tazzo/ambrogio.tazlab.net --jq .default_branch`.
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-push:
