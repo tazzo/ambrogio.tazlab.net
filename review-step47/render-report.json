@@ -1,0 +1,517 @@
+{
+  "host": "https://ambrogio.tazlab.net",
+  "chrome": "/home/tazpod/.cache/ms-playwright/chromium-1148/chrome-linux/chrome",
+  "widths": {
+    "phone": {
+      "viewport": [
+        390,
+        844,
+        3
+      ],
+      "pages": {
+        "/": {
+          "url": "https://ambrogio.tazlab.net/",
+          "title": "Ambrogio \u2014 the agent orchestrator of tazlab.net",
+          "h1": "Ambrogio",
+          "cards": 4,
+          "scripts": 0,
+          "window": [
+            390,
+            844
+          ],
+          "page": [
+            390,
+            2051
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 16px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/favicon.ico": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/queues.html": {
+          "url": "https://ambrogio.tazlab.net/queues.html",
+          "title": "The queues, and who accepts them \u2014 Ambrogio",
+          "h1": "The queues, and who accepts them",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            390,
+            844
+          ],
+          "page": [
+            390,
+            3069
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 16px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/doors.html": {
+          "url": "https://ambrogio.tazlab.net/doors.html",
+          "title": "The two doors, and the sandbox \u2014 Ambrogio",
+          "h1": "The two doors, and the sandbox",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            390,
+            844
+          ],
+          "page": [
+            390,
+            2381
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 16px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/hands.html": {
+          "url": "https://ambrogio.tazlab.net/hands.html",
+          "title": "The hands, the budget and the silence \u2014 Ambrogio",
+          "h1": "The hands, the budget and the silence",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            390,
+            844
+          ],
+          "page": [
+            390,
+            2485
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 16px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/conversation.html": {
+          "url": "https://ambrogio.tazlab.net/conversation.html",
+          "title": "The conversation \u2014 Ambrogio",
+          "h1": "The conversation",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            390,
+            844
+          ],
+          "page": [
+            390,
+            2269
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 16px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        }
+      },
+      "screenshot": "/workspace/ambrogio-site/review-step47/shot-phone-390x844.png",
+      "screenshotBytes": 760844,
+      "fullPageCss": [
+        390,
+        2051
+      ]
+    },
+    "desktop": {
+      "viewport": [
+        1440,
+        900,
+        1
+      ],
+      "pages": {
+        "/": {
+          "url": "https://ambrogio.tazlab.net/",
+          "title": "Ambrogio \u2014 the agent orchestrator of tazlab.net",
+          "h1": "Ambrogio",
+          "cards": 4,
+          "scripts": 0,
+          "window": [
+            1440,
+            900
+          ],
+          "page": [
+            1440,
+            1295
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 17px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/queues.html": {
+          "url": "https://ambrogio.tazlab.net/queues.html",
+          "title": "The queues, and who accepts them \u2014 Ambrogio",
+          "h1": "The queues, and who accepts them",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            1440,
+            900
+          ],
+          "page": [
+            1440,
+            2088
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 17px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/doors.html": {
+          "url": "https://ambrogio.tazlab.net/doors.html",
+          "title": "The two doors, and the sandbox \u2014 Ambrogio",
+          "h1": "The two doors, and the sandbox",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            1440,
+            900
+          ],
+          "page": [
+            1440,
+            1681
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 17px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/hands.html": {
+          "url": "https://ambrogio.tazlab.net/hands.html",
+          "title": "The hands, the budget and the silence \u2014 Ambrogio",
+          "h1": "The hands, the budget and the silence",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            1440,
+            900
+          ],
+          "page": [
+            1440,
+            1768
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 17px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        },
+        "/conversation.html": {
+          "url": "https://ambrogio.tazlab.net/conversation.html",
+          "title": "The conversation \u2014 Ambrogio",
+          "h1": "The conversation",
+          "cards": 0,
+          "scripts": 0,
+          "window": [
+            1440,
+            900
+          ],
+          "page": [
+            1440,
+            1626
+          ],
+          "bodyFont": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif 17px",
+          "bodyBackground": "rgb(20, 22, 26)",
+          "logo": {
+            "src": "logo.png",
+            "complete": true,
+            "naturalWidth": 192,
+            "naturalHeight": 192,
+            "renderedWidth": 28,
+            "renderedHeight": 28
+          },
+          "images": [
+            {
+              "src": "logo.png",
+              "complete": true,
+              "naturalWidth": 192,
+              "naturalHeight": 192,
+              "renderedWidth": 28,
+              "renderedHeight": 28
+            }
+          ],
+          "stylesheets": [
+            "https://ambrogio.tazlab.net/styles.css"
+          ],
+          "headingColour": "rgb(232, 230, 227)",
+          "documentStatus": 200,
+          "subresources": {
+            "https://ambrogio.tazlab.net/styles.css": 200,
+            "https://ambrogio.tazlab.net/fonts/inter.woff2": 200,
+            "https://ambrogio.tazlab.net/logo.png": 200
+          },
+          "consoleErrors": [],
+          "exceptions": []
+        }
+      },
+      "screenshot": "/workspace/ambrogio-site/review-step47/shot-desktop-1440x900.png",
+      "screenshotBytes": 208600,
+      "fullPageCss": [
+        1440,
+        1295
+      ]
+    }
+  },
+  "failures": [],
+  "chromeBeforeMachine": 13,
+  "chromeBeforeMine": 0,
+  "chromeVersion": "Chrome/131.0.6778.33",
+  "pgrepChromeAfter": 13,
+  "chromeBinaryAfter": [
+    "/workspace/.tazpod/.omp/puppeteer/chrome/linux-150.0.7871.24/chrome-linux64/chrome"
+  ],
+  "chromeMineAfter": 0,
+  "chromeOpenedByThisTaskLeftBehind": 0
+}
