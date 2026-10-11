@@ -1,0 +1,14 @@
+$ go test ./logx/ -count=1
+ok  	github.com/tazzo/ambrogio/logx	0.489s
+
+$ go test ./v2/runner/ -run 'TestTheGateRefusesATreeThatDoesNotCompile|TestTheGateLetsACompilingTreeThrough|TestTheGateLetsAWriterThroughWhenTheKeyIsDeclared' -count=1
+ok  	github.com/tazzo/ambrogio/v2/runner	15.639s
+
+$ go test -count=1 ./v2/runner/ ./v2/engine/ ./v2/queue/
+ok  	github.com/tazzo/ambrogio/v2/runner	98.445s
+ok  	github.com/tazzo/ambrogio/v2/engine	4.637s
+ok  	github.com/tazzo/ambrogio/v2/queue	19.556s
+
+the line that was refused, and the declaration:
+479:					logx.F("queue", q.ID), logx.F("step", next.ID))
+96:	"step":            Identity, // next.ID, the step the line is about (v2/queue/carry.go:479),
