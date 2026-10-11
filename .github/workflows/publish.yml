@@ -18,10 +18,14 @@ jobs:
           username: "roberto.tazzoli@gmail.com"
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # The site's source lives in ambrogio-site/ (the repository's root also carries the
+      # project's documents); the build context is that directory, which is what the
+      # Dockerfile's `COPY site/ ...` is relative to.
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ambrogio-site
+          file: ambrogio-site/Dockerfile
           push: true
           tags: |
             tazzo/tazlab-ambrogio-site:latest
