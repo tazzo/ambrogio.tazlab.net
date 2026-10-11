@@ -1,0 +1,21 @@
+the live hostname, read after the push (2026-10-11, ~23:33Z)
+
+$ git -C /workspace/ambrogio-site push origin main
+    05217ac..0802624  main -> main
+
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/
+    / 200 3963   Personal Agent Orchestrator 3   Agent orchestrator 0   og: tags 0
+      <title>  Ambrogio — the Personal Agent Orchestrator of tazlab.net
+      eyebrow  Personal Agent Orchestrator
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/queues.html
+    /queues.html 200 5587   Personal Agent Orchestrator 1   Agent orchestrator 0   og: tags 0
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/doors.html
+    /doors.html 200 4362   Personal Agent Orchestrator 1   Agent orchestrator 0   og: tags 0
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/agents.html
+    /agents.html 200 4641   Personal Agent Orchestrator 1   Agent orchestrator 0   og: tags 0
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/conversation.html
+    /conversation.html 200 4078   Personal Agent Orchestrator 1   Agent orchestrator 0   og: tags 0
+
+case-sensitive, on the served bytes: 'Agent orchestrator' is 0 everywhere;
+'Agent Orchestrator' occurs only inside 'Personal Agent Orchestrator' (3 on /: the <title>,
+the eyebrow, the footer; 1 on each deep dive: the footer).

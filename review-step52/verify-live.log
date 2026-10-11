@@ -1,0 +1,12 @@
+$ sh review-step52/verify-live.sh   (from /workspace/ambrogio-site, 2026-10-11)
+/                    200  Personal Agent Orchestrator 3  Agent orchestrator 0
+/queues.html         200  Personal Agent Orchestrator 1  Agent orchestrator 0
+/doors.html          200  Personal Agent Orchestrator 1  Agent orchestrator 0
+/agents.html         200  Personal Agent Orchestrator 1  Agent orchestrator 0
+/conversation.html   200  Personal Agent Orchestrator 1  Agent orchestrator 0
+VERIFY-LIVE: OK
+
+$ sh review-step52/measure-live.sh new
+3
+$ sh review-step52/measure-live.sh old
+0

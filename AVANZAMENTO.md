@@ -105,7 +105,21 @@ they land; never rewrite history, append.
   is the previous deployment. Proven: the step's own commands pass on this tree (rc 0) and in
   a container that carries the copy only; on three corrupted copies — the logo's digest, one
   page's markup, one of the five page names in PROGETTO.md — the same commands exit 1
-  (`evidence-checks-pass.log`, `evidence-checks-corrupt.log`).
+  `evidence-checks-pass.log`, `evidence-checks-corrupt.log`).
+
+- **[step #52] The site says *Personal Agent Orchestrator*.** The operator filed *Agent
+  orchestrator → Personal Agent Orchestrator* against the page he is presenting, and the phrase
+  moved where it is read — and only the phrase: the hero eyebrow, the `<title>` and the footer of
+  the main page (`ambrogio-site/site/index.html:6,33,85`), the footer of the four deep dives
+  (`agents.html:92`, `queues.html:103`, `doors.html:85`, `conversation.html:81`), and the
+  documents with them (`PROGETTO.md:178`, `README.md:3`, `ambrogio-site/README.md:4`). The pages
+  carry **no** Open Graph tag and the meta description never named the phrase, so there was
+  nowhere else in the markup to move. Both checks the publish workflow runs
+  (`verify-project.sh --in-repo`, `verify-logo-files.sh`) pass on the pushed tree. The lane
+  carried it: push `0802624` → Actions run #10 →
+  `ambrogio-site-10-08026245668b…` → Flux's commit `ea0bd53` in `tazlab-k8s` → the pod rolled;
+  measured on the live hostname, `/` carries *Personal Agent Orchestrator* and no *Agent
+  orchestrator*, and the five pages answer **200** (`review-step52/`).
 
 ## Next
 
