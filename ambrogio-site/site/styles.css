@@ -49,7 +49,12 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 .site-header .wrap { display: flex; align-items: center; min-height: 62px; padding-top: 10px; padding-bottom: 10px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--fg); font-weight: 650; letter-spacing: -0.01em; }
 .brand:hover { text-decoration: none; }
-.brand img { display: block; width: 28px; height: 28px; }
+/* The mark. site/logo.png is android-chrome-512x512.png of the Ambrogio icon set
+   (ambrogio/v2/api/, from app-icons.zip): 512×512, 121,589 B — the largest the set
+   holds. Drawn at 40 px, a header mark and not a favicon (the favicon stays
+   favicon.ico, in the tab's business). 40 px keeps the header's own 62 px min-height
+   in charge, so the mark grows without moving anything else on the page. */
+.brand img { display: block; width: 40px; height: 40px; }
 .brand .name { font-size: 17px; }
 .brand .tld { color: var(--dim); font-weight: 500; }
 
