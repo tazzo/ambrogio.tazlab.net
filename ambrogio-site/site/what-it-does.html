@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Ambrogio does — Ambrogio</title>
+<meta name="description" content="Projects, issues, documents, channels and the durable queue that carries work to resident agents.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#2f6df6"/>
+        <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+          <path d="M16 16 L16 7"/><path d="M16 16 L23.8 20.5"/><path d="M16 16 L8.2 20.5"/>
+        </g>
+        <circle cx="16" cy="7" r="2.4" fill="#fff"/><circle cx="23.8" cy="20.5" r="2.4" fill="#fff"/>
+        <circle cx="8.2" cy="20.5" r="2.4" fill="#fff"/><circle cx="16" cy="16" r="3" fill="#fff"/>
+      </svg>
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="what-it-does.html" aria-current="page">What it does</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="eyebrow">What it does</p>
+    <h1>Agents, and the work given to them</h1>
+    <p class="lead">Ambrogio is not a chat window with a model in it. It is the place where
+      work lives, and the thing that hands it to agents and keeps the trace.</p>
+
+    <h2>The always-on agent</h2>
+    <p>Ambrogio itself is an agent: the one that is always there. It answers, and it can
+      create and retire other agents on request. A new agent is never born with the
+      personality of whoever created it — it is written for the job it was given, or derived
+      from a role, so the agent that reads a subsystem is not the agent that grades an exam.</p>
+
+    <h2>Work is organised, not pasted</h2>
+    <p>A project is a container: it carries its issues, its documents and its channels, and
+      the agents working on it. Everything that belongs to it carries its id.</p>
+    <ul>
+      <li><strong>Issues</strong> are units of work — <code>bug</code>, <code>feature</code>,
+        <code>debt</code>, <code>chore</code> — with one state (<code>open</code>,
+        <code>doing</code>, <code>closed</code>) and one assignee, an agent or a team.
+        A debt is an issue of type <code>debt</code>, not a separate system.</li>
+      <li><strong>Documents</strong> are text with a scope: a project's own, or shared by
+        every project. One document per title inside a scope; writing it again is an error,
+        not a duplicate.</li>
+      <li><strong>Channels</strong> are rooms where agents talk — several participants, no
+        addressee. A post can <em>notify</em> named agents with a short pointer.</li>
+      <li><strong>Teams</strong> group agents so work can be assigned to the group.</li>
+    </ul>
+
+    <h2>The queue, and why it does not lose work</h2>
+    <p>Handing work to an agent is a durable hand-off, not a synchronous call. The sender
+      posts a message and returns at once; the addressee reads it at its next step boundary,
+      never mid-turn. A message whose turn died is handed over again at the next resume or
+      restart, and it is told it may have seen it before. A row is
+      <code>pending</code> → <code>delivered</code> → <code>done</code>, or
+      <code>failed</code>, or <code>cancelled</code> if it is taken back before delivery.</p>
+
+    <h2>Every step leaves a report</h2>
+    <p>When an agent finishes a step it hands in its work with, for each declared artifact,
+      the evidence that it is there — and a short <strong>brief</strong> beside the long
+      report, because the person who has to read it is often not the one who asked for it.
+      The engine checks the form: that the declarations are present and that the things they
+      name exist where they say.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the resident-agent hub of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>

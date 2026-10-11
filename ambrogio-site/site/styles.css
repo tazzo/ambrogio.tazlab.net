@@ -1,0 +1,148 @@
+/* ambrogio.tazlab.net — one stylesheet, no framework, no build step. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/inter.woff2") format("woff2");
+}
+
+:root {
+  --bg: #ffffff;
+  --panel: #f6f8fb;
+  --ink: #15181e;
+  --muted: #5c6572;
+  --line: #e5e8ee;
+  --accent: #2f6df6;
+  --accent-ink: #ffffff;
+  --code-bg: #f2f5f9;
+  --radius: 10px;
+  --measure: 720px;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 22px; }
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 62px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; letter-spacing: -0.01em; }
+.brand:hover { text-decoration: none; }
+.brand svg { display: block; }
+.brand .name { font-size: 17px; }
+.brand .tld { color: var(--muted); font-weight: 500; }
+nav.site-nav { display: flex; flex-wrap: wrap; gap: 18px; }
+nav.site-nav a { color: var(--muted); font-size: 15px; font-weight: 500; }
+nav.site-nav a:hover, nav.site-nav a[aria-current="page"] { color: var(--ink); text-decoration: none; }
+
+/* Main */
+main { display: block; padding: 46px 0 8px; }
+
+h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; font-weight: 680; }
+h1 { font-size: 2.35rem; margin: 0 0 0.5rem; }
+h2 { font-size: 1.35rem; margin: 2.4rem 0 0.7rem; }
+h3 { font-size: 1.05rem; margin: 1.6rem 0 0.4rem; }
+p { margin: 0 0 1rem; }
+.lead { font-size: 1.18rem; color: var(--muted); max-width: 40ch; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 650; color: var(--accent); margin: 0 0 0.8rem; }
+
+ul, ol { padding-left: 1.15rem; }
+li { margin: 0.25rem 0; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.4rem 0; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--code-bg);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+}
+pre {
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  background: var(--bg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.card:hover { border-color: #c9d2e0; transform: translateY(-1px); }
+.card h3 { margin-top: 0; }
+.card p { color: var(--muted); font-size: 15px; margin: 0.3rem 0 0; }
+
+/* Flow diagram (the delivery lane) */
+.lane { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 1rem 0 1.4rem; }
+.lane .step {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 14px;
+  font-weight: 550;
+  background: var(--panel);
+  white-space: nowrap;
+}
+.lane .arrow { color: var(--muted); font-size: 14px; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 56px;
+  padding: 22px 0 40px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  h1 { font-size: 1.9rem; }
+  main { padding-top: 34px; }
+  .cards { grid-template-columns: 1fr; }
+  .site-header .wrap { min-height: 56px; }
+  nav.site-nav { gap: 14px; }
+}
