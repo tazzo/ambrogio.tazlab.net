@@ -177,14 +177,27 @@ the four deep dives, the header/footer, and one media query that collapses the s
 
 ### `site/index.html` — *Ambrogio — the Personal Agent Orchestrator of tazlab.net*
 
-The main page. Five lines and four cards, nothing else:
+The main page. The claim, five paragraphs and four cards:
 
 - the claim, in the operator's words §1: it keeps the trace of what is done, gives order and
   documentation to every movement, and its own internal agents keep it correct;
-- what it is: one static Go binary beside one SQLite file, supervising resident agent processes
-  over the Agent Client Protocol; one HTTP API, one SSE stream, one page of its own;
-- why it exists: two problems — several agents working at once without two agents in one place,
-  and the trace of what was done and why, for whoever comes later (`ambrogio/README.md` §1);
+- **that it is a personal tool, and the shape that makes it one**: one static Go binary beside
+  one SQLite file — no server to install, no database to run, no infrastructure, no team; the
+  operator runs it on his own machine and drives it from a page the binary serves itself; one
+  person, or a small team, is the most it is made for;
+- what it orchestrates: several agents working at the same time on the same things, supervised
+  over the Agent Client Protocol without two agents in one place; one HTTP API and one event
+  stream; and the tasks it opens for itself — the smaller jobs — carried by the agents it spawns
+  (`ambrogio/README.md` §1, §2);
+- what it keeps: the trace — what was done, by whom and when — the operator's own work, the work
+  of other tools, and the work of the agents Ambrogio spawns for itself; a queue says the order,
+  its documents say why, and the record stays in the one file beside the binary
+  (`ambrogio/README.md` §6);
+- the problem it removes, in the operator's terms: the work growing past what one person can
+  hold — many terminals open at once, documents written here and there, no answer to who did
+  what and when — against one place where the work is written down and the documents stay
+  (`ambrogio/README.md` §1);
+- the register: **not a professional product**, a small thing that does its job well;
 - **four cards**, one per deep dive, each one sentence naming the question it answers.
 
 No feature list, no screenshot gallery, no version badge.

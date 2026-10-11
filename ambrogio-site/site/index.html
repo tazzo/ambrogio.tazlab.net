@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ambrogio — the Personal Agent Orchestrator of tazlab.net</title>
-<meta name="description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta name="description" content="Ambrogio is a personal tool: one binary beside one file, for one person or a small team, that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
 <meta property="og:title" content="Ambrogio — the Personal Agent Orchestrator of tazlab.net">
-<meta property="og:description" content="Ambrogio is one binary that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta property="og:description" content="Ambrogio is a personal tool: one binary beside one file, for one person or a small team, that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
 <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
 <meta property="og:url" content="https://ambrogio.tazlab.net/">
 <meta property="og:type" content="website">
@@ -40,14 +40,29 @@
       <p class="lead">Ambrogio keeps the trace of what is done. It gives order and
         documentation to every movement, and its own internal agents keep it correct.</p>
 
-      <p>It is one static Go binary beside one SQLite file. It supervises resident agent
-        processes over the Agent Client Protocol, hands them work, and exposes the whole of it
-        — the queues, the steps, the documents, the verdicts — through one HTTP API and one
-        event stream. The operator drives it from a page the binary serves itself.</p>
+      <p>It is a personal tool. It is one static Go binary beside one SQLite file — no
+        server to install, no database to run, no infrastructure, no team — and the operator
+        runs it on his own machine and drives it from a page the binary serves itself. One
+        person, or a small team, is the most it is made for.</p>
 
-      <p>It exists for two problems: several agents working at once without two agents in one
-        place, and the trace of what was done and why, for the agent that comes later and was
-        not there when the decision was taken.</p>
+      <p>What it does is orchestration: several agents working at the same time on the same
+        things. Ambrogio supervises resident agent processes over the Agent Client Protocol,
+        hands them work without two agents in one place, and exposes the whole of it — the
+        queues, the steps, the documents, the verdicts — through one HTTP API and one event
+        stream. It opens tasks of its own as well, the smaller jobs, and the agents it spawns
+        carry them.</p>
+
+      <p>What it keeps is the trace: what was done, by whom and when — the operator's own
+        work, the work of other tools, and the work of the agents Ambrogio spawns for itself.
+        A queue says the order, its documents say why, and the record stays in the one file
+        beside the binary.</p>
+
+      <p>That is the problem it removes. For one person the work grows past what one person
+        can hold — many terminals open at once, documents written here and there, no answer to
+        who did what and when — and Ambrogio is the one place where the work is written down,
+        the documents stay, and the order of it can be read back afterwards.</p>
+
+      <p>It is not a professional product. It is a small thing that does its job well.</p>
 
       <h2>The four things worth knowing</h2>
       <ul class="cards">
