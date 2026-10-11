@@ -1,0 +1,323 @@
+ok  	github.com/tazzo/ambrogio/v2/task	0.060s
+ok  	github.com/tazzo/ambrogio/v2/store	15.942s
+ok  	github.com/tazzo/ambrogio/v2/queue	21.530s
+ok  	github.com/tazzo/ambrogio/v2/engine	10.501s
+2026-10-11T23:09:47.944Z INFO	claimed task=1 queue=external run=1 kind=work title="touch v2/broken/half.go"
+2026-10-11T23:09:48.369Z INFO	the worker started task=1 run=1 prompt_bytes=5386
+2026-10-11T23:09:48.625Z INFO	the worker delivered task=1 run=1 took=256 artifacts=1 proposes=0 summary="the call without the function"
+2026-10-11T23:09:50.159Z WARN	the log vocabulary's own tests refused the delivery task=1 file=logx/vocabulary.go command="go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1" took=1102 err="exit status 1"
+--- FAIL: TestTheGateRefusesATreeThatDoesNotCompile (7.49s)
+    build_gate_test.go:100: the refusal does not open with its cause: "the delivery touches the hub's log writers and `go test ./logx/...` did not pass in the tree: the command that says so: go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1 — the tree said:\n--- FAIL: TestEveryFieldAWriterUsesIsDeclared (0.24s)\n    vocabulary_test.go:289: the writer at v2/queue/carry.go:479 logs the key \"step\", which logx.FieldKeys does not declare. Declare it as logx.Identity if its value names the incident — a task, a run, a count — or as logx.Plain if it is a word of the fact.\nFAIL\nFAIL\tgithub.com/tazzo/ambrogio/logx\t0.504s\nFAIL"
+    build_gate_test.go:103: the refusal does not name the command that says so: "the delivery touches the hub's log writers and `go test ./logx/...` did not pass in the tree: the command that says so: go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1 — the tree said:\n--- FAIL: TestEveryFieldAWriterUsesIsDeclared (0.24s)\n    vocabulary_test.go:289: the writer at v2/queue/carry.go:479 logs the key \"step\", which logx.FieldKeys does not declare. Declare it as logx.Identity if its value names the incident — a task, a run, a count — or as logx.Plain if it is a word of the fact.\nFAIL\nFAIL\tgithub.com/tazzo/ambrogio/logx\t0.504s\nFAIL"
+    build_gate_test.go:108: the refusal does not carry the compiler's own words about the missing symbol: "the delivery touches the hub's log writers and `go test ./logx/...` did not pass in the tree: the command that says so: go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1 — the tree said:\n--- FAIL: TestEveryFieldAWriterUsesIsDeclared (0.24s)\n    vocabulary_test.go:289: the writer at v2/queue/carry.go:479 logs the key \"step\", which logx.FieldKeys does not declare. Declare it as logx.Identity if its value names the incident — a task, a run, a count — or as logx.Plain if it is a word of the fact.\nFAIL\nFAIL\tgithub.com/tazzo/ambrogio/logx\t0.504s\nFAIL"
+2026-10-11T23:09:52.802Z INFO	claimed task=1 queue=external run=1 kind=work title="touch v2/whole/whole.go"
+2026-10-11T23:09:53.259Z INFO	the worker started task=1 run=1 prompt_bytes=5386
+2026-10-11T23:09:53.424Z INFO	the worker delivered task=1 run=1 took=165 artifacts=1 proposes=0 summary="the function and its call"
+2026-10-11T23:09:54.822Z WARN	the log vocabulary's own tests refused the delivery task=1 file=logx/vocabulary.go command="go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1" took=1117 err="exit status 1"
+--- FAIL: TestTheGateLetsACompilingTreeThrough (4.54s)
+    build_gate_test.go:121: a tree that compiles was not let through: "" <nil>
+2026-10-11T23:09:55.209Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:09:55.231Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:09:55.252Z INFO	the worker delivered task=1 run=1 took=21 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:09:55.304Z WARN	the delivery damages a file it did not claim: the delivery is refused task=1 why="the delivery damages a file it did not claim: v2/runner/runner.go changes its Go package clause from `package runner` to `package worker` — the tree's copy is not that file any more, which is the shape of a wrong buffer committed over a path (`git show 68d010e:v2/runner/runner.go` answers `package worker`). The work in the branch is kept, and the delivery is refused"
+2026-10-11T23:09:55.400Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:09:55.426Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:09:55.447Z INFO	the worker delivered task=1 run=1 took=21 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:09:55.483Z WARN	the delivery damages a file it did not claim: the delivery is refused task=1 why="the delivery damages a file it did not claim: outside/notes.txt loses 300 line(s) and no artifact of the report names it (the bound is 200). A commit that takes away a file nobody claimed is a truncated write or the wrong buffer, not a delivery: `git add -A && git commit` commits whatever the tree holds. The work in the branch is kept, and the delivery is refused"
+2026-10-11T23:09:55.583Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:09:55.586Z INFO	the worker started task=1 run=1 prompt_bytes=5852
+2026-10-11T23:09:55.586Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:09:55.599Z WARN	nothing to deliver task=1 why="the branch has no commits over the trunk: there is nothing to deliver, whatever the tree looks like. A delivery is the branch: write the work into the tree and commit it"
+2026-10-11T23:09:55.773Z INFO	claimed task=1 queue=external run=1 kind=work title="the same line, on the old base"
+2026-10-11T23:09:55.775Z INFO	the worker started task=1 run=1 prompt_bytes=5387
+2026-10-11T23:09:55.775Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="the answer is ok"
+2026-10-11T23:09:55.805Z INFO	the review passed task=1 checks=1
+2026-10-11T23:09:55.927Z INFO	the rebuilt branch conflicts on the trunk task=1 trunk=main files=README merge=e8ea6f7d477e7fc6d4c26196f5337a6ee7e0e582 why="the branch conflicted with main on README and is now on it (merge e8ea6f7d477e7fc6d4c26196f5337a6ee7e0e582), keeping the trunk's version of those files: git rebase refs/heads/main: exit status 1: Rebasing (1/1)\rerror: could not apply b2c4413... the same line, on the old base\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nCould not apply b2c4413... the same line, on the old base"
+2026-10-11T23:09:59.372Z INFO	claimed task=1 queue=external run=1 kind=work title="log a key"
+2026-10-11T23:09:59.978Z INFO	the worker started task=1 run=1 prompt_bytes=5373
+2026-10-11T23:10:00.174Z INFO	the worker delivered task=1 run=1 took=196 artifacts=1 proposes=0 summary="a new writer logged a key"
+2026-10-11T23:10:01.450Z WARN	the log vocabulary's own tests refused the delivery task=1 file=logx/vocabulary.go command="go test ./logx/ -run TestEveryFieldAWriterUsesIsDeclared|TestACountedValueIsDeclaredAnIdentity -count=1" took=1210 err="exit status 1"
+--- FAIL: TestTheGateLetsAWriterThroughWhenTheKeyIsDeclared (2.94s)
+    logx_vocabulary_test.go:295: the declared delivery is not on a passing verdict: "" <nil> (the gate refused?)
+2026-10-11T23:10:04.790Z INFO	claimed task=1 queue=external run=1 kind=work title="write f"
+2026-10-11T23:10:04.792Z INFO	the worker started task=1 run=1 prompt_bytes=5327
+2026-10-11T23:10:04.801Z INFO	the worker delivered task=1 run=1 took=9 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:04.829Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:04.858Z INFO	merged task=1 branch=task/1 commit=b1db77b0b64e16ef76a6b9174294adc9d139291d trunk=main
+2026-10-11T23:10:04.913Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:04.925Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:04.925Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file, in the tree"
+2026-10-11T23:10:04.940Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=a9e35cb345e4acdbfbbf24644b15fc8ccbc390f2 kept_files=1
+2026-10-11T23:10:04.940Z WARN	the delivery is not committed task=1 files=[?? made.txt]
+2026-10-11T23:10:04.951Z INFO	claimed task=1 queue=external run=2 kind=work title="make the file"
+2026-10-11T23:10:04.954Z INFO	the worker started task=1 run=2 prompt_bytes=5852
+2026-10-11T23:10:04.954Z INFO	the worker delivered task=1 run=2 took=0 artifacts=1 proposes=0 summary="I made the file, in the tree"
+2026-10-11T23:10:04.971Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=d0a5d0d3579e710c71627bc226db972d9236e60a kept_files=1
+2026-10-11T23:10:04.971Z WARN	the delivery is not committed task=1 files=[M made.txt]
+2026-10-11T23:10:05.039Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.076Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.076Z ERROR	the worker failed task=1 run=1 took=0 err="the engine stopped this run: the worker ran longer than 1m"
+2026-10-11T23:10:05.123Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=e267718c03ee00eebbbfccc6dd332d45b30a7f26 kept_files=1
+2026-10-11T23:10:05.147Z INFO	claimed task=1 queue=external run=2 kind=work title="make the file"
+2026-10-11T23:10:05.151Z INFO	the worker started task=1 run=2 prompt_bytes=5852
+2026-10-11T23:10:05.151Z INFO	the worker delivered task=1 run=2 took=0 artifacts=1 proposes=0 summary="I kept the stopped agent's work and delivered the branch"
+2026-10-11T23:10:05.173Z WARN	nothing to deliver task=1 why="the branch has no commits over the trunk: there is nothing to deliver, whatever the tree looks like. A delivery is the branch: write the work into the tree and commit it"
+2026-10-11T23:10:05.263Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.293Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.311Z INFO	the worker delivered task=1 run=1 took=18 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.398Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:05.456Z INFO	merged task=1 branch=task/1 commit=fbe67b7eb08dc541064d6757b70abfac4a5a1a8a trunk=main
+2026-10-11T23:10:05.467Z INFO	closing task=1 why="the review passed: the work is done, and done is about the report, not the agent"
+2026-10-11T23:10:05.572Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.587Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.599Z INFO	the worker delivered task=1 run=1 took=12 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.653Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:05.677Z INFO	merged task=1 branch=task/1 commit=fbe67b7eb08dc541064d6757b70abfac4a5a1a8a trunk=main
+2026-10-11T23:10:05.724Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.736Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.736Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.749Z WARN	the branch's tip is the trunk's tip: there is nothing to deliver task=1 trunk=main why="the branch's tip is the trunk's tip: the trunk the gate reads is the ref refs/heads/main (the trunk is main), the work is already in the trunk and there is nothing to deliver"
+2026-10-11T23:10:05.785Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.796Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.797Z INFO	the worker delivered task=1 run=1 took=1 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.813Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=2aca53380e0ada3e51d584883ce39d3d1d8ba72b kept_files=1
+2026-10-11T23:10:05.813Z WARN	the delivery is not committed task=1 files=[?? made.txt]
+2026-10-11T23:10:05.856Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.867Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.874Z INFO	the worker delivered task=1 run=1 took=7 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.901Z INFO	the formal review refused task=1 checks=1 reasons=1 why="a declared file is not there: the artifact: made.txt — stat /tmp/TestAFormalRefusalCarriesWhatItChecked561473897/003/trees/task-1/made.txt: no such file or directory"
+2026-10-11T23:10:05.944Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:05.957Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:05.957Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:05.979Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=8e505f1781cf1da421202a9a6d8f73441ccc80ca kept_files=1
+2026-10-11T23:10:05.979Z WARN	the delivery is not committed task=1 files=[?? first.txt]
+2026-10-11T23:10:06.055Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.067Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.067Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:06.083Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=24a95e1a2e5ad8a58435e115b6529b3ec9244fc7 kept_files=1
+2026-10-11T23:10:06.083Z WARN	the delivery is not committed task=1 files=[?? second.txt]
+2026-10-11T23:10:06.130Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.140Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.140Z ERROR	the worker failed task=1 run=1 took=0 err="permission denied"
+2026-10-11T23:10:06.185Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.234Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.244Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.244Z ERROR	the worker failed task=1 run=1 took=0 err="the worker exited: exit status 1: the model answered 402: Insufficient account funds"
+2026-10-11T23:10:06.288Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.299Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.299Z ERROR	the worker failed task=1 run=1 took=0 err="the agent ended the turn with \"cancelled\""
+2026-10-11T23:10:06.337Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.347Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.347Z ERROR	the worker failed task=1 run=1 took=0 err="the agent ended the turn with \"cancelled\""
+2026-10-11T23:10:06.374Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.386Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.386Z ERROR	the worker failed task=1 run=1 took=0 err="the agent ended the turn with \"cancelled\""
+2026-10-11T23:10:06.437Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.449Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.449Z ERROR	the worker failed task=1 run=1 took=0 err="the agent ended the turn with \"cancelled\""
+2026-10-11T23:10:06.488Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.489Z INFO	closed a run whose process is gone run=1 task=1 pid=0
+2026-10-11T23:10:06.501Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.509Z INFO	the worker delivered task=1 run=1 took=8 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:06.541Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:06.564Z INFO	merged task=1 branch=task/1 commit=aa004809758de5435ceb3525c81dfc04e5170aab trunk=main
+2026-10-11T23:10:06.612Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.625Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.625Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:06.639Z WARN	the branch's tip is the trunk's tip: there is nothing to deliver task=1 trunk=main why="the branch's tip is the trunk's tip: the trunk the gate reads is the ref refs/heads/main (the trunk is main), the work is already in the trunk and there is nothing to deliver"
+2026-10-11T23:10:06.676Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.686Z INFO	the worker started task=1 run=1 prompt_bytes=2416
+2026-10-11T23:10:06.692Z INFO	the worker delivered task=1 run=1 took=6 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:06.719Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:06.739Z INFO	merged task=1 branch=task/1 commit=aa004809758de5435ceb3525c81dfc04e5170aab trunk=main
+2026-10-11T23:10:06.838Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.850Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:06.859Z INFO	the worker delivered task=1 run=1 took=9 artifacts=1 proposes=0 summary="I made something"
+2026-10-11T23:10:06.881Z WARN	the delivery was refused task=1 run=1 err="the delivery does not account for the task's expectations: the task expected 1 artifact(s) and got 1 — nothing answers to: made.txt — what it delivered: \"other.go\""
+2026-10-11T23:10:06.881Z INFO	the worker is told what was refused task=1 attempt=1 reasons=1 why="the delivery does not account for the task's expectations: the task expected 1 artifact(s) and got 1 — nothing answers to: made.txt — what it delivered: \"other.go\""
+2026-10-11T23:10:06.922Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:06.942Z INFO	merged task=1 branch=task/1 commit=2134c36156521c208b1dc96ecfe0bd1214d6149f trunk=main
+2026-10-11T23:10:06.983Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:06.994Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:07.001Z INFO	the worker delivered task=1 run=1 took=7 artifacts=1 proposes=2 summary="I made the file"
+2026-10-11T23:10:07.028Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:07.045Z INFO	merged task=1 branch=task/1 commit=fd8250aeea41521310cbd90859e7685a5a949c29 trunk=main
+2026-10-11T23:10:07.046Z INFO	the children were opened task=1 opened=2 left=0 ids=[2 3]
+2026-10-11T23:10:07.094Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:07.108Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:07.116Z INFO	the worker delivered task=1 run=1 took=8 artifacts=1 proposes=2 summary="I made the file"
+2026-10-11T23:10:07.149Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:07.170Z INFO	merged task=1 branch=task/1 commit=e109797d8440fd65a71fc976c52388da2e7b58a2 trunk=main
+2026-10-11T23:10:07.171Z INFO	the children were opened task=1 opened=2 left=0 ids=[2 3]
+2026-10-11T23:10:07.204Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:07.217Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:07.224Z INFO	the worker delivered task=1 run=1 took=7 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:07.254Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:07.273Z INFO	merged task=1 branch=task/1 commit=e109797d8440fd65a71fc976c52388da2e7b58a2 trunk=main
+2026-10-11T23:10:07.325Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:07.337Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:07.345Z INFO	the worker delivered task=1 run=1 took=8 artifacts=1 proposes=2 summary="I made the file"
+2026-10-11T23:10:07.376Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:07.396Z INFO	merged task=1 branch=task/1 commit=e109797d8440fd65a71fc976c52388da2e7b58a2 trunk=main
+2026-10-11T23:10:07.398Z INFO	the children were opened task=1 opened=2 left=0 ids=[2 3]
+2026-10-11T23:10:07.457Z INFO	claimed task=1 queue=external run=1 kind=work title="change the second line of f"
+2026-10-11T23:10:07.468Z INFO	the worker started task=1 run=1 prompt_bytes=5367
+2026-10-11T23:10:07.480Z INFO	the worker delivered task=1 run=1 took=12 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:07.507Z INFO	the trunk entered the branch task=1 trunk=main why="1 conflict(s): git merge --no-ff -m task 1: main enters the branch refs/heads/main: exit status 1: Auto-merging f\nCONFLICT (content): Merge conflict in f\nAutomatic merge failed; fix conflicts and then commit the result."
+2026-10-11T23:10:07.511Z INFO	the trunk could not be brought into the branch: the delivery is refused task=1 trunk=main files=f
+2026-10-11T23:10:07.755Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:07.767Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:07.773Z INFO	the worker delivered task=1 run=1 took=6 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:07.790Z WARN	the branch could not be read against the trunk: the delivery is refused task=1 trunk=main err="git merge-base refs/heads/main task/1: exit status 1: git said nothing"
+2026-10-11T23:10:07.992Z INFO	claimed task=1 queue=external run=1 kind=work title="answer the command"
+2026-10-11T23:10:08.002Z INFO	the worker started task=1 run=1 prompt_bytes=5370
+2026-10-11T23:10:08.013Z INFO	the worker delivered task=1 run=1 took=11 artifacts=1 proposes=0 summary="the answer is ok"
+2026-10-11T23:10:08.026Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:08.058Z ERROR	the branch could not be rebuilt on the trunk task=1 err="the branch could not be rebased onto main: git rebase refs/heads/main: exit status 1: error: cannot rebase: You have unstaged changes.\nerror: Please commit or stash them."
+2026-10-11T23:10:08.099Z INFO	claimed task=1 queue=external run=1 kind=work title="the first line"
+2026-10-11T23:10:08.109Z INFO	the worker started task=1 run=1 prompt_bytes=5353
+2026-10-11T23:10:08.126Z INFO	the worker delivered task=1 run=1 took=17 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:08.164Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:08.186Z INFO	merged task=1 branch=task/1 commit=43e285a47c5e96cd20b1b079034eabfd816834cf trunk=main
+2026-10-11T23:10:08.190Z INFO	closing task=1 why="the review passed: the work is done, and done is about the report, not the agent"
+2026-10-11T23:10:08.226Z INFO	claimed task=2 queue=external run=2 kind=work title="the same line, on the old base"
+2026-10-11T23:10:08.229Z INFO	the worker started task=2 run=2 prompt_bytes=5382
+2026-10-11T23:10:08.229Z INFO	the worker delivered task=2 run=2 took=0 artifacts=1 proposes=0 summary="the answer is ok"
+2026-10-11T23:10:08.249Z INFO	the review passed task=2 checks=1
+2026-10-11T23:10:08.318Z INFO	the rebuilt branch conflicts on the trunk task=2 trunk=main files=f merge=ec22541bbca09a3e6778321d8c44b060ff7f2987 why="the branch conflicted with main on f and is now on it (merge ec22541bbca09a3e6778321d8c44b060ff7f2987), keeping the trunk's version of those files: git rebase refs/heads/main: exit status 1: Rebasing (1/1)\rerror: could not apply b9333ba... the same line, on the old base\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nCould not apply b9333ba... the same line, on the old base"
+2026-10-11T23:10:08.327Z INFO	claimed task=2 queue=external run=3 kind=work title="the same line, on the old base"
+2026-10-11T23:10:08.330Z INFO	the worker started task=2 run=3 prompt_bytes=5897
+2026-10-11T23:10:08.330Z INFO	the worker delivered task=2 run=3 took=0 artifacts=1 proposes=0 summary="the answer is ok"
+2026-10-11T23:10:08.353Z INFO	the review passed task=2 checks=1
+2026-10-11T23:10:08.387Z INFO	merged task=2 branch=task/2 commit=1252e0859c26ad9a4aaa7ba1cce30b6ffc11f3b7 trunk=main
+2026-10-11T23:10:08.476Z INFO	claimed task=1 queue=external run=1 kind=work title="the first line"
+2026-10-11T23:10:08.493Z INFO	the worker started task=1 run=1 prompt_bytes=5353
+2026-10-11T23:10:08.510Z INFO	the worker delivered task=1 run=1 took=17 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:08.571Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:08.636Z INFO	merged task=1 branch=task/1 commit=43e285a47c5e96cd20b1b079034eabfd816834cf trunk=main
+2026-10-11T23:10:08.649Z INFO	closing task=1 why="the review passed: the work is done, and done is about the report, not the agent"
+2026-10-11T23:10:08.700Z INFO	claimed task=2 queue=external run=2 kind=work title="the same line, on the old base"
+2026-10-11T23:10:08.706Z INFO	the worker started task=2 run=2 prompt_bytes=5369
+2026-10-11T23:10:08.733Z INFO	the worker delivered task=2 run=2 took=27 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:08.808Z INFO	the trunk entered the branch task=2 trunk=main why="1 conflict(s): git merge --no-ff -m task 2: main enters the branch refs/heads/main: exit status 1: Auto-merging f\nCONFLICT (content): Merge conflict in f\nAutomatic merge failed; fix conflicts and then commit the result."
+2026-10-11T23:10:08.813Z INFO	the trunk could not be brought into the branch: the delivery is refused task=2 trunk=main files=f
+2026-10-11T23:10:08.991Z INFO	claimed task=1 queue=external run=1 kind=work title="one trunk commit behind"
+2026-10-11T23:10:08.996Z INFO	the worker started task=1 run=1 prompt_bytes=5362
+2026-10-11T23:10:09.003Z INFO	the worker delivered task=1 run=1 took=7 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:09.054Z INFO	the trunk was brought into the branch, and the merged branch is reviewed task=1 trunk=main ref=refs/heads/main merge=3d79fbd0436de7aff34ec904bfb32fcfab8f3334
+2026-10-11T23:10:09.089Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:09.122Z INFO	merged task=1 branch=task/1 commit=bce3cb65c80c4b87ffd45dc731e0176c58eb7e1e trunk=main
+2026-10-11T23:10:09.203Z INFO	closing task=1 why="the review passed: the work is done, and done is about the report, not the agent"
+2026-10-11T23:10:09.208Z INFO	claimed task=2 queue=external run=2 kind=work title="the same line, on the old base"
+2026-10-11T23:10:09.211Z INFO	the worker started task=2 run=2 prompt_bytes=5369
+2026-10-11T23:10:09.229Z INFO	the worker delivered task=2 run=2 took=18 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:09.268Z INFO	the trunk entered the branch task=2 trunk=main why="1 conflict(s): git merge --no-ff -m task 2: main enters the branch refs/heads/main: exit status 1: Auto-merging f\nCONFLICT (content): Merge conflict in f\nAutomatic merge failed; fix conflicts and then commit the result."
+2026-10-11T23:10:09.271Z INFO	the trunk could not be brought into the branch: the delivery is refused task=2 trunk=main files=f
+2026-10-11T23:10:09.295Z INFO	claimed task=3 queue=external run=3 kind=work title="make the file"
+2026-10-11T23:10:09.298Z INFO	the worker started task=3 run=3 prompt_bytes=5347
+2026-10-11T23:10:09.298Z INFO	the worker delivered task=3 run=3 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:09.317Z WARN	nothing to deliver task=3 why="the branch has no commits over the trunk: there is nothing to deliver, whatever the tree looks like. A delivery is the branch: write the work into the tree and commit it"
+2026-10-11T23:10:09.324Z INFO	claimed task=3 queue=external run=4 kind=work title="make the file"
+2026-10-11T23:10:09.327Z INFO	the worker started task=3 run=4 prompt_bytes=5347
+2026-10-11T23:10:09.327Z INFO	the worker delivered task=3 run=4 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:09.342Z WARN	nothing to deliver task=3 why="the branch has no commits over the trunk: there is nothing to deliver, whatever the tree looks like. A delivery is the branch: write the work into the tree and commit it"
+2026-10-11T23:10:09.454Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:09.458Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:09.458Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:09.481Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=8e9ece0058d1eddda8c0bc260d3a85c757bb753c kept_files=1
+2026-10-11T23:10:09.481Z WARN	the delivery is not committed task=1 files=[?? made.txt]
+2026-10-11T23:10:09.585Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:09.589Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:09.589Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:09.617Z WARN	nothing to deliver task=1 why="the branch has no commits over the trunk: there is nothing to deliver, whatever the tree looks like. A delivery is the branch: write the work into the tree and commit it"
+2026-10-11T23:10:09.786Z INFO	claimed task=1 queue=external run=1 kind=work title="write f"
+2026-10-11T23:10:09.789Z INFO	the worker started task=1 run=1 prompt_bytes=5327
+2026-10-11T23:10:09.805Z INFO	the worker delivered task=1 run=1 took=16 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:09.859Z INFO	the trunk entered the branch task=1 trunk=main why="1 conflict(s): git merge --no-ff -m task 1: main enters the branch refs/heads/main: exit status 1: Auto-merging f\nCONFLICT (content): Merge conflict in f\nAutomatic merge failed; fix conflicts and then commit the result."
+2026-10-11T23:10:09.863Z INFO	the trunk could not be brought into the branch: the delivery is refused task=1 trunk=main files=f
+2026-10-11T23:10:09.950Z INFO	claimed task=1 queue=external run=1 kind=work title="write f"
+2026-10-11T23:10:09.953Z INFO	the worker started task=1 run=1 prompt_bytes=5327
+2026-10-11T23:10:09.964Z INFO	the worker delivered task=1 run=1 took=11 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:10:09.993Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:10.012Z INFO	merged task=1 branch=task/1 commit=c29a883b4ec255877896ebd3b83469cc9c1d624e trunk=main
+2026-10-11T23:10:10.291Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:10.304Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:12.878Z INFO	the worker delivered task=1 run=1 took=2574 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:10:12.906Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:12.925Z INFO	merged task=1 branch=task/1 commit=bd4e8fb8c5044d5b10e7c1f88b21b6ad73637782 trunk=main
+2026-10-11T23:10:12.976Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:12.986Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:13.049Z INFO	the worker delivered task=1 run=1 took=63 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:10:13.077Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:13.097Z INFO	merged task=1 branch=task/1 commit=8d7130278389c0d068ecf8ec39b64887589cecb8 trunk=main
+2026-10-11T23:10:13.340Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:13.351Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:13.414Z INFO	the worker delivered task=1 run=1 took=63 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:10:13.444Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:13.464Z INFO	merged task=1 branch=task/1 commit=6927af668de41180ee36dd6583d42aff851c2989 trunk=main
+2026-10-11T23:10:14.921Z INFO	claimed task=1 queue=external run=1 kind=work title="move the page"
+2026-10-11T23:10:15.145Z INFO	the worker started task=1 run=1 prompt_bytes=5370
+2026-10-11T23:10:15.339Z INFO	the worker delivered task=1 run=1 took=194 artifacts=1 proposes=0 summary="the page moved"
+2026-10-11T23:10:20.081Z WARN	the page's own tests refused the delivery task=1 file=v2/api/page.html command="go test ./v2/api/ -run TestTheUndatedSampleHoldsThePagesBytes|TestTheNewestDatedCopyHoldsThePagesBytes|TestTheRefreshWritesBothCopies -count=1" took=4471 err="exit status 1"
+2026-10-11T23:10:29.748Z INFO	claimed task=1 queue=external run=1 kind=work title="write f"
+2026-10-11T23:10:29.750Z INFO	the worker started task=1 run=1 prompt_bytes=5327
+2026-10-11T23:10:29.750Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:10:29.780Z INFO	the trunk entered the branch task=1 trunk=main why="1 conflict(s): git merge --no-ff -m task 1: main enters the branch refs/heads/main: exit status 1: Auto-merging f\nCONFLICT (content): Merge conflict in f\nAutomatic merge failed; fix conflicts and then commit the result."
+2026-10-11T23:10:29.783Z INFO	the trunk could not be brought into the branch: the delivery is refused task=1 trunk=main files=f
+2026-10-11T23:10:30.696Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:30.710Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:30.748Z INFO	the worker delivered task=1 run=1 took=38 artifacts=1 proposes=0 summary="the file is there"
+2026-10-11T23:10:30.787Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:30.814Z INFO	merged task=1 branch=task/1 commit=caf28b3ecbda010bdb24d0769c9032a4b84de3a2 trunk=main
+2026-10-11T23:10:30.819Z INFO	closing task=1 why="the review passed: the work is done, and done is about the report, not the agent"
+2026-10-11T23:10:31.201Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:31.217Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:31.435Z INFO	the worker delivered task=1 run=1 took=218 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:10:31.464Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:31.484Z INFO	merged task=1 branch=task/1 commit=160c5a94ef5417e2b7fef8418ea4e4cccd7142de trunk=main
+2026-10-11T23:10:31.532Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:31.544Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:10:31.766Z INFO	the worker delivered task=1 run=1 took=222 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:10:31.797Z INFO	the review passed task=1 checks=1
+2026-10-11T23:10:31.819Z INFO	merged task=1 branch=task/1 commit=160c5a94ef5417e2b7fef8418ea4e4cccd7142de trunk=main
+2026-10-11T23:10:32.079Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:10:32.090Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:11:32.295Z INFO	the worker delivered task=1 run=1 took=60205 artifacts=1 proposes=0 summary="wrote made.txt (committed by the worker before the delivery: the agent had not done it)"
+2026-10-11T23:11:32.321Z INFO	the review passed task=1 checks=1
+2026-10-11T23:11:32.339Z INFO	merged task=1 branch=task/1 commit=4d9d2dca96a6132b6f37f64b3a9878b54739fb99 trunk=main
+2026-10-11T23:11:32.400Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:11:32.403Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:11:32.403Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:11:32.415Z WARN	the branch's tip is the trunk's tip: there is nothing to deliver task=1 trunk=main why="the branch's tip is the trunk's tip: the trunk the gate reads is the ref refs/heads/main (the trunk is main), the work is already in the trunk and there is nothing to deliver"
+2026-10-11T23:11:32.499Z INFO	claimed task=1 queue=external run=1 kind=work title="one trunk commit behind"
+2026-10-11T23:11:32.502Z INFO	the worker started task=1 run=1 prompt_bytes=5362
+2026-10-11T23:11:32.506Z INFO	the worker delivered task=1 run=1 took=4 artifacts=1 proposes=0 summary="the line is on the branch"
+2026-10-11T23:11:32.544Z INFO	the trunk was brought into the branch, and the merged branch is reviewed task=1 trunk=main ref=refs/heads/main merge=7fa4791af92b965452789f72a63f7853b9d06064
+2026-10-11T23:11:32.558Z INFO	the review passed task=1 checks=1
+2026-10-11T23:11:32.577Z INFO	merged task=1 branch=task/1 commit=5b4738f68100d2ecfa03c4ee61674cd113982e8c trunk=main
+2026-10-11T23:11:32.631Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:11:32.642Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:11:32.648Z INFO	the worker delivered task=1 run=1 took=6 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:11:32.676Z INFO	the review passed task=1 checks=1
+2026-10-11T23:11:32.693Z INFO	merged task=1 branch=task/1 commit=3446f1e782cbb4114b09aa3a8bb405e86f92fced trunk=main
+2026-10-11T23:11:32.728Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:11:32.738Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:11:32.738Z INFO	the worker delivered task=1 run=1 took=0 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:11:32.752Z INFO	the refused tree was kept on its branch task=1 branch=task/1 tip=b39d95eeefc027ec575b4d5b707808dcd434c7f2 kept_files=1
+2026-10-11T23:11:32.752Z WARN	the delivery is not committed task=1 files=[?? made.txt]
+2026-10-11T23:11:32.791Z INFO	claimed task=1 queue=external run=1 kind=work title="make the file"
+2026-10-11T23:11:32.804Z INFO	the worker started task=1 run=1 prompt_bytes=5347
+2026-10-11T23:11:32.812Z INFO	the worker delivered task=1 run=1 took=8 artifacts=1 proposes=0 summary="I made the file"
+2026-10-11T23:11:32.856Z INFO	the review passed task=1 checks=1
+2026-10-11T23:11:32.922Z INFO	the rebuilt branch conflicts on the trunk task=1 trunk=main files=made.txt merge=92141e23de6863576b0c490ecff8782cdc24b2d3 why="the branch conflicted with main on made.txt and is now on it (merge 92141e23de6863576b0c490ecff8782cdc24b2d3), keeping the trunk's version of those files: git rebase refs/heads/main: exit status 1: Rebasing (1/1)\rerror: could not apply a437cb7... the work\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nCould not apply a437cb7... the work"
+2026-10-11T23:11:32.932Z INFO	the trunk's suite did not run: the trunk's state is not known task=1 trunk=main tree=/tree command="go test ./v2/... -count=1" took=0 err="no toolchain here: this test measures the door and not the suite"
+2026-10-11T23:11:32.943Z ERROR	the trunk's suite is red task=904 trunk=v0.2 tree=/tree/of/the/trunk command="go test ./v2/... -count=1" took=1 err="exit status 1" said="--- FAIL: TestTheDoorReadsTheTree (0.03s)\nFAIL\tgithub.com/tazzo/ambrogio/v2/api\t0.5s\n"
+2026-10-11T23:11:32.943Z INFO	the trunk's suite is green task=905 trunk=v0.2 command="go test ./v2/... -count=1" took=0
+2026-10-11T23:11:32.943Z INFO	the trunk's suite did not run: the trunk's state is not known task=906 trunk=v0.2 tree=/tree command="go test ./v2/... -count=1" took=0 err="exec: \"go\": executable file not found in $PATH"
+FAIL
+FAIL	github.com/tazzo/ambrogio/v2/runner	109.826s
+ok  	github.com/tazzo/ambrogio/v2/worker	16.622s
+ok  	github.com/tazzo/ambrogio/v2/worktree	6.256s
+ok  	github.com/tazzo/ambrogio/v2/review	0.019s
+ok  	github.com/tazzo/ambrogio/v2/acp	4.908s
+FAIL

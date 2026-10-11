@@ -13,7 +13,7 @@ site/
   index.html          the main page: what Ambrogio is, and the four things worth knowing
   queues.html         deep dive: the queues, and who accepts them
   doors.html          deep dive: the two doors, and the sandbox
-  hands.html          deep dive: the hands, the budget and the silence
+  agents.html          deep dive: the agents, the budget and the silence
   conversation.html   deep dive: the conversation
   styles.css          the one stylesheet, hand-written, no framework, no CDN
   logo.png            the mark — ambrogio/v2/api/android-chrome-512x512.png, drawn at 40 px

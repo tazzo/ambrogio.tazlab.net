@@ -1,0 +1,47 @@
+==== http://127.0.0.1:7891/ (213047 bytes)
+   | <option value="hand">have it done</option>
+   | // by hand.
+   | const hand = {operator: "the operator", program: "a program", task: "a finding", cron: "a cronjob", beat: "the engine"};
+   | + esc(hand[t.origin] || t.origin) + ref + "</span>";
+   | // four buttons, the operator writes the why where the mark lands, and the button hands
+   | // many* and nothing else: which tasks they are was a walk down the queue by hand. The
+   | // **`trees` is the door's own number, and it is not counted here.** The reservation hands a
+   | // and the font — the number written by hand in the CSS was right for
+   | // hub differentiates `/proc/vmstat`'s own page traffic and hands the card `swap_pages_per_s`
+   | {name:"available memory", tone:"", value:mb(machine.mem_available_mb), why:"MemAvailable in /proc/meminfo: what the kernel can hand out without swapping, cached pages included"},
+   | const hands = running.filter(t => t.live).length;
+   | + hands + " with an agent, " + (running.length - hands) + " with no agent)";
+   | // is the same reading the claim uses, and it says what it is: the queue hands out
+   | + ' is 1: a pause, not a share of zero — the queue hands out none of this project\'s '
+   | // rewrite everything by hand, and what the operator wanted was **to edit the body he saw**.
+   | // of a hundred lines in a one-line field is a sentence you retype by hand.
+   | // replace** — the addition is made where it belongs, instead of rewriting everything by hand — and a
+   | by hand).  The chronicle of that night records the four: #774 (the reservation
+   | live" was produced by hand, and the operator's spec of that night names the
+   | reading that was being done by hand.
+==== http://127.0.0.1:7891/ui (85607 bytes)
+   | on the other hand, starts itself in a microtask at the end of its own script and then
+   | **It is a form, so it is hand-written and not an `x-html` pane**: the stream
+   | <b>accept</b> gives the request a queue: the engine hands it to an agent of that role.
+   | <span class="dim small">the engine stops a step at its own clock and hands the work
+   | **Hand-written, for the reason Settings is.** The section carries two textareas, and
+   | reader. **Nothing is read for it**: the event is in hand, and the sentence is
+   | They are built by `pane(name)` in app.js rather than hand-written here: they share
+   | A section hand-written because of a real defect: drawn as an `x-html` pane, this form
+==== http://127.0.0.1:7891/ui/app.js (160419 bytes)
+   | // **Hand-written, and that is the point.** There is no framework between this file and
+   | // is the same link a hand-written section draws.
+   | let COMPONENT = null;                 // set in boot(); what `amb()` hands back
+   | // them, exactly as they do for a sentence typed by hand.
+   | // parsed here — the page's ids are numbers everywhere else and a `select` hands back a
+   | // hand-written (`index.html`) and not an `x-html` pane: it is a form, and `x-html`
+   | // printed below). The section is hand-written (`index.html`) and its rows carry their own
+   | // **Three sections are drawn by hand** — the board, the conversations and the Settings
+   | // event that carries it is already in hand: nothing is read for this line.
+   | // section is hand-written (its two boxes must survive the burst), so a burst re-reads
+   | // body the operator is typing into would be wiped as he types. It is hand-written in
+   | // It is hand-written in `index.html`, its facts live in `conv`/`convSaid`/`convNew` above,
+   | // it. So the board is hand-written in `index.html`, its rows draw from `runs` and `free`
+   | // rowsOfTasks — the list of tasks the dashboard hands back, cut to what a reader scans:
+==== http://127.0.0.1:7891/ui/app.css (35908 bytes)
+   | / box 225), while `flex:1 1 100%` still hands it the whole line. */

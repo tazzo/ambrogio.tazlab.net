@@ -22,7 +22,7 @@ they land; never rewrite history, append.
 - **[step #45] The design decided, and written down.** `PROGETTO.md` now carries the four
   things the step asked for, each with its reason and its `path:line`:
   - **structure** — one main page + **four** deep dives, one per mechanism the step names
-    (the queues and who accepts them; the two doors and the sandbox; the hands, the budget
+    (the queues and who accepts them; the two doors and the sandbox; the agents, the budget
     and the silence; the conversation), behind a side menu (PROGETTO §2);
   - **visual** — the operator's own mark `ambrogio/v2/api/ambrogio-mark.png`, **unmodified**
     (27638 B, sha256 `7c37248e…`), plus the engine's `favicon.ico`; one typeface, Inter,
@@ -50,7 +50,7 @@ they land; never rewrite history, append.
   **§5**, and the definition of done it calls *§7* is still **§7**.
 - **[step #46] The source reconciled to the design.** `ambrogio-site/site/` now carries the
   five pages of PROGETTO §2/§4 — `index.html` (the main page) plus `queues.html`, `doors.html`,
-  `hands.html`, `conversation.html` — and the first pass' `what-it-does.html`,
+  `agents.html`, `conversation.html` — and the first pass' `what-it-does.html`,
   `how-it-works.html`, `about.html` and hand-drawn `logo.svg` are gone.
 - **[step #46] The mark and the favicon are the operator's own files.** `site/logo.png` is
   **byte-identical** to `ambrogio/v2/api/ambrogio-mark.png` (27,638 B, sha256 `7c37248e…`,

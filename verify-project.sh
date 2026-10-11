@@ -105,7 +105,7 @@ if ! grep -q "626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9" 
 fi
 
 # the page set PROGETTO.md fixes, and the sections an artifact must carry
-for want in "index.html" "queues.html" "doors.html" "hands.html" "conversation.html"; do
+for want in "index.html" "queues.html" "doors.html" "agents.html" "conversation.html"; do
   checked=$((checked + 1))
   grep -q "$want" "$DOC" || { echo "PROGETTO.md does not name $want"; missing=$((missing + 1)); }
 done

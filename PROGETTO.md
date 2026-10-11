@@ -54,7 +54,7 @@ ambrogio.tazlab.net
 ├── index.html            the main page: what this orchestrator is, in a few lines
 ├── queues.html           deep dive 1 — the queues, and who accepts them
 ├── doors.html            deep dive 2 — the two doors, and the sandbox
-├── hands.html            deep dive 3 — the hands, the budget and the silence
+├── agents.html           deep dive 3 — the agents, the budget and the silence
 └── conversation.html     deep dive 4 — the conversation
 ```
 
@@ -64,7 +64,7 @@ merging any two would put two unrelated anxieties on one page:
 
 1. **order** — where does work come from, and who is allowed to start it? (`queues.html`)
 2. **boundary** — what may an agent touch on my machine, and who can ask for what? (`doors.html`)
-3. **bound** — what stops a hand: its slots, its budget, its silence? (`hands.html`)
+3. **bound** — what stops an agent: its slots, its budget, its silence? (`agents.html`)
 4. **the chat** — what is the thing the operator actually talks to? (`conversation.html`)
 
 Four is the top of the allowed range and the site is still five pages: it is the smallest set
@@ -183,7 +183,7 @@ The main page. Five lines and four cards, nothing else:
   documentation to every movement, and its own internal agents keep it correct;
 - what it is: one static Go binary beside one SQLite file, supervising resident agent processes
   over the Agent Client Protocol; one HTTP API, one SSE stream, one page of its own;
-- why it exists: two problems — several agents working at once without two hands in one place,
+- why it exists: two problems — several agents working at once without two agents in one place,
   and the trace of what was done and why, for whoever comes later (`ambrogio/README.md` §1);
 - **four cards**, one per deep dive, each one sentence naming the question it answers;
 - a closing paragraph, *Built in the lab it runs*: tazlab.net, GitOps, the same delivery lane as
@@ -239,19 +239,19 @@ Answers: what may an agent touch on my machine, and who can ask for what?
 - the honest edge, named by the project itself: the policy does not grant what the Go toolchain
   needs, so **a caged worker cannot build the project** (`ambrogio/README.md` §9).
 
-### `site/hands.html` — *The hands, the budget and the silence*
+### `site/agents.html` — *The agents, the budget and the silence*
 
-Answers: what stops a hand?
+Answers: what stops an agent?
 
-- a **hand** is the live form of a **run** — the process doing the work now; a run is one
-  execution of one step by one hand, closed with an **outcome** and an **end cause**
-  (`ambrogio/VOCABULARY.md`, *run*/*hand*; `ambrogio/README.md` §6);
-- **the pool**: the hands the engine spawns, counted per lane (`lane_cap:external`,
+- an **agent** is the live form of a **run** — the process doing the work now; a run is one
+  execution of one step by one agent, closed with an **outcome** and an **end cause**
+  (`ambrogio/VOCABULARY.md`, *run*/*agent*; `ambrogio/README.md` §6);
+- **the pool**: the agents the engine spawns, counted per lane (`lane_cap:external`,
   `lane_cap:internal`, and `conversation_slots` for the chats); a queue that holds a place keeps
   it until it closes (`ambrogio/README.md` §2);
-- a **free hand** is spawned by nobody here: it takes a work order from `GET /api/v1/free`,
+- a **free agent** is spawned by nobody here: it takes a work order from `GET /api/v1/free`,
   holds it for a deadline, and hands it in — it holds **no lane and no slot**
-  (`ambrogio/README.md` §4; `ambrogio/VOCABULARY.md`, *free hand*);
+  (`ambrogio/README.md` §4; `ambrogio/VOCABULARY.md`, *free agent*);
 - **the budget**: a worker estimates the work when it accepts it; the step is carried with a
   **declared budget**, and `+N` is a new acceptance, never a silent extension
   (`ambrogio/README.md` §2);
@@ -260,7 +260,7 @@ Answers: what stops a hand?
   **declares a budget for itself**, and the engine's **ceiling** stops it regardless. This is
   the queue engine's own protocol, stated plainly — the step this document is written under
   carries exactly these three numbers;
-- **what is left behind** when a hand ends: `task_event` (what happened, in order, read **from a
+- **what is left behind** when an agent ends: `task_event` (what happened, in order, read **from a
   cursor**), `run` (who worked, for how long, how it ended), `report` (the account), `review`
   (what the gate checked and refused), `document` (plan, roadmap, progress) —
   `ambrogio/README.md` §6.
@@ -283,7 +283,7 @@ Answers: what is the thing the operator actually talks to?
   `engine`, never the operator — and the next message **resumes** it; the session is untouched
   by both (`ambrogio/README.md` §2);
 - a chat has **slots of its own** (`conversation_slots`), so it never waits behind the work; it
-  is carried by an **external hand**, and the external **stop** stops the chats too
+  is carried by an **external agent**, and the external **stop** stops the chats too
   (`ambrogio/README.md` §2);
 - **the memory is the ledger, not the session**: every prompt carries his messages and the
   briefs they were answered with, read off the disk at every step — *the session is the bonus*
@@ -481,7 +481,7 @@ Certificate exists.
 `ambrogio-site/site/` currently holds a **first pass** written before this document: one main
 page and three deep dives (`what-it-does.html`, `how-it-works.html`, `about.html`). This design
 **supersedes its page set**: the deep dives become the four mechanism pages of §2/§4
-(`queues.html`, `doors.html`, `hands.html`, `conversation.html`), the "About" content folds
+(`queues.html`, `doors.html`, `agents.html`, `conversation.html`), the "About" content folds
 into three lines at the foot of the main page, and the inline hand-drawn `logo.svg` of that
 first pass is replaced by the operator's own mark (§3.1) — a redrawn mark is not the mark. The
 one-stylesheet approach (no framework, no JavaScript), the "one typeface, self-hosted" rule,

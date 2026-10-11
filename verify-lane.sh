@@ -29,7 +29,7 @@ echo "== 2. serve"
 sudo docker rm -f "$NAME" >/dev/null 2>&1
 if sudo docker run -d --name "$NAME" --security-opt apparmor=unconfined -p "$PORT:80" "$IMAGE" >/dev/null; then
   sleep 2
-  for p in / /index.html /queues.html /doors.html /hands.html /conversation.html \
+  for p in / /index.html /queues.html /doors.html /agents.html /conversation.html \
            /styles.css /logo.png /favicon.ico /fonts/inter.woff2 /fonts/LICENSE-inter.txt; do
     line=$(curl -s -o /dev/null -w '%{http_code} %{content_type} %{size_download}' "http://127.0.0.1:$PORT$p")
     printf '%-24s %s\n' "$p" "$line"
