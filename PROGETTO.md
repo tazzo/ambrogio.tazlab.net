@@ -453,6 +453,12 @@ Certificate exists.
 
 ## 8. State of the tree, so the build step is not puzzled
 
+> **Landed.** This section described the first pass before it was reconciled. As of the
+> reconciliation step, `ambrogio-site/site/` carries the four mechanism pages, `logo.png` (the
+> operator's mark, byte-identical) and the product's palette; `what-it-does.html`,
+> `how-it-works.html`, `about.html` and `logo.svg` are gone, and `site/fonts/LICENSE-inter.txt`
+> records the font's upstream URL and digest. `AVANZAMENTO.md` is the live record.
+
 `ambrogio-site/site/` currently holds a **first pass** written before this document: one main
 page and three deep dives (`what-it-does.html`, `how-it-works.html`, `about.html`). This design
 **supersedes its page set**: the deep dives become the four mechanism pages of §2/§4

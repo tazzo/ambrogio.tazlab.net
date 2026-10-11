@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The hands, the budget and the silence — Ambrogio</title>
+<meta name="description" content="A hand is a live run; the pool counts slots per lane, a step declares its budget, and a hand that goes quiet is stopped and its trace kept.">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="28" height="28" alt="">
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shell">
+    <nav class="side-menu" aria-label="Site">
+      <p class="menu-label">The mechanisms</p>
+      <a href="index.html">Home</a>
+      <a href="queues.html">The queues</a>
+      <a href="doors.html">The two doors</a>
+      <a href="hands.html" aria-current="page">The hands</a>
+      <a href="conversation.html">The conversation</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">The hands</p>
+      <h1>The hands, the budget and the silence</h1>
+      <p class="lead">What stops a hand? Its slot when the pool is full, its budget when the
+        work is bigger than it said, and its silence clock always.</p>
+
+      <h2>A hand is a live run</h2>
+      <p>A <strong>hand</strong> is the live form of a <strong>run</strong>: the process doing
+        the work now. A run is one execution of one step by one hand, opened when the step is
+        claimed and closed with an outcome and an end cause — so "why did this stop" is a row,
+        not a guess.</p>
+
+      <h2>The pool, and the two lanes</h2>
+      <p>The pool is the hands the engine spawns, and it is counted <strong>per lane</strong>:
+        an external lane for work on the machine, an internal lane for work inside the hub, and
+        the conversations' own slots so a chat never waits behind the work. A queue that holds
+        a place keeps it until it closes; the arrival waits.</p>
+
+      <h2>The free hand</h2>
+      <p>Not every hand is in the pool. A <strong>free hand</strong> is an external agent the
+        engine did not spawn: it takes a work order from the free list, holds it for a
+        deadline that defends itself, and hands it in. It holds no lane and no slot, it opens
+        no queue, and the engine's own takes leave it alone — whoever it is and wherever it
+        runs, it cannot occupy a place the pool counts.</p>
+
+      <h2>The budget</h2>
+      <p>A worker estimates the work when it accepts it, and the step is carried with a
+        <strong>declared budget</strong>. Raising it is <code>+N</code>, and <code>+N</code> is
+        a new acceptance: a step does not quietly spend more than it was given. At the
+        threshold the queue closes and returns to the operator with what it did, what is
+        missing and why.</p>
+
+      <h2>The silence</h2>
+      <p>A step that says nothing for its <strong>silence limit</strong> is stopped by the
+        engine; every announcement puts the clock back to the full limit. A step that needs
+        longer <strong>declares a budget for itself</strong>, and there is a
+        <strong>ceiling</strong> over the whole of it that nothing renews — only the operator
+        can give it longer. A step that goes quiet is not killed in silence: it is stopped, and
+        what it had written stays where it was written.</p>
+
+      <h2>What is left behind</h2>
+      <p>The trace is the product, not a side effect. When a hand ends, the record answers
+        four questions and is readable while the hub runs.</p>
+      <ul>
+        <li><strong>What happened, in order</strong> — the events, read from a cursor, never
+          from zero.</li>
+        <li><strong>Who worked, for how long, how it ended</strong> — one row per run.</li>
+        <li><strong>The account</strong> — the report a delivery leaves, with the evidence for
+          every artifact it declares.</li>
+        <li><strong>What the gate checked and refused</strong> — the verdict, in its own
+          words.</li>
+      </ul>
+      <p>Beside them are the documents — plan, roadmap, progress — because a chain says the
+        order and the documents say why.</p>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the agent orchestrator of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>

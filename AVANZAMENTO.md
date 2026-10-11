@@ -48,18 +48,41 @@ they land; never rewrite history, append.
 - **[step #45] Section numbers moved.** `PROGETTO.md` was renumbered by the rewrite: the
   naming rule the #44 entry calls *§4* is now **§5.5**, the artifacts list it calls *§5* is
   **§5**, and the definition of done it calls *§7* is still **§7**.
+- **[step #46] The source reconciled to the design.** `ambrogio-site/site/` now carries the
+  five pages of PROGETTO §2/§4 — `index.html` (the main page) plus `queues.html`, `doors.html`,
+  `hands.html`, `conversation.html` — and the first pass' `what-it-does.html`,
+  `how-it-works.html`, `about.html` and hand-drawn `logo.svg` are gone.
+- **[step #46] The mark and the favicon are the operator's own files.** `site/logo.png` is
+  **byte-identical** to `ambrogio/v2/api/ambrogio-mark.png` (27,638 B, sha256 `7c37248e…`,
+  compared this step), and `site/favicon.ico` to the engine's `v2/api/favicon.ico` (15,086 B);
+  every page draws `<img src="logo.png">` at 28 px, with no inlined SVG left.
+- **[step #46] The palette is the product's, and the site is script-free.** `site/styles.css`
+  (5,259 B, ~150 lines) uses only the tokens of `ambrogio/v2/api/ui/app.css:15-16` and the side
+  menu of PROGETTO §2; the rendered pages report `background rgb(20,22,26)` (`#14161a`), four
+  cards, **0 `<script>` elements**, and the menu collapsing to a wrapped row at 380 px
+  (measured in a real Chromium this step).
+- **[step #46] The font is pinned.** `site/fonts/inter.woff2` (48,256 B, sha256 `3100e775…`)
+  is **byte-identical to its upstream URL** — the fontsource Latin subset of Inter Variable —
+  and the URL, the size, the digest and the SIL OFL 1.1 text are recorded in
+  `site/fonts/LICENSE-inter.txt`.
+- **[step #46] Served and fetched.** From a document root over `site/`: `/`, the four deep
+  dives, `styles.css`, `logo.png`, `favicon.ico`, `fonts/inter.woff2` and the licence all
+  answered **200** with the right content types; no page still references a removed file.
+- **[step #46] The pod files were left untouched.** `Dockerfile` and
+  `.github/workflows/publish.yml` still match PROGETTO §5.1 and §5.5 byte for byte
+  (`Dockerfile` 244 B sha256 `cbd0b103…`).
 
 ## Next
 
-1. **Build the site and its image half.** Scaffold the `ambrogio-site` repository
-   (pages, logo, font, `Dockerfile`, `.github/workflows/publish.yml`), push, and
-   confirm the first image lands on Docker Hub as
-   `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>`.
-2. **Wire the k8s half.** Add `apps/base/ambrogio-site/*`, `apps/cluster/ambrogio-site/*`,
-   `infrastructure/automation/ambrogio-site/*`, the `cluster-instances` registration,
-   and `clusters/tazlab-k8s/apps-ambrogio-site.yaml`; confirm Flux selects the tag,
-   commits it into the marked image line, and serves
-   `https://ambrogio.tazlab.net/` with a valid certificate (PROGETTO §5, §7).
+1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the
+   k8s half is already wired in `/workspace/tazlab-k8s` (`apps/base/ambrogio-site/*`,
+   `apps/cluster/ambrogio-site/*`, `infrastructure/automation/ambrogio-site/*`, the
+   `cluster-instances` registration and `clusters/tazlab-k8s/apps-ambrogio-site.yaml`; the
+   marked image line still reads `:latest`). Push the source to `master`, confirm Docker Hub
+   carries `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>`, confirm Flux commits the tag
+   into `apps/base/ambrogio-site/ambrogio-site.yaml` and rolls the Deployment, then check that
+   the five pages answer **200** over HTTPS with a valid Let's Encrypt chain and that the mark,
+   the favicon and the woff2 are served (PROGETTO §7).
 
 ## Open questions
 
@@ -71,8 +94,14 @@ they land; never rewrite history, append.
   **Closed [step #45]:** Inter, the variable WOFF2, self-hosted; the site copies no existing
   site's font (the blog uses a Google CDN, the wiki a system stack — both rejected) (PROGETTO
   §3.2).
-- **New [step #45], asset provenance to record at build time:** the Inter file must be fetched
+- ~~**New [step #45], asset provenance to record at build time:** the Inter file must be fetched
   from the vendor's own release (SIL OFL 1.1) and its digest recorded in the repository, so the
-  one font the site ships is a pinned file, not a download that drifts.
-- **New [step #45]:** the first pass under `ambrogio-site/site/` must be reconciled to the page
-  set of PROGETTO §2/§4 (its `logo.svg` and light palette go).
+  one font the site ships is a pinned file, not a download that drifts.~~
+  **Closed [step #46]:** the file in the tree is byte-identical to
+  `https://cdn.jsdelivr.net/npm/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2`
+  (48,256 B, sha256 `3100e775…`), and the URL, the size, the digest and the licence are recorded
+  in `site/fonts/LICENSE-inter.txt`.
+- ~~**New [step #45]:** the first pass under `ambrogio-site/site/` must be reconciled to the page
+  set of PROGETTO §2/§4 (its `logo.svg` and light palette go).~~
+  **Closed [step #46]:** the four mechanism pages are in place, `logo.svg` and the three
+  first-pass pages are deleted, and `styles.css` carries the product's tokens.

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The queues, and who accepts them — Ambrogio</title>
+<meta name="description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, and a step ceiling declared when the operator accepts it.">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="28" height="28" alt="">
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shell">
+    <nav class="side-menu" aria-label="Site">
+      <p class="menu-label">The mechanisms</p>
+      <a href="index.html">Home</a>
+      <a href="queues.html" aria-current="page">The queues</a>
+      <a href="doors.html">The two doors</a>
+      <a href="hands.html">The hands</a>
+      <a href="conversation.html">The conversation</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">The queues</p>
+      <h1>The queues, and who accepts them</h1>
+      <p class="lead">Where does work come from, and who may start it? Work is a queue, and
+        nothing starts by itself: the operator accepts it, and says how many steps it may
+        take.</p>
+
+      <h2>What a queue is</h2>
+      <p>The queue is the unit of work. It is not a list of messages and not a git branch: it
+        is the container that carries one request from the moment it is accepted to the moment
+        it closes. It has exactly these parts.</p>
+      <ul>
+        <li><strong>An originator</strong> — a request from the operator, or a task the hub
+          opened itself. The queue says which.</li>
+        <li><strong>A kind</strong> — <code>work</code>, or <code>conversation</code>. The kind
+          is what tells the engine that a queue with nothing left to do <em>waits</em> instead
+          of closing.</li>
+        <li><strong>A chain of steps</strong> — the ordered tasks the queue carries; the order
+          is the order the worker chose when it packed them.</li>
+        <li><strong>One session</strong> — the agent's conversation, carried from step to step.
+          The third step knows what the first one said, without being told again.</li>
+        <li><strong>A step ceiling</strong> — declared when the queue is accepted, with what is
+          left of it.</li>
+        <li><strong>A state</strong> — <code>open</code>, <code>paused</code> or
+          <code>closed</code>.</li>
+      </ul>
+
+      <h2>Nothing starts by itself</h2>
+      <p>Acceptance is the operator's act. A request waits until he turns it into a queue, and
+        the ceiling is declared with the acceptance — not guessed later. Raising it is
+        <code>+N</code>, and <code>+N</code> is a <em>new acceptance</em>, never a silent
+        extension: the number a queue may spend is a number somebody said out loud.</p>
+      <p>The count survives a pause. A queue that sleeps does not start over, and a restart of
+        the engine does not undo the choice that put it in.</p>
+
+      <h2>Who goes first</h2>
+      <p>The dispatcher carries queues in <strong>arrival order</strong>, because that is the
+        rule chosen when the queue took the tree's place: whoever arrived first does not wait
+        for ever behind whoever arrived later.</p>
+      <p><strong>Urgency</strong> orders tasks <em>inside</em> a lane, not queues. It is one
+        scale, <code>0..100</code>, and the operator's own requests are born at
+        <code>90</code> — just under the top, because a human request must never lose against
+        the traffic the system generates for itself. Above <code>100</code> is the
+        hyper-priority band, and only a task there may preempt a place already taken.</p>
+      <p>A queue that holds a slot keeps it until it closes; the arrival waits.</p>
+
+      <h2>At the ceiling it comes back</h2>
+      <p>When the chain reaches the step ceiling, the queue <strong>closes and returns to the
+        operator</strong> saying what it did, what is missing and why. That is a return, not a
+        bounce: nothing walks the task toward an escalation nobody asked for, and the shape of
+        the answer is the same as any other delivery.</p>
+
+      <h2>The order is not the documentation</h2>
+      <p>A chain says the <em>order</em>; the documents say <em>why</em>. Every queue is asked
+        for three — <strong>plan</strong>, <strong>roadmap</strong>, <strong>progress</strong>
+        — and the review refuses a queue whose documents are missing. That is the whole reason
+        the trace is the product and not a side effect: a step that lies can be contested, and
+        the record stays where it was.</p>
+
+      <h2>What the engine does not do</h2>
+      <p>The engine does not build and does not merge; it runs no tests and judges no prose.
+        The review is deterministic and executes nothing: it checks that every artifact a
+        delivery declares exists where it says, and that the queue's documents are there. The
+        merge is the worker's act, in the project's own repository, under the project's own
+        rules.</p>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the agent orchestrator of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>

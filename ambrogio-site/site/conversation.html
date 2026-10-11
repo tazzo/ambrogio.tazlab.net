@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The conversation — Ambrogio</title>
+<meta name="description" content="A conversation is a queue you talk to: its steps are the operator's messages, each answer is that step's brief, and the chain in the database is the transcript.">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="28" height="28" alt="">
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shell">
+    <nav class="side-menu" aria-label="Site">
+      <p class="menu-label">The mechanisms</p>
+      <a href="index.html">Home</a>
+      <a href="queues.html">The queues</a>
+      <a href="doors.html">The two doors</a>
+      <a href="hands.html">The hands</a>
+      <a href="conversation.html" aria-current="page">The conversation</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">The conversation</p>
+      <h1>The conversation</h1>
+      <p class="lead">The thing the operator actually talks to is a queue: same container, same
+        chain, same trace — with a kind that tells the engine to wait instead of closing.</p>
+
+      <h2>A queue you talk to</h2>
+      <p>A chat is not a second system beside the queues. It <em>is</em> a queue whose kind is
+        <code>conversation</code>, and the kind is the whole difference: a queue with nothing
+        left to do <strong>waits</strong> instead of closing. Everything else — the steps, the
+        session, the ceiling, the trace — is the machinery the rest of the site describes.</p>
+
+      <h2>His messages are its steps</h2>
+      <p>Every message the operator sends <strong>is a step of the chain</strong>, and every
+        answer is that step's <strong>brief</strong> — the short text a delivery carries for
+        the person who has to read it, with the long report behind it.</p>
+      <p>So the chain in the database <strong>is the transcript</strong>. There is no
+        conversation table and no extra field on a task: the queue's id is the conversation's
+        id, and the history is the same rows the trace was already made of.</p>
+
+      <h2>It grows by a declared function</h2>
+      <p>A started queue refuses more steps — except a conversation. There, one verb appends
+        the next message, and that is the only way a conversation grows. Nothing is relaxed to
+        make the chat work: the <code>+N</code> is still the operator giving it more room, and
+        it is still a number somebody said.</p>
+
+      <h2>The idle clock</h2>
+      <p>A chat with nothing to do is paused by the engine's own clock after a short silence —
+        the actor of that pause is the engine, never the operator — and the next message
+        resumes it. The session is untouched by both, so a chat that slept overnight answers in
+        the morning with its context intact.</p>
+
+      <h2>Its own slots</h2>
+      <p>A conversation is counted in slots of its own, so it never waits behind the work. It
+        is carried by an external hand, which is also why the operator's external stop stops
+        the chats too: the same switch that stops the work on the machine stops what is talking
+        to him.</p>
+
+      <h2>The memory is the ledger</h2>
+      <p>Every prompt carries the operator's messages and the briefs they were answered with,
+        read off the disk at every step. So a chat is answered from what was actually said, and
+        not from a session that may be gone tomorrow: <em>the session is the bonus, the ledger
+        is the memory</em>.</p>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the agent orchestrator of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>
