@@ -497,8 +497,12 @@ site's own files are unchanged.
 
 Because the publish branch watches *every* push to `main`, so does this repository's
 documentation: a docs-only commit mints a tag and rolls the pod — the same behaviour the wiki,
-the blog and the teaching site have. If that is ever unwanted the fix is a `paths-ignore` on the
-workflow, not a change of branch; it is not applied here.
+the blog and the teaching site have. That is not a guess: the commit that carried the previous
+revision of this report (`f017e89`, documentation only) was pushed, and it ran **run #3** on `main`
+(`success`, 21:47Z), published `ambrogio-site-3-f017e8932af30ea3bdd331ef71e36c7c646ac01d`, and
+the Automation committed it as `e32a44a` — the Deployment took that tag and the pod is on its
+digest. If the behaviour is ever unwanted the fix is a `paths-ignore` on the workflow, not a
+change of branch; it is not applied here.
 
 ---
 
