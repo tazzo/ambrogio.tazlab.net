@@ -1,14 +1,16 @@
-The publish workflow's check step, run on three deliberately corrupted copies of
-this repository, each in a container that carries the copy only (no sibling trees):
-the step must fail on each, and it does.
+The same step, on four deliberately corrupted copies of this repository, each run in a
+container that carries the copy only: it must fail on each, and it does.
 
-### a. site/logo.png with one byte flipped
-$ sh verify-project.sh --in-repo ; sh verify-logo-files.sh
+### site/logo.png with one byte flipped
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
 == 1. the mark in the site
 site/logo.png  121589 bytes  93a050d109601ac5962121f12cac5ce3afbfc1423a31024599c63e2a944ada1f
 expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
 DIGEST MISMATCH  the page's mark is not the pinned file
 sibling        /workspace/ambrogio/v2/api/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+PROGETTO.md    names the same digest
 == 2. the markup, on the five pages
 pages          5 of 5 carry the file's own 512x512
 == 3. the drawn height the stylesheet states
@@ -20,12 +22,15 @@ VERIFY-LOGO-FILES: FAILURES
 
 exit 1
 
-### b. queues.html's img drawn at 256
-$ sh verify-project.sh --in-repo ; sh verify-logo-files.sh
+### queues.html drawing the mark at 256 instead of 512
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
 == 1. the mark in the site
 site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
 expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
 sibling        /workspace/ambrogio/v2/api/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+PROGETTO.md    names the same digest
 == 2. the markup, on the five pages
 pages          4 of 5 carry the file's own 512x512
 == 3. the drawn height the stylesheet states
@@ -37,16 +42,7 @@ VERIFY-LOGO-FILES: FAILURES
 
 exit 1
 
-### c. PROGETTO.md's citation of queues.html renamed
-$ sh verify-project.sh --in-repo ; sh verify-logo-files.sh
-skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
-verify-project: checked 8 citations, 0 missing
-verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
-
-exit 0
-
-### c. PROGETTO.md no longer names one of the five pages (queues.html -> queues.page)
-$ sh verify-project.sh --in-repo
+### PROGETTO.md no longer naming queues.html
 skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
 PROGETTO.md does not name queues.html
 verify-project: checked 8 citations, 1 missing
@@ -54,22 +50,12 @@ verify-project: 24 citations are in sibling trees this checkout does not carry (
 
 exit 1
 
-### control: the same command on the pristine copy of the repository
-skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
-verify-project: checked 8 citations, 0 missing
-verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
-
-exit 0
-### d. the workflow's step as one shell, on the copy with the corrupted digest
-$ sh -c 'set -e; sh verify-project.sh --in-repo; sh verify-logo-files.sh'
-skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
-verify-project: checked 8 citations, 0 missing
-verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+### PROGETTO.md naming a digest one character off the pinned one
 == 1. the mark in the site
-site/logo.png  121589 bytes  93a050d109601ac5962121f12cac5ce3afbfc1423a31024599c63e2a944ada1f
+site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
 expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
-DIGEST MISMATCH  the page's mark is not the pinned file
 sibling        /workspace/ambrogio/v2/api/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+DOC MISMATCH   PROGETTO.md does not name 626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9: the script and the design doc have parted
 == 2. the markup, on the five pages
 pages          5 of 5 carry the file's own 512x512
 == 3. the drawn height the stylesheet states
@@ -80,3 +66,4 @@ favicon        unchanged (still the tab's favicon.ico)
 VERIFY-LOGO-FILES: FAILURES
 
 exit 1
+

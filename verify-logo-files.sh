@@ -54,6 +54,13 @@ if [ -f "$REPO" ]; then
 else
   echo "sibling        $REPO is not here (a runner carries this repository only): the pinned digest above is the whole check"
 fi
+# The same number is written in PROGETTO.md §3.1: two copies of one digest, so they are read
+# against each other here rather than trusted to stay in step.
+if [ -f "$ROOT/PROGETTO.md" ]; then
+  grep -q "$EXPECTED_SHA" "$ROOT/PROGETTO.md" \
+    && echo "PROGETTO.md    names the same digest" \
+    || { echo "DOC MISMATCH   PROGETTO.md does not name $EXPECTED_SHA: the script and the design doc have parted"; fail=1; }
+fi
 
 echo "== 2. the markup, on the five pages"
 n=$(grep -l 'src="logo.png" width="512" height="512"' "$SITE"/*.html 2>/dev/null | wc -l)
