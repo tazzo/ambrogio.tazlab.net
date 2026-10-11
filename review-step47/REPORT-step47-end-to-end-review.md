@@ -5,6 +5,10 @@ Date: 2026-10-11. Role: worker-external (review).
 change made to `.github/workflows/publish.yml`, the deletion of the vestigial `origin/master`
 ref, and the second full pass of the chain that the closing push ran (run #2 →
 `ambrogio-site-2-a5ae413…` → the Automation's commit `8287717` → the pod on the new digest).
+**§7 was added by the step that closed finding 3** (the kustomize-root fix): it records the
+change in `/workspace/tazlab-k8s` (`f1884ad`, landed as `63c7ee7`) that puts the DB-wait patch
+inside each consumer's own kustomize root, the byte-identical renders that prove the cluster does
+not move, and the new check `tests/verify_overlays_build.sh`.
 Tree: `/workspace/ambrogio-site` (the site's repository, on branch `main` — `602bf05` when this
 review opened, `a5ae413` when the fix landed) and its
 sibling `/workspace/tazlab-k8s` (reached through the in-tree symlink `tazlab-k8s`), the cluster
@@ -378,13 +382,19 @@ the foreign Go test had finished, a plain `pgrep -c chrome` on the box read **0*
    `tests/verify_manifest_purity.sh`, which exits 1 on `instances/longhorn`,
    `operators/traefik`, `instances/homepage`, `instances/tazlab-db` — all pre-existing, none of
    them `ambrogio-site`.
+   **CLOSED by §7**: the patch now lives inside each consumer's own kustomize root, so
+   `kubectl kustomize infrastructure/instances` and `infrastructure/cluster-instances` (and
+   `apps/cluster/mnemosyne-mcp`) build plainly, the rendered manifests are byte-identical, and
+   `tests/verify_overlays_build.sh` now checks every root in the repository.
 
-4. **`/workspace/tazlab-k8s` has a dirty working tree right now** — another task's in-flight work:
-   `apps/base/mnemosyne-mcp/kustomization.yaml`, `apps/base/mnemosyne-mcp/wait-for-db-patch.yaml`,
+4. **`/workspace/tazlab-k8s` had a dirty working tree when this review opened** — in-flight work
+   not authored by the review: `apps/base/mnemosyne-mcp/kustomization.yaml`,
+   `apps/base/mnemosyne-mcp/wait-for-db-patch.yaml`,
    `infrastructure/instances/pgadmin/{kustomization.yaml,wait-for-db-patch.yaml}`, and a deletion
    of `infrastructure/common/wait-for-db-patch.yaml`. `git status --porcelain | grep -i ambrogio`
-   → none: nothing in flight touches this lane, and Flux reads the remote, not this working tree.
-   Left untouched.
+   → none: nothing in flight touched this lane, and Flux reads the remote, not this working tree.
+   **Step #49 landed it** (verified byte-for-byte, with the check of §7) because it *is* the fix
+   finding 3 asked for; see §7 for what was taken on and how it was verified.
 
 5. **`pgrep -c chrome` has no clean zero baseline on this box** because of the foreign Go test's
    puppeteer Chromium (§4). Handled by counting by binary; recorded here so the next reader does
@@ -506,7 +516,134 @@ change of branch; it is not applied here.
 
 ---
 
-## The single command that reproduces the whole chain's non-browser half
+## 7. The fix applied by step #49: every kustomize root holds its own patches, and a check says so
+
+**The defect, restated.** `infrastructure/instances/pgadmin/kustomization.yaml` pointed its
+PatchTransformer at `../../common/wait-for-db-patch.yaml`, and
+`apps/base/mnemosyne-mcp/kustomization.yaml` at `../../../infrastructure/common/wait-for-db-patch.yaml`.
+Both paths escape their own kustomize root, which kustomize v5 refuses under its default load
+restrictions — so `kubectl kustomize infrastructure/instances` and
+`kubectl kustomize infrastructure/cluster-instances` did not build at all, and built only with
+`--load-restrictor LoadRestrictionsNone`. Flux was never affected (its kustomize-controller loads
+unrestricted), which is exactly why the defect could sit there: the cluster looked right while a
+plain build disagreed with it.
+
+**What this step took on.** The working tree already carried the repair, uncommitted, when the
+step opened (pgadmin and mnemosyne-mcp repointed at a local copy, `infrastructure/common/`
+deleted) — §5 finding 4. Landing it *is* what finding 3 asks for, and the two halves cannot be
+split (committing pgadmin alone while the deletion stayed uncommitted would leave mnemosyne-mcp
+pointing at a file the commit had removed), so this step adopted both, verified them, and added
+the check. This is stated plainly because the diff is not all first-authored here.
+
+**The change, in `/workspace/tazlab-k8s`** (one commit):
+
+```
+$ git show --stat --format='%s' f1884ad
+kustomize roots: keep the DB-wait patch inside each root, and check that every root builds plainly
+ 5 files changed, 108 insertions(+), 2 deletions(-)
+ rename {infrastructure/common => apps/base/mnemosyne-mcp}/wait-for-db-patch.yaml (100%)
+ create mode 100644 infrastructure/instances/pgadmin/wait-for-db-patch.yaml
+ create mode 100755 tests/verify_overlays_build.sh
+```
+
+```
+$ git diff
+ apps/base/mnemosyne-mcp/kustomization.yaml
+-  - path: ../../../infrastructure/common/wait-for-db-patch.yaml
++  - path: wait-for-db-patch.yaml
+ infrastructure/instances/pgadmin/kustomization.yaml
+-  - path: ../../common/wait-for-db-patch.yaml
++  - path: wait-for-db-patch.yaml
+ infrastructure/common/wait-for-db-patch.yaml      → deleted (its content lives on, unchanged, in the two roots that use it)
+```
+
+**Before — proved on a read-only worktree of the pre-fix commit** (`git worktree add
+/tmp/k8s-head HEAD`, removed afterwards; the working tree was never disturbed):
+
+```
+$ kubectl kustomize /tmp/k8s-head/infrastructure/instances
+error: accumulating resources: … accumulating resources from 'pgadmin': …/:pgadmin' must resolve
+to a file': … trouble configuring builtin PatchTransformer            → exit ≠ 0
+$ kubectl kustomize /tmp/k8s-head/infrastructure/cluster-instances   → exit ≠ 0 (same, via ../instances)
+$ kubectl kustomize /tmp/k8s-head/apps/cluster/mnemosyne-mcp         → exit ≠ 0 (same, via ../../base)
+$ kubectl kustomize --load-restrictor LoadRestrictionsNone /tmp/k8s-head/infrastructure/instances
+                                                                     → exit 0  (the old workaround)
+```
+
+**After — plainly, no restrictor flag:**
+
+```
+$ kubectl kustomize infrastructure/instances                 → exit 0
+$ kubectl kustomize infrastructure/cluster-instances         → exit 0
+$ kubectl kustomize apps/cluster/mnemosyne-mcp               → exit 0
+$ sh tests/verify_overlays_build.sh                          → exit 0
+  OK    65 roots build plainly (4 known-broken, listed in this script)
+VERIFY-OVERLAYS: OK
+```
+
+**Nothing in the cluster changes — the renders are byte-identical.** This is the check that makes
+the repair safe to land, and it is stronger than "it builds":
+
+| overlay | before (pre-fix commit + `LoadRestrictionsNone`) | after (plain) | sha256 (both) |
+|---|---|---|---|
+| `infrastructure/instances` | 37,053 B | 37,053 B | `f6fe59f8b9942599…` |
+| `infrastructure/cluster-instances` | 44,122 B | 44,122 B | `beb4b815d19db7e4…` |
+| `apps/cluster/mnemosyne-mcp` | 3,578 B | 3,578 B | `c2f39acc06873a9e…` |
+
+`diff` of each before/after pair prints nothing; the pgadmin Deployment still carries its
+`wait-for-db` initContainer, and the overlay still renders its 14 kinds (Deployment, Ingress,
+Job, Namespace, PostgresCluster, VaultPKISecret, …). So the patch still applies — it is only the
+path to it that moved.
+
+**And the cluster agrees it was a no-op.** After the push, Flux took the new revision and both
+consumers re-applied it (the namespace `tazlab-db` holds both workloads):
+
+```
+$ kubectl -n flux-system get gitrepository flux-system -o jsonpath='{.status.artifact.revision}'
+master@sha1:63c7ee7027cadda82157450db2c29f07112a115d
+$ kubectl -n flux-system get kustomization infrastructure-instances -o jsonpath='{.status.conditions[?(@.type=="Ready")].message}'
+Applied revision: master@sha1:63c7ee7027cadda82157450db2c29f07112a115d
+$ kubectl -n flux-system get kustomization apps-data               → same revision, Ready=True
+$ kubectl -n tazlab-db get deploy pgadmin        -o jsonpath=…  → generation 109, resourceVersion 43067172, initContainer wait-for-db
+$ kubectl -n tazlab-db get deploy mnemosyne-mcp  -o jsonpath=…  → generation 109, resourceVersion 43051708, initContainer wait-for-db
+pods: identical names, creationTimestamps and pod-template-hashes before and after the reconcile
+all 28 Flux Kustomizations: Ready=True
+```
+
+Generation, resourceVersion and the pods are unchanged across the reconcile: Flux applied the new
+commit and **no workload was restarted**, which is what a pure path repair must look like.
+
+The push itself was rebased once: `origin/master` had moved (three `chore: self-update
+ambrogio-site image [skip ci]` commits from the ImageUpdateAutomation, one per ambrogio-site tag
+minted in §6), none of them touching these files, so the commit landed on top as `63c7ee7`.
+
+**The check: `tests/verify_overlays_build.sh`** (new, 2,773 B, `sh`-runnable from anywhere, exit
+0 when every root builds). It walks all 65 kustomization roots under `infrastructure/`, `apps/`
+and `clusters/`, runs `kubectl kustomize` with the *default* load restrictions on each, and:
+
+- fails on any root that does not build unless it is listed in `KNOWN_BROKEN` with a reason;
+- fails if a listed root starts building — so the list cannot rot;
+- prints the reason for each known-broken root.
+
+The four roots that still cannot build plainly are all pre-existing and unrelated to the pgadmin
+fix, and the script names each one's cause:
+
+| root | why it cannot build plainly |
+|---|---|
+| `infrastructure/operators/namespaces` | references `../monitoring/namespace.yaml`, outside its own root |
+| `infrastructure/operators/vso-secrets` | references `../vso/vaultconnection.yaml`, outside its own root |
+| `infrastructure/operators` | accumulates `operators/namespaces`, which fails above |
+| `infrastructure/tls` | `kustomization.yaml` is empty |
+
+**The check catches the regression it was written for.** Copied into the pre-fix worktree and run
+there, it exits 1 and names the culprits — `infrastructure/instances/pgadmin`,
+`infrastructure/instances`, `infrastructure/cluster-instances`, `apps/base/mnemosyne-mcp` — so it
+is not a check that passes by construction.
+
+**Nothing runs the check yet.** `tazlab-k8s` has no CI at all (no `.github/`, no `Makefile`, and
+`tests/` holds only this script and `verify_manifest_purity.sh`), so the gate exists but nobody
+pulls it. Wiring it into a runner is a decision for the operator, and it is the first child
+below.
 
 ```
 $ sh /workspace/ambrogio-site/verify-lane.sh
@@ -517,8 +654,8 @@ $ sh /workspace/ambrogio-site/verify-lane.sh
 VERIFY-LANE: OK          (exit 0)
 ```
 
-(The run above is the one this review made; the registry carries 3 tags since the fix's own
-publish — §6. `verify-lane.sh` only requires a non-zero count.)
+(The run above is the one this review made. The registry carries several tags since — one per
+push to the publish branch, §6 — and `verify-lane.sh` only requires a non-zero count.)
 
 ## The single command that reproduces the browser half
 
@@ -536,14 +673,18 @@ a page overflows horizontally, or this task's Chrome is still running when it re
 **The chain is whole**: the commit publishes an image whose bytes the pod is running, and the
 pages answer over HTTPS and render correctly at phone and desktop widths.
 
-The one defect this review found — the publish workflow watching `master` while every push went
-to `main` — is **closed** (§6): `publish.yml` now watches `main`, the branch the checkout carries
-and the repository's default; the vestigial `origin/master` ref is deleted; and the closing push
-itself (`a5ae413`) fired run #2 on `main`, published `ambrogio-site-2-a5ae413…`, and was read,
-resolved, committed and rolled onto by Flux without a hand touching anything — the second full
-pass of the chain, on the branch a worker will actually push.
+Both defects this review found are **closed**: the publish workflow watching `master` while every
+push went to `main` (§6 — `publish.yml` now watches `main`, the branch the checkout carries and
+the repository's default; the vestigial `origin/master` ref is deleted; the closing push fired
+run #2 on `main`, published `ambrogio-site-2-a5ae413…`, and Flux read, resolved, committed and
+rolled onto it), and the `pgadmin`/`mnemosyne-mcp` PatchTransformers escaping their kustomize
+roots (§7 — the patch now lives in each consumer's own root, the two overlays build with a plain
+`kubectl kustomize`, the rendered manifests are byte-identical so no workload moved, and
+`tazlab-k8s/tests/verify_overlays_build.sh` checks every root in the repository).
 
-What is open, and was open before this lane existed: the pre-existing `pgadmin` PatchTransformer
-path that keeps `kubectl kustomize infrastructure/cluster-instances` from building under the
-default load restrictions (finding 3 of §5), and the observation that a docs-only push now mints
-an image tag, as it does for the wiki, the blog and the teaching site.
+What remains open is what the check now makes visible and cannot fix by itself: the three other
+roots that still cannot build plainly (`infrastructure/operators/namespaces`,
+`infrastructure/operators/vso-secrets`, and the empty `infrastructure/tls`), the fact that nothing
+in `tazlab-k8s` runs the check (the repository has no CI), and the observation that a docs-only
+push to a publish branch mints an image tag, as it does for the wiki, the blog and the teaching
+site.
