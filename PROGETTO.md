@@ -185,9 +185,7 @@ The main page. Five lines and four cards, nothing else:
   over the Agent Client Protocol; one HTTP API, one SSE stream, one page of its own;
 - why it exists: two problems — several agents working at once without two agents in one place,
   and the trace of what was done and why, for whoever comes later (`ambrogio/README.md` §1);
-- **four cards**, one per deep dive, each one sentence naming the question it answers;
-- a closing paragraph, *Built in the lab it runs*: tazlab.net, GitOps, the same delivery lane as
-  the blog and the wiki — and one sentence saying the site is static and is **not** the hub.
+- **four cards**, one per deep dive, each one sentence naming the question it answers.
 
 No feature list, no screenshot gallery, no version badge.
 
