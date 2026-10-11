@@ -1,0 +1,12 @@
+$ cd /workspace/ambrogio && go test ./v2/api/ -count=1
+ok  	github.com/tazzo/ambrogio/v2/api	50.638s
+
+$ cd /workspace/ambrogio && go test -count=1 ./v2/task/ ./v2/store/ ./v2/queue/ ./v2/engine/ ./v2/worker/ ./v2/worktree/ ./v2/review/ ./v2/acp/
+ok  	github.com/tazzo/ambrogio/v2/task	0.077s
+ok  	github.com/tazzo/ambrogio/v2/store	6.439s
+ok  	github.com/tazzo/ambrogio/v2/queue	18.900s
+ok  	github.com/tazzo/ambrogio/v2/engine	5.328s
+ok  	github.com/tazzo/ambrogio/v2/worker	11.170s
+ok  	github.com/tazzo/ambrogio/v2/worktree	1.676s
+ok  	github.com/tazzo/ambrogio/v2/review	0.006s
+ok  	github.com/tazzo/ambrogio/v2/acp	0.899s

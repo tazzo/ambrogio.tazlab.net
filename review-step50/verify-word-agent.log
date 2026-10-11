@@ -1,0 +1,16 @@
+== 1. the binary, built from this tree
+built   /tmp/ambrogio-word-agent (18814465 bytes)
+== 2. a second engine, serving the page
+serving http://127.0.0.1:7891/ (pid 2012478)
+== 3. the bytes it serves
+/               213047 bytes   hand(s) total  21   for the being 0
+/ui              85607 bytes   hand(s) total   8   for the being 0
+/ui/app.js      160419 bytes   hand(s) total  14   for the being 0
+/ui/app.css      35908 bytes   hand(s) total   1   for the being 0
+== 4. the sentences, as they are served
+found   an agent is on it
+absent  an agent does not do this
+found   in progress, with an agent
+found   no agent at work
+VERIFY-WORD-AGENT: OK
+EXIT=0

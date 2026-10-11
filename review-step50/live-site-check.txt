@@ -1,0 +1,33 @@
+the live hostname, read after the push (2026-10-11, ~23:29Z)
+
+$ git -C /workspace/ambrogio-site push origin main
+    2c04afc..b0ff6ff  main -> main
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/
+    / 200 3930
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/agents.html
+    /agents.html 404 153
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/hands.html
+    /hands.html 200 4611
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/queues.html
+    /queues.html 200 5576
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/doors.html
+    /doors.html 200 4351
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/conversation.html
+    /conversation.html 200 4066
+
+== the same reading again, once the publish lane had landed (2026-10-11, ~23:36Z)
+
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/agents.html
+    /agents.html 200 4632
+$ curl -s -o /dev/null -w '%{http_code} %{size_download}' https://ambrogio.tazlab.net/hands.html
+    /hands.html 404 153
+
+The lane: push to main b0ff6ff -> Actions builds tazzo/tazlab-ambrogio-site:ambrogio-site-<run>-<sha>
+-> Flux ImagePolicy picks it -> ImageUpdateAutomation commits the tag -> Flux deploys.
+
+$ for f in / /queues.html /doors.html /conversation.html; do ... grep -o 'href="agents.html"' | wc -l
+the live pages, each carrying the link to the renamed page (1 = present):
+/                    2
+/queues.html         1
+/doors.html          1
+/conversation.html   1
