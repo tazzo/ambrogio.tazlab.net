@@ -1,0 +1,20 @@
+$ sh review-step54/verify-live.sh
+== the first page: the section gone, and 200 ==
+/                    200  3818 bytes
+  contains "Built in the lab it runs"                    0
+  contains "A repository holds the desired state"        0
+  contains "This site is a description, not the product" 0
+  contains "not reachable from here"                     0
+== the side menu, on the first page ==
+  links to index.html           2
+  links to queues.html          2
+  links to doors.html           2
+  links to agents.html          2
+  links to conversation.html    2
+== the four deep dives: 200, and unchanged since before this step ==
+/queues.html         200  6056 bytes  bc874571808393504ddf06188a62bf153eebc66274b7577840c621511a90fe52  unchanged=yes
+/doors.html          200  4799 bytes  d744585f6f8c86e5ffc56a64daed6e194e71609166e7f3762cd1910c279cacbf  unchanged=yes
+/agents.html         200  5110 bytes  5758c7e6eed5b20e9d28d9fffae0a612cb9df6fa78b2123ef960c65374b342d7  unchanged=yes
+/conversation.html   200  4548 bytes  077e668be17160988e2182b13b8fcb77773469fea48d51c1455c1d31bf826ca4  unchanged=yes
+VERIFY-LIVE: OK
+-> rc 0

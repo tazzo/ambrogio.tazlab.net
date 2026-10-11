@@ -134,6 +134,21 @@ they land; never rewrite history, append.
   properties and `logo.png` answers **200 121589** with the pinned digest
   `626654ac…` (`review-step53/`).
 
+- **[step #54] The first page loses *Built in the lab it runs*.** The operator asked for the
+  section out of `index.html`, heading included; the `h2` and its two paragraphs are gone
+  (`ambrogio-site/site/index.html:75`; the commit `3717efe`, 2 files, 1 insertion, 12 deletions),
+  and nothing else on the page moved — the eyebrow, the hero, the two body paragraphs, the four
+  cards, the side menu and its five links, the header and the footer are untouched, and **no
+  other page changed**. `PROGETTO.md` §4 documents each page file by file and described that
+  closing paragraph, so its bullet went with it (docs only; declared). The removed block carried
+  only `h2`/`p`/`a`, all shared with the rest of the site, so **no stylesheet rule is used only by
+  that section** and none was removed. Both publish checks pass (`verify-project.sh --in-repo`
+  8 checked / 0 missing; `verify-logo-files.sh` OK). The lane carried it: push `3717efe` →
+  Actions run #12 (`ambrogio-site-12-3717efe11b09…`, 23:48:15Z) → Flux commit `9ec44cd` in
+  `tazlab-k8s` → the pod rolled; measured on the live hostname (23:52:00Z), `/` carries no
+  *Built in the lab it runs* and none of the three sentences, the five pages all answer **200**,
+  and the four deep dives are byte-for-byte the same as before the push (`review-step54/`).
+
 ## Next
 
 1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the

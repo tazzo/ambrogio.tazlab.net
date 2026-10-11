@@ -1,0 +1,10 @@
+== live readings BEFORE the change (https://ambrogio.tazlab.net/)
+/                   200   4419 386c2b71c1b56431fc6e4667aa437d1130848e7b30fe9b2c6f91d3c67fca9d83
+/queues.html        200   6056 bc874571808393504ddf06188a62bf153eebc66274b7577840c621511a90fe52
+/doors.html         200   4799 d744585f6f8c86e5ffc56a64daed6e194e71609166e7f3762cd1910c279cacbf
+/agents.html        200   5110 5758c7e6eed5b20e9d28d9fffae0a612cb9df6fa78b2123ef960c65374b342d7
+/conversation.html  200   4548 077e668be17160988e2182b13b8fcb77773469fea48d51c1455c1d31bf826ca4
+  index BEFORE contains 'Built in the lab it runs': 1
+  index BEFORE contains 'A repository holds the desired state': 1
+  index BEFORE contains 'This site is a description, not the product': 1
+  index BEFORE contains 'not reachable from here': 1

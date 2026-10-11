@@ -1,0 +1,28 @@
+the lane that carried the change (2026-10-11)
+
+$ git -C /workspace/ambrogio-site push origin main
+    3815a07..3717efe  main -> main
+      (3717efe: "index.html: the "Built in the lab it runs" section is gone")
+
+$ gh api repos/tazzo/ambrogio.tazlab.net/actions/runs/38185623235 --jq '.run_number,.head_sha,.conclusion'
+    run_number 12   head_sha 3717efe11b09f9bdaa65f5087e61e1c1fe0032d4   success
+    created 2026-10-11T23:47:55Z
+      steps: Checkout code / The repository's own checks / Login to Docker Hub / Build and push
+             -> all success
+
+$ curl 'https://hub.docker.com/v2/repositories/tazzo/tazlab-ambrogio-site/tags?page_size=2&ordering=last_updated'
+    ambrogio-site-12-3717efe11b09f9bdaa65f5087e61e1c1fe0032d4   2026-10-11T23:48:15Z   <- this run
+    latest                                                       2026-10-11T23:48:13Z
+
+$ git -C /workspace/tazlab-k8s log --oneline origin/master -1
+    9ec44cd chore: self-update ambrogio-site image [skip ci]
+$ git -C /workspace/tazlab-k8s show origin/master:apps/base/ambrogio-site/ambrogio-site.yaml | grep image:
+    image: tazzo/tazlab-ambrogio-site:ambrogio-site-12-3717efe11b09f9bdaa65f5087e61e1c1fe0032d4 # {"$imagepolicy": "flux-system:ambrogio-site"}
+
+$ the live page, polled every 15 s
+    23:51:45Z  /  200 4419  "Built in the lab it runs" present   (the previous deployment)
+    23:52:00Z  /  200 3818  absent                              (this deployment)
+
+So: push 3717efe (23:47Z) -> Actions run #12 builds and pushes the tag (23:48Z) ->
+Flux ImageUpdateAutomation commits 9ec44cd into tazlab-k8s -> the pod rolls -> the live
+page carries no section by 23:52:00Z, about four minutes after the push.
