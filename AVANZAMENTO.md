@@ -88,6 +88,25 @@ they land; never rewrite history, append.
   that digest. `verify-logo.sh` runs the four checks; the citation check's digest moved to the
   512 (PROGETTO §3.1).
 
+- **[step #49] The publish job runs the repository's own checks, before the registry.**
+  `.github/workflows/publish.yml` gained a step after the checkout — `sh verify-project.sh
+  --in-repo` then `sh verify-logo-files.sh` — standing **before** the Docker Hub login, so a
+  tree that fails its own checks never touches the registry. Nothing ran either script before
+  this step (grep found no reference to them). `verify-project.sh` gained `--in-repo`: the
+  runner carries this repository and not the sibling trees, so the citations that live in
+  `wiki.tazlab.net/`, `blog-src/`, `tazlab-k8s/` and `ambrogio/` are counted and reported as
+  *not carried here* (8 checked, 0 missing, 24 not carried) instead of being called missing,
+  and the full mode on the operator's machine is unchanged (32 checked, 0 missing).
+  `verify-logo-files.sh` is the mark's file half, split out of `verify-logo.sh`: the pinned
+  digest of `site/logo.png` (121,589 B / `626654ac…`) written **inline**, because the runner
+  has no sibling checkout to read it from; the five pages' `img` attributes; the drawn height
+  the stylesheet states (40 px); `favicon.ico`'s digest. `verify-logo.sh` now runs that half
+  and then the live URL — the live half stays off the runner on purpose, since the live site
+  is the previous deployment. Proven: the step's own commands pass on this tree (rc 0) and in
+  a container that carries the copy only; on three corrupted copies — the logo's digest, one
+  page's markup, one of the five page names in PROGETTO.md — the same commands exit 1
+  (`evidence-checks-pass.log`, `evidence-checks-corrupt.log`).
+
 ## Next
 
 1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the

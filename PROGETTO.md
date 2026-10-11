@@ -415,7 +415,7 @@ ImagePolicy regex and the Deployment marker must agree, or the automation never 
 |---|---|---|
 | Docker Hub image | `tazzo/tazlab-ambrogio-site` | `blog-src/.github/workflows/publish.yml:29-30`, name swapped (`RICERCA.md` §8) |
 | tags pushed | `:latest` and `ambrogio-site-${github.run_number}-${github.sha}` | `blog-src/.github/workflows/publish.yml:28-30` |
-| trigger | push to `master` | `blog-src/.github/workflows/publish.yml:4-6` |
+| trigger | push to `main` | `blog-src/.github/workflows/publish.yml:4-6`; this workflow watched `master` until step 47, when the checkout was found to carry `main` |
 | registry login | `roberto.tazzoli@gmail.com` + `secrets.DOCKER_PASSWORD` | `blog-src/.github/workflows/publish.yml:22-25` |
 | ImageRepository | `tazzo/tazlab-ambrogio-site`, `interval: 1m` | `…/automation/hugo-wiki/automation.yaml:7-8` |
 | ImagePolicy | `filterTags.pattern: '^ambrogio-site-(?P<value>[0-9]+)-.*$'`, `extract: '$value'`, `numerical: order: asc` | `…/automation/hugo-wiki/automation.yaml:19-23` |
@@ -423,6 +423,21 @@ ImagePolicy regex and the Deployment marker must agree, or the automation never 
 | ImageUpdateAutomation | `interval: 1m`, commit `chore: self-update ambrogio-site image [skip ci]`, push `master`, `update.path: ./apps/base/ambrogio-site`, `strategy: Setters` | `…/automation/hugo-wiki/automation.yaml:31,43-48` |
 | Flux Kustomization | `clusters/tazlab-k8s/apps-ambrogio-site.yaml`, `path: ./apps/cluster/ambrogio-site`, `dependsOn: [infrastructure-configs]`, `postBuild.substituteFrom ConfigMap/cluster-vars` | `clusters/tazlab-k8s/apps-static-wiki.yaml:4-10,17-19` |
 | registration | `../automation/ambrogio-site` added to `infrastructure/cluster-instances/kustomization.yaml` | `RICERCA.md` §9 |
+
+**The repository's own checks run before anything is published** (step 49). The job's second
+step is `sh verify-project.sh --in-repo` then `sh verify-logo-files.sh`, both offline, and it
+stands **before the registry login**: a tree that fails its own checks must not touch Docker
+Hub. `verify-project.sh --in-repo` holds PROGETTO to the citations this checkout can carry —
+the runner has this repository and not the sibling trees (`wiki.tazlab.net/`, `blog-src/`,
+`tazlab-k8s/`, `ambrogio/`), so those are counted and reported as *not carried here* rather
+than called missing — and `verify-logo-files.sh` is the mark's file half: `site/logo.png`
+against the digest pinned in the script (121,589 B / `626654ac…`), the five pages' `img`
+attributes, the drawn height the stylesheet states, and `favicon.ico`'s digest.
+
+**Two halves deliberately stay off the runner**: the live URL (`https://ambrogio.tazlab.net/logo.png`
+is the *previous* deployment, so a check of it says nothing about the image being built) and
+every citation that lives in a sibling tree. Both are run on the operator's machine by
+`verify-logo.sh` (the file half, then the wire) and by `verify-project.sh` without `--in-repo`.
 
 **DNS: none.** `*.tazlab.net` is wildcard-resolved to the house IP and Traefik is the MetalLB
 VIP `192.168.1.240` (`RICERCA.md` §7), so the hostname answers at the edge before the

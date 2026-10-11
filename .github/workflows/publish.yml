@@ -17,6 +17,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # **The repository's own checks, before anything is published.** Two scripts the tree
+      # already carried and no run ever called (step 49): `verify-project.sh --in-repo` —
+      # the citations in PROGETTO.md this checkout can be held to, since a runner carries
+      # this repository and not the sibling trees (`wiki.tazlab.net/`, `blog-src/`,
+      # `tazlab-k8s/`, `ambrogio/`) — and `verify-logo-files.sh`, the mark's file half:
+      # `ambrogio-site/site/logo.png` against its pinned digest, the five pages' markup, the
+      # drawn height the stylesheet states, the favicon's digest.
+      #
+      # They stand before the login on purpose: a tree that fails its own checks must not
+      # touch the registry at all. Both are offline — no network, no sibling checkout — and
+      # neither reads the live site, because the live site is the *previous* deployment and a
+      # check of it would say nothing about the image being built. The halves that need a
+      # sibling tree or the wire stay on the operator's machine: `verify-project.sh` (without
+      # `--in-repo`) and `verify-logo.sh`, which runs the file half and then fetches
+      # https://ambrogio.tazlab.net/logo.png.
+      - name: The repository's own checks
+        run: |
+          sh verify-project.sh --in-repo
+          sh verify-logo-files.sh
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
