@@ -1,0 +1,46 @@
+The publish workflow's own runs, on GitHub's runner (gh run view <id> --log).
+
+### run 38182410132 — the commit that added the step (93b88226…), conclusion success
+$ sh verify-project.sh --in-repo ; sh verify-logo-files.sh
+##[group]Run sh verify-project.sh --in-repo
+^[[36;1msh verify-project.sh --in-repo^[[0m
+shell: /usr/bin/bash -e {0}
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+sibling        /workspace/ambrogio/v2/api/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+pages          5 of 5 carry the file's own 512x512
+logo drawn     40 px tall (and as wide), expected 40
+== 4. the favicon left alone
+favicon.ico    15086 bytes  b88644a59fa5dad99bf7aa9371ee52b8e2da5d24f1e6f31d45943500bf40377f
+favicon        unchanged (still the tab's favicon.ico)
+VERIFY-LOGO-FILES: OK
+Logging into docker.io...
+Login Succeeded!
+
+### run 38182532293 — the final bytes of the step (49f2c2d7…), conclusion success
+$ sh verify-project.sh --in-repo ; sh verify-logo-files.sh
+##[group]Run sh verify-project.sh --in-repo
+^[[36;1msh verify-project.sh --in-repo^[[0m
+^[[36;1msh verify-logo-files.sh^[[0m
+shell: /usr/bin/bash -e {0}
+##[endgroup]
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+== 1. the mark in the site
+site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+sibling        /workspace/ambrogio/v2/api/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+PROGETTO.md    names the same digest
+== 2. the markup, on the five pages
+pages          5 of 5 carry the file's own 512x512
+== 3. the drawn height the stylesheet states
+logo drawn     40 px tall (and as wide), expected 40
+== 4. the favicon left alone
+favicon.ico    15086 bytes  b88644a59fa5dad99bf7aa9371ee52b8e2da5d24f1e6f31d45943500bf40377f
+favicon        unchanged (still the tab's favicon.ico)
+VERIFY-LOGO-FILES: OK
+

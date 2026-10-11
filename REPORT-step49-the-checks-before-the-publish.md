@@ -155,9 +155,11 @@ touched no byte under `ambrogio-site/`, which is the build context).
   corrupted tree, and the combined command exits 1 on the corrupted copies (the log above). A
   red run on `main` would be operator-visible noise for a proof the step asked to be made
   locally.
-- **The last commit of this step** (the report, the logs and the `PROGETTO.md` digest tie inside
-  `verify-logo-files.sh`) is pushed after the run above; its own run is the one to read if a
-  reader wants the shipped bytes' CI result.
+- **Both runs of this step are green.** The one on the commit that added the step
+  (`93b88226…`, run 38182410132) and the one on the final bytes — the report, the logs and the
+  `PROGETTO.md` digest tie inside `verify-logo-files.sh` (`49f2c2d7…`, run 38182532293), whose
+  check step printed `PROGETTO.md    names the same digest` and `VERIFY-LOGO-FILES: OK` before
+  the login. Log excerpts: `evidence-checks-ci-run.log`.
 - **The check reads the tree, not the image.** Nothing here runs the built image and fetches a
   page from it: a Dockerfile that copied the wrong directory would still publish. That is the
   next step, and it is declared as a child.
