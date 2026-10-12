@@ -61,10 +61,10 @@ It is not a professional product. It is a small thing that does its job well.
 and, in the head, both the description and the share card's copy of it:
 
 ```html
-<meta name="description" content="Ambrogio is a personal tool: one binary beside one file, for
-  one person or a small team, that supervises resident AI agents, carries their work in queues,
-  and keeps the trace of what was done and why.">
+<meta name="description" content="Ambrogio is a personal tool: one binary beside one file, for one person or a small team, that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
 ```
+
+(one line in the file; `og:description` carries the same content, character for character)
 
 **The one paragraph that left the page** is the one that said *"It exists for two problems: several
 agents working at once without two agents in one place, and the trace of what was done and why, for
