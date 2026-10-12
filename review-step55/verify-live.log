@@ -1,0 +1,26 @@
+== the first page: it is personal, for one person, and it says so ==
+/                    200  4943 bytes
+  says "It is a personal tool."                                                 1
+  says "one static Go binary beside one SQLite file"                            1
+  says "no server to install, no database to run, no infrastructure, no team"   1
+  says "One person, or a small team, is the most it is made for."               1
+  says "What it does is orchestration"                                          1
+  says "several agents working at the same time on the same things"             1
+  says "What it keeps is the trace"                                             1
+  says "the work of other tools, and the work of the agents Ambrogio spawns for itself" 1
+  says "That is the problem it removes."                                        1
+  says "many terminals open at once, documents written here and there"          1
+  says "It is not a professional product."                                      1
+  description and og:description say "a personal tool"                           2
+== the side menu, on the first page ==
+  links to index.html           2
+  links to queues.html          2
+  links to doors.html           2
+  links to agents.html          2
+  links to conversation.html    2
+== the four deep dives: 200, and unchanged since before this step ==
+/queues.html         200  6056 bytes  bc874571808393504ddf06188a62bf153eebc66274b7577840c621511a90fe52  unchanged=yes
+/doors.html          200  4799 bytes  d744585f6f8c86e5ffc56a64daed6e194e71609166e7f3762cd1910c279cacbf  unchanged=yes
+/agents.html         200  5110 bytes  5758c7e6eed5b20e9d28d9fffae0a612cb9df6fa78b2123ef960c65374b342d7  unchanged=yes
+/conversation.html   200  4548 bytes  077e668be17160988e2182b13b8fcb77773469fea48d51c1455c1d31bf826ca4  unchanged=yes
+VERIFY-LIVE: OK

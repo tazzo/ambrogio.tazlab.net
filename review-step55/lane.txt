@@ -1,0 +1,32 @@
+the lane that carried the change (2026-10-11 → 2026-10-12)
+
+$ git -C /workspace/ambrogio-site push origin main
+    9b62b93..6e214c6  main -> main
+      (6e214c6: "index.html: the page says it is a personal tool, who it is for, and what it
+       takes off one person"; 2 files, 42 insertions, 14 deletions — index.html and PROGETTO.md)
+
+$ gh api repos/tazzo/ambrogio.tazlab.net/actions/runs/38186202415 --jq '.run_number,.head_sha,.conclusion,.created_at'
+    run_number 13   head_sha 6e214c693ca8bffdc786d12f901dd61118ecb45e   success
+    created 2026-10-11T23:57:33Z   updated 23:58:00Z
+      steps: Set up job / Checkout code / The repository's own checks / Login to Docker Hub /
+             Build and push / Post Build and push / Post Login to Docker Hub / Post Checkout code
+             / Complete job   -> all success
+
+$ curl 'https://hub.docker.com/v2/repositories/tazzo/tazlab-ambrogio-site/tags?page_size=3&ordering=last_updated'
+    ambrogio-site-13-6e214c693ca8bffdc786d12f901dd61118ecb45e   2026-10-11T23:57:53Z   <- this run
+    latest                                                       2026-10-11T23:57:50Z
+    ambrogio-site-12-3717efe11b09f9bdaa65f5087e61e1c1fe0032d4   2026-10-11T23:48:15Z
+
+$ git -C /workspace/tazlab-k8s log origin/master -1 --format='%H %ci %s' -- apps/base/ambrogio-site/ambrogio-site.yaml
+    1ce456136141a402893ecccc2ef04dcc9a462688 2026-10-11 23:58:35 +0000
+    chore: self-update ambrogio-site image [skip ci]
+$ git -C /workspace/tazlab-k8s show origin/master:apps/base/ambrogio-site/ambrogio-site.yaml | grep image:
+    image: tazzo/tazlab-ambrogio-site:ambrogio-site-13-6e214c693ca8bffdc786d12f901dd61118ecb45e # {"$imagepolicy": "flux-system:ambrogio-site"}
+
+$ the live first page, polled every 15 s
+    23:57Z  /  200  3818 bytes  5739af66…  (the previous deployment, "Built in the lab" already gone)
+    00:02:10Z  /  200  4943 bytes  15c3ecf0…  <- this deployment
+
+So: push 6e214c6 (23:57:33Z) -> Actions run #13 builds and pushes the tag (23:57:53Z) ->
+Flux's ImageUpdateAutomation commits 1ce4561 into tazlab-k8s (23:58:35Z) -> the pod rolls ->
+the live page is the new one by 00:02:10Z, about four and a half minutes after the push.

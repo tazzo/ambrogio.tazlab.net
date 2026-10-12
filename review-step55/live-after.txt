@@ -1,0 +1,23 @@
+the live hostname after this step's roll (2026-10-12, read from https://ambrogio.tazlab.net)
+
+/                    200  4943 bytes  15c3ecf0df5dde0dfd6ccbe80122d24ad8d997402e9e957fa59d1a07fdf6f326
+/queues.html         200  6056 bytes  bc874571808393504ddf06188a62bf153eebc66274b7577840c621511a90fe52
+/doors.html          200  4799 bytes  d744585f6f8c86e5ffc56a64daed6e194e71609166e7f3762cd1910c279cacbf
+/agents.html         200  5110 bytes  5758c7e6eed5b20e9d28d9fffae0a612cb9df6fa78b2123ef960c65374b342d7
+/conversation.html   200  4548 bytes  077e668be17160988e2182b13b8fcb77773469fea48d51c1455c1d31bf826ca4
+
+the first page as served, the sentences this step added (verbatim, the page's own
+wrapping flattened to one line per paragraph):
+
+* Ambrogio keeps the trace of what is done. It gives order and documentation to every movement, and its own internal agents keep it correct.
+* It is a personal tool. It is one static Go binary beside one SQLite file — no server to install, no database to run, no infrastructure, no team — and the operator runs it on his own machine and drives it from a page the binary serves itself. One person, or a small team, is the most it is made for.
+* What it does is orchestration: several agents working at the same time on the same things. Ambrogio supervises resident agent processes over the Agent Client Protocol, hands them work without two agents in one place, and exposes the whole of it — the queues, the steps, the documents, the verdicts — through one HTTP API and one event stream. It opens tasks of its own as well, the smaller jobs, and the agents it spawns carry them.
+* What it keeps is the trace: what was done, by whom and when — the operator's own work, the work of other tools, and the work of the agents Ambrogio spawns for itself. A queue says the order, its documents say why, and the record stays in the one file beside the binary.
+* That is the problem it removes. For one person the work grows past what one person can hold — many terminals open at once, documents written here and there, no answer to who did what and when — and Ambrogio is the one place where the work is written down, the documents stay, and the order of it can be read back afterwards.
+* It is not a professional product. It is a small thing that does its job well.
+
+<script> elements on the first page: 0
+
+the four deep dives are byte-for-byte the ones served before the push
+(review-step55/live-before.txt): 6056 / 4799 / 5110 / 4548 bytes, same sha256.
+

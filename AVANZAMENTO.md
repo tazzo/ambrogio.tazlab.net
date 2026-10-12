@@ -149,6 +149,30 @@ they land; never rewrite history, append.
   *Built in the lab it runs* and none of the three sentences, the five pages all answer **200**,
   and the four deep dives are byte-for-byte the same as before the push (`review-step54/`).
 
+- **[step #55] The first page says it is a personal tool, and what it takes off one person.**
+  The operator's own words (2026-10-11): the text should make plain that the thing is personal —
+  one binary that starts on its own file, not something for large teams but for the work of one
+  person, or a small team — and what it is for: orchestrating several agents that work on the same
+  things at once and keeping the trace of the work, including work done by other tools and by
+  Ambrogio's own agents, which take the smaller jobs; against the complexity that outgrows one
+  person — many terminals open at once, documents written here and there. The change is
+  `ambrogio-site/site/index.html` only: the two body paragraphs became five (a personal-tool
+  paragraph, what it orchestrates, what it keeps, the problem it removes, and the honest
+  register — *"not a professional product … a small thing that does its job well"*), and the meta
+  description and the `og:description` that copies it now read *"Ambrogio is a personal tool: one
+  binary beside one file, for one person or a small team, …"*
+  (`ambrogio-site/site/index.html:7,9,43-65`). The page's structure, its side menu, the stylesheet
+  and the four cards are untouched, and **no other page changed**; **no new fact is claimed** —
+  one binary, one file, the queues, the trace and the tasks the hub opens for itself are what
+  `ambrogio/README.md` §1/§2/§6 already say. `PROGETTO.md` §4 documents the page file by file, so
+  its `index.html` bullet was rewritten to the new text (docs only; declared). Both publish checks
+  pass (`verify-project.sh --in-repo` 8 checked / 0 missing; `verify-logo-files.sh` OK). The lane
+  carried it: push `6e214c6` → Actions run #13
+  (`ambrogio-site-13-6e214c69…`, 23:57:53Z) → Flux commit `1ce4561` in `tazlab-k8s` → the pod
+  rolled; measured on the live hostname (00:02:10Z), `/` answers **200 4943** with all eleven of
+  the new sentences present, and the four deep dives are byte-for-byte the ones served before the
+  push (`review-step55/`).
+
 ## Next
 
 1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the
