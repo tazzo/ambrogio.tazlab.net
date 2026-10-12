@@ -1,0 +1,36 @@
+== 1. the site's own text (source, with file:line) ==
+/workspace/ambrogio-site/ambrogio-site/site/index.html:49:        things. Ambrogio supervises resident agent processes over the Agent Client Protocol,
+/workspace/ambrogio-site/PROGETTO.md:189:  over the Agent Client Protocol without two agents in one place; one HTTP API and one event
+
+== 2. what the engine's own source says the engine speaks ==
+/workspace/ambrogio/README.md:8:One static Go binary with an embedded SQLite file that **supervises AI agents over the Agent
+/workspace/ambrogio/README.md-9-Client Protocol** (`omp acp`), gives them work, keeps the trace of what they did and why, and
+--
+/workspace/ambrogio/v2/worker/acp.go:40:// ACP is a worker that is **spoken to** instead of run: an agent that speaks the Agent
+/workspace/ambrogio/v2/worker/acp.go-41-// Client Protocol, driven by the hub.
+--
+/workspace/ambrogio/v2/acp/acp.go:1:// Package acp is the hub as the **client** of an agent that speaks the Agent Client
+/workspace/ambrogio/v2/acp/acp.go-2-// Protocol.
+   (the transport prompt the engine hands every ACP agent:)
+757:const acpTurn = "You are an agent of Ambrogio speaking the Agent Client Protocol. You do not hold " +
+
+== 3. what the agent process the dispatcher starts says it is (omp acp) ==
+Run Oh My Pi as an ACP (Agent Client Protocol) server over stdio
+   (what the dispatcher runs:)
+743:	prog, args := d.Agent, []string{"acp"}
+
+== 4. the LIVE page's spelling (not the source) ==
+   Agent Client Protocol
+
+== 5. the site answers 200 at its hostname, every page whole ==
+   index.html     200
+   queues.html    200
+   doors.html     200
+   agents.html    200
+   conversation.html 200
+
+== verdict ==
+   the LIVE page names the protocol 'Agent Client Protocol',
+   which is the protocol the engine speaks — the site is CORRECT, change nothing.
+
+[exit 0]
