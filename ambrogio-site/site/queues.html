@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The queues, and who accepts them — Ambrogio</title>
-<meta name="description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, and a step ceiling declared when the operator accepts it.">
+<meta name="description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, a step ceiling declared when the operator accepts it — and a branch and a working directory of its own, which the engine lands when the chain closes.">
 <meta property="og:title" content="The queues, and who accepts them — Ambrogio">
-<meta property="og:description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, and a step ceiling declared when the operator accepts it.">
+<meta property="og:description" content="A queue is the unit of work: an originator, a kind, an ordered chain of steps, one session, a step ceiling declared when the operator accepts it — and a branch and a working directory of its own, which the engine lands when the chain closes.">
 <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
 <meta property="og:url" content="https://ambrogio.tazlab.net/queues.html">
 <meta property="og:type" content="website">
@@ -42,9 +42,10 @@
         take.</p>
 
       <h2>What a queue is</h2>
-      <p>The queue is the unit of work. It is not a list of messages and not a git branch: it
-        is the container that carries one request from the moment it is accepted to the moment
-        it closes. It has exactly these parts.</p>
+      <p>The queue is the unit of work. It is not a list of messages: it is the container that
+        carries one request from the moment it is accepted to the moment it closes, and it owns
+        the branch and the working directory its steps are written in. It has exactly these
+        parts.</p>
       <ul>
         <li><strong>An originator</strong> — a request from the operator, or a task the hub
           opened itself. The queue says which.</li>
@@ -53,6 +54,9 @@
           of closing.</li>
         <li><strong>A chain of steps</strong> — the ordered tasks the queue carries; the order
           is the order the worker chose when it packed them.</li>
+        <li><strong>A branch, and a working directory</strong> — the queue's own two: the
+          steps are written there, and two queues at work at the same time do not write in one
+          another's tree.</li>
         <li><strong>One session</strong> — the agent's conversation, carried from step to step.
           The third step knows what the first one said, without being told again.</li>
         <li><strong>A step ceiling</strong> — declared when the queue is accepted, with what is
@@ -93,12 +97,18 @@
         the trace is the product and not a side effect: a step that lies can be contested, and
         the record stays where it was.</p>
 
+      <h2>What the engine does with the work</h2>
+      <p>The queue's branch is not left where it was written. When the chain closes, the
+        engine <strong>lands the work</strong>: it pushes the branch and opens a
+        <strong>pull request</strong>, so what leaves the queue is the branch itself, with the
+        request that carries it out to be read.</p>
+
       <h2>What the engine does not do</h2>
-      <p>The engine does not build and does not merge; it runs no tests and judges no prose.
-        The review is deterministic and executes nothing: it checks that every artifact a
-        delivery declares exists where it says, and that the queue's documents are there. The
-        merge is the worker's act, in the project's own repository, under the project's own
-        rules.</p>
+      <p>The engine does not build, it runs no tests, and it judges no prose: the review is
+        deterministic and executes nothing — it checks that every artifact a delivery declares
+        exists where it says, and that the queue's documents are there. Landing the work is a
+        mechanical act of another kind, and it is only that: the push, and the pull
+        request.</p>
     </main>
   </div>
 </div>

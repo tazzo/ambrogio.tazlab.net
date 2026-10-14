@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambrogio — the Personal Agent Orchestrator of tazlab.net</title>
+<meta name="description" content="Ambrogio is a personal tool: one binary beside one file, for one person or a small team, that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta property="og:title" content="Ambrogio — the Personal Agent Orchestrator of tazlab.net">
+<meta property="og:description" content="Ambrogio is a personal tool: one binary beside one file, for one person or a small team, that supervises resident AI agents, carries their work in queues, and keeps the trace of what was done and why.">
+<meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+<meta property="og:url" content="https://ambrogio.tazlab.net/">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="512" height="512" alt="">
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shell">
+    <nav class="side-menu" aria-label="Site">
+      <p class="menu-label">The mechanisms</p>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="queues.html">The queues</a>
+      <a href="doors.html">The two doors</a>
+      <a href="agents.html">The agents</a>
+      <a href="conversation.html">The conversation</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">Personal Agent Orchestrator</p>
+      <h1>Ambrogio</h1>
+      <p class="lead">Ambrogio keeps the trace of what is done. It gives order and
+        documentation to every movement, and its own internal agents keep it correct.</p>
+
+      <p>It is a personal tool. It is one static Go binary beside one SQLite file — no
+        server to install, no database to run, no infrastructure, no team — and the operator
+        runs it on his own machine and drives it from a page the binary serves itself. One
+        person, or a small team, is the most it is made for.</p>
+
+      <p>What it does is orchestration: several agents working at the same time on the same
+        things. Ambrogio supervises resident agent processes over the Agent Client Protocol,
+        hands them work without two agents in one place, and exposes the whole of it — the
+        queues, the steps, the documents, the verdicts — through one HTTP API and one event
+        stream. It opens tasks of its own as well, the smaller jobs, and the agents it spawns
+        carry them.</p>
+
+      <p>What it keeps is the trace: what was done, by whom and when — the operator's own
+        work, the work of other tools, and the work of the agents Ambrogio spawns for itself.
+        A queue says the order, its documents say why, and the record stays in the one file
+        beside the binary.</p>
+
+      <p>That is the problem it removes. For one person the work grows past what one person
+        can hold — many terminals open at once, documents written here and there, no answer to
+        who did what and when — and Ambrogio is the one place where the work is written down,
+        the documents stay, and the order of it can be read back afterwards.</p>
+
+      <p>It is not a professional product. It is a small thing that does its job well.</p>
+
+      <h2>The four things worth knowing</h2>
+      <ul class="cards">
+        <li class="card">
+          <h3><a href="queues.html">The queues, and who accepts them</a></h3>
+          <p>Work is a queue with a declared ceiling, and nothing starts by itself: the
+            operator accepts it.</p>
+        </li>
+        <li class="card">
+          <h3><a href="doors.html">The two doors, and the sandbox</a></h3>
+          <p>One door for the operator and a smaller one for the agents, and a worker that may
+            only touch what its role allows.</p>
+        </li>
+        <li class="card">
+          <h3><a href="agents.html">The agents, the budget and the silence</a></h3>
+          <p>Every agent has a slot, a declared budget and a clock: a step that goes quiet is
+            stopped, and what it did is kept.</p>
+        </li>
+        <li class="card">
+          <h3><a href="conversation.html">The conversation</a></h3>
+          <p>A chat is a queue you talk to: its steps are the messages, its transcript is the
+            chain, and it waits instead of closing.</p>
+        </li>
+      </ul>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the Personal Agent Orchestrator of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>

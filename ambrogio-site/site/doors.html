@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The two doors, and the sandbox — Ambrogio</title>
-<meta name="description" content="One door for the operator and a smaller one for the agents, and every worker started inside a per-role Landlock sandbox.">
+<meta name="description" content="One door for the operator and a smaller one for the agents, and every agent started inside a per-role Landlock sandbox.">
 <meta property="og:title" content="The two doors, and the sandbox — Ambrogio">
-<meta property="og:description" content="One door for the operator and a smaller one for the agents, and every worker started inside a per-role Landlock sandbox.">
+<meta property="og:description" content="One door for the operator and a smaller one for the agents, and every agent started inside a per-role Landlock sandbox.">
 <meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
 <meta property="og:url" content="https://ambrogio.tazlab.net/doors.html">
 <meta property="og:type" content="website">
@@ -38,7 +38,8 @@
       <p class="eyebrow">The two doors</p>
       <h1>The two doors, and the sandbox</h1>
       <p class="lead">What may an agent touch on my machine, and who can ask for what? The
-        engine serves two doors, and every worker it starts is caged before it runs.</p>
+        engine serves two doors, and every agent it starts is caged before it runs — not only
+        the workers.</p>
 
       <h2>Two doors, one engine</h2>
       <p>The same handlers are served on two addresses with two different tables of verbs. One
@@ -55,9 +56,10 @@
         type himself.</p>
 
       <h2>The sandbox</h2>
-      <p>Every worker is started through a launcher that applies a <strong>Landlock</strong>
-        policy to itself and then <code>exec</code>s the target. The process is replaced, so
-        the domain is inherited directly — a live worker shows <code>NoNewPrivs=1</code>.</p>
+      <p>Every agent the engine starts goes through a launcher that applies a
+        <strong>Landlock</strong> policy to itself and then <code>exec</code>s the target. The
+        process is replaced, so the domain is inherited directly — a live agent shows
+        <code>NoNewPrivs=1</code>.</p>
       <p>The policy is an <strong>allow-list</strong>, and it is short enough to read: the
         system directories read-only, TCP 443 (the model), the run's own tree, and the IPC
         scopes restricted. Everything not named is not there.</p>
@@ -76,11 +78,10 @@
       </ul>
 
       <h2>What the sandbox does not grant</h2>
-      <p>The policy does not give a caged worker what the Go toolchain needs — a writable
-        temporary directory and build cache, and a readable module cache. A caged worker
+      <p>The policy does not give a caged agent what the Go toolchain needs — a writable
+        temporary directory and build cache, and a readable module cache. A caged agent
         therefore cannot build the project: it fails on the environment before the compiler
-        speaks. That is a declared limit, not a hidden one, and the workaround is a worker
-        outside the cage, on purpose, for that step.</p>
+        speaks. That is a declared limit, not a hidden one.</p>
     </main>
   </div>
 </div>

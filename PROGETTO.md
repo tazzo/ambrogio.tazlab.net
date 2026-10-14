@@ -212,9 +212,10 @@ No feature list, no screenshot gallery.
 Answers: where does work come from, and who may start it?
 
 - a **queue** is the unit of work: an **originator** (the operator, or a task the hub opened
-  itself), a **kind** (`work` or `conversation`), an ordered **chain of steps**, **one session**
-  carried from step to step, a **step ceiling** declared when the queue is accepted, and a
-  **state** (`open` / `paused` / `closed`) — `ambrogio/README.md` §2;
+  itself), a **kind** (`work` or `conversation`), an ordered **chain of steps**, a **branch and
+  a working directory of its own** [step #67/2], **one session** carried from step to step, a
+  **step ceiling** declared when the queue is accepted, and a **state** (`open` / `paused` /
+  `closed`) — `ambrogio/README.md` §2;
 - **nothing starts by itself**: acceptance is the operator's act (`POST /api/v1/queues
   {task, role, steps}`); the ceiling is declared *with* the acceptance, and `+N` is a **new
   acceptance**, never a silent extension (`ambrogio/README.md` §2);
@@ -228,8 +229,10 @@ Answers: where does work come from, and who may start it?
 - the order is not the documentation: the three documents — **plan, roadmap, progress** — say
   *why*, and the review refuses a queue whose documents are missing
   (`ambrogio/README.md` §2, §5, §6);
-- the honest edge: **the engine does not build and does not merge**, and it runs no tests and
-  judges no prose — it checks that the declarations exist where they say
+- **the landing** [step #67/2]: when the chain closes, the engine lands the work — it pushes the
+  queue's branch and opens a **pull request** (the operator's words, 2026-10-14);
+- the honest edge: **the engine does not build**, it runs no tests and judges no prose — it
+  checks that the declarations exist where they say
   (`ambrogio/README.md` §5; `ambrogio/VOCABULARY.md`, *the words the code refuses*).
 
 ### `site/doors.html` — *The two doors, and the sandbox*
@@ -242,9 +245,10 @@ Answers: what may an agent touch on my machine, and who can ask for what?
   answers **403** with a sentence saying why (`ambrogio/README.md` §4);
 - the **wall** on the operator door: socket credentials, and the token on writes
   (`ambrogio/VOCABULARY.md`, *wall*);
-- **the sandbox.** Every worker is started through `v2/cmd/sandbox`, which applies a **Landlock**
-  allow-list to itself and `exec`s the target — the process is replaced, so the domain is
-  inherited directly and a live worker shows `NoNewPrivs=1` (`ambrogio/README.md` §7);
+- **the sandbox.** Every agent the engine starts — and not only the workers [step #67/2] — goes
+  through `v2/cmd/sandbox`, which applies a **Landlock** allow-list to itself and `exec`s the
+  target — the process is replaced, so the domain is inherited directly and a live agent shows
+  `NoNewPrivs=1` (`ambrogio/README.md` §7);
 - the allow-list, in plain words: the system directories read-only, TCP 443 (the model), the
   run's own tree, the IPC scopes restricted; the policy is **per role**, kept in the database
   (`role_policy`) (`ambrogio/README.md` §7);
@@ -253,7 +257,9 @@ Answers: what may an agent touch on my machine, and who can ask for what?
   the hub and gets `read`, `glob`, `grep` and the internal APIs — **no `bash`, no `write`**
   (`ambrogio/README.md` §7; `ambrogio/VOCABULARY.md`, *role*);
 - the honest edge, named by the project itself: the policy does not grant what the Go toolchain
-  needs, so **a caged worker cannot build the project** (`ambrogio/README.md` §9).
+  needs, so **a caged agent cannot build the project** (`ambrogio/README.md` §9). The page no
+  longer glosses that limit with a worker outside the cage — 0.3 cages every agent [step
+  #67/2].
 
 ### `site/agents.html` — *The agents, the budget and the silence*
 
@@ -262,6 +268,9 @@ Answers: what stops an agent?
 - an **agent** is the live form of a **run** — the process doing the work now; a run is one
   execution of one step by one agent, closed with an **outcome** and an **end cause**
   (`ambrogio/VOCABULARY.md`, *run*/*agent*; `ambrogio/README.md` §6);
+- **the cage** [step #67/2]: every agent the engine starts works inside the sandbox, and not
+  only the workers that carry a step — the run *is* the caged process (the operator's words,
+  2026-10-14);
 - **the pool**: the agents the engine spawns, counted per lane (`lane_cap:external`,
   `lane_cap:internal`, and `conversation_slots` for the chats); a queue that holds a place keeps
   it until it closes (`ambrogio/README.md` §2);

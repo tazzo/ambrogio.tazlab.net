@@ -211,21 +211,64 @@ they land; never rewrite history, append.
   pre-0.3 page: `curl -sS https://ambrogio.tazlab.net/` → **200 4943**, byte-identical to
   `index.html` at `HEAD`, `grep -c 'Ambrogio 0.3'` → **0** (`review-step67/live-before.txt`).
 
+- **[step #67/2] The three deep dives carry 0.3; the conversation page is left alone.** The
+  step's order (2026-10-14): *«Read the engine's own source before writing, then bring each of
+  the four pages to what 0.3 is, in its own words. Do not restyle the site and do not touch
+  index.html.»* **The engine's source could not be read from this cage** — `/workspace/ambrogio`
+  answers `Permission denied` on every file (README.md, `v2/worktree/*.go`, `go.sum`), its
+  directory cannot be listed, and the repository is not on the wire (`git ls-remote
+  https://github.com/tazzo/ambrogio` → *Invalid username or token*), so the pages were brought
+  to 0.3 from the account that is on the record — the first page's line and the order's own
+  words — and **no mechanism beyond those three is claimed anywhere**:
+  - `queues.html` — *What a queue is* no longer opens *«not a git branch»*: it says the queue
+    *«owns the branch and the working directory its steps are written in»* (`:45-48`), the parts
+    list gained *«A branch, and a working directory»* (`:57-59`), and a new section **What the
+    engine does with the work** says the engine *«lands the work: it pushes the branch and opens
+    a pull request»* (`:100-104`). *What the engine does not do* keeps the honest edge (no
+    build, no tests, no judgement of prose) and **drops the two claims 0.3 supersedes** — that
+    the engine does not merge, and that the merge is the worker's act (`:106-111`); the page no
+    longer asserts either way about the merge, because nothing available here says where it
+    happens. Its `meta`/`og:description` gained the branch and the landing, still one text.
+  - `doors.html` — the lead is *«every agent it starts is caged before it runs — not only the
+    workers»* (`:40-42`), the sandbox opens *«Every agent the engine starts goes through a
+    launcher…»* (`:59-62`), the declared limit is told of **agents** (`:81-84`), and the
+    `meta`/`og:description` say *every agent started inside a per-role Landlock sandbox*. The
+    page's last clause — *«the workaround is a worker outside the cage, on purpose, for that
+    step»* — **was removed**: with every agent caged it contradicted the line above it, and no
+    available source states what the workaround now is.
+  - `agents.html` — a new section, **The agent works inside the cage** (`:49-55`): *«Every agent
+    the engine starts works inside the cage — and not only the workers that carry a step… the
+    run *is* the caged process»*, linking to `doors.html`.
+  - `conversation.html` — **unchanged, and that is the answer the order allows**: nothing in
+    0.3 names a queue of kind `conversation`, and the page already delegates the rest (*«the
+    steps, the session, the ceiling, the trace — is the machinery the rest of the site
+    describes»*, `:60-62`). Said out loud in §Open questions rather than glossed.
+  The checks: `sh review-step67-2/verify-0.3-deep-dives.sh` → **OK**, rc 0 (78 `ok` lines: the
+  eighteen named assertions, plus the scaffolding and link checks over the five pages —
+  `index.html` still carries the 0.3 line, `conversation.html` is the page it was, and on all
+  five pages one `h1`/one `main`, no `<script>`, `meta` == `og:description`, the mark 512×512,
+  every internal link resolves, no tabs) — and the same script **refuses the published pages**:
+  15 FAIL, rc 1, run against `git show HEAD:` copies
+  (`review-step67-2/checks.log`). `sh verify-project.sh --in-repo` → 8 checked / 0 missing, rc 0;
+  `verify-logo-files.sh` → OK, rc 0 (runner's mode, the sibling checkout is a cage permission, as
+  in [step #67]). **No page was rendered**: this cage carries no renderer
+  (`FATAL:sandbox/linux/services/proc_util.cc:38 … Permission denied`), and the stylesheet was not
+  touched. `PROGETTO.md` §4 documents every page, so its three bullets moved with them (docs
+  only; declared). The live hostname still serves the pre-0.3 pages (see §Next).
+
 ## Next
 
-1. **The four deep dives do not carry 0.3 yet.** The first page states the new version and the
-   three changes it brought ([step #67]); the deep dives say nothing of them: `queues.html`
-   still opens *«It is not a list of messages and not a git branch»*, `doors.html` gives the
-   sandbox to the worker alone, and `agents.html` names no cage at all. Bring each page to what
-   0.3 is, in its own words, with the engine's source read before it is written — the site is
-   the product's public face, and a mechanism the product carries has to be readable there.
-2. **The 0.3 line is in the source; the lane has to carry it.** The live `/` answers **200 4943**
-   and does not carry the line ([step #67]; `review-step67/live-before.txt`). The publish is the
-   one PROGETTO §7 already states, and nothing about it is new: push → the Action builds
-   `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>` → Flux commits the tag into
-   `apps/base/ambrogio-site/ambrogio-site.yaml` and rolls the Deployment; then read `/` back,
-   with the line and the sentence on it, and the four deep dives as **200** — byte-for-byte the
-   pages they are today.
+**One thing, and it is the lane's, not a worker's: publish 0.3, and read it back.** The source
+carries the version — the first page since [step #67], the three deep dives since [step #67/2] —
+and the live hostname does not: `GET /` → **200 4943** with no *Ambrogio 0.3*, and
+`/queues.html` still opens *«not a git branch»* and still says *«the engine does not build and
+does not merge»* (`review-step67/live-before.txt`, `review-step67-2/live-before.txt`). The
+publish is the one PROGETTO §7 already states and nothing about it is new: push → the Action
+builds `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>` → Flux commits the tag into
+`apps/base/ambrogio-site/ambrogio-site.yaml` and rolls the Deployment; then read the five pages
+back as **200**, with the 0.3 line and the new sentences on them. **No worker can do it from the
+queue's worktrees**: this cage has no credentials (`git push --dry-run` → *Invalid username or
+token*), so the push is the engine's own act, as it has been for every step before this one.
 
 ## Open questions
 
@@ -249,3 +292,23 @@ they land; never rewrite history, append.
   set of PROGETTO §2/§4 (its `logo.svg` and light palette go).~~
   **Closed [step #46]:** the four mechanism pages are in place, `logo.svg` and the three
   first-pass pages are deleted, and `styles.css` carries the product's tokens.
+- **New [step #67/2], the engine's own source could not be read when the deep dives were
+  written.** This cage answers `Permission denied` on every file under `/workspace/ambrogio`
+  (`README.md`, `v2/worktree/*.go`, `go.sum`), cannot list the directory, and the repository is
+  private on the wire (`git ls-remote https://github.com/tazzo/ambrogio` → *Invalid username or
+  token*). The three pages were therefore written from the account on the record — the first
+  page's line and the order's own words — and claim nothing beyond them. A step run where the
+  source *is* readable (a worker-internal, or the operator's machine) should read
+  `ambrogio/README.md` §2/§4/§7 and `v2/worktree/`, `v2/cmd/sandbox`, and correct the pages if
+  they say more than it does.
+- **New [step #67/2], what 0.3 changed for a queue of kind `conversation` is unknown.**
+  `conversation.html` was left untouched, which is one of the two answers the order allows; the
+  reason is that none of 0.3's three changes names a conversation, and the page already
+  delegates the rest to the queue machinery (*«the steps, the session, the ceiling, the trace —
+  is the machinery the rest of the site describes»*). If 0.3 gave a conversation its own branch
+  or a landing of its own, the page does not say it yet.
+- **New [step #67/2], the workaround for the declared limit is no longer stated.**
+  `doors.html` used to close that section with *«the workaround is a worker outside the cage, on
+  purpose, for that step»*; with every agent caged that clause contradicted the sentence above
+  it, so it was removed and the declared limit is left alone. If the operator knows what the
+  workaround now is, it is one sentence on `doors.html`.
