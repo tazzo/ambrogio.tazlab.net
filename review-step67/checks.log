@@ -1,0 +1,67 @@
+$ sh review-step67/verify-index-0.3.sh
+ok    the page carries «Ambrogio 0.3 — The Butler» exactly once (found 1)
+ok    the line is the text of a <p> of its own in <main>, not a comment or an attribute
+ok    the sentence sits directly under the line, as the next paragraph
+ok    the two paragraphs are marked .release and .release-note (one each)
+ok    the note is one sentence (0 further sentence ends)
+ok    the sentence names: a queue owns a branch and a working directory of its own
+ok    the sentence names: the engine lands the work itself — a push, and a pull request —
+ok    the sentence names: every agent works inside a cage
+ok    the order is: the hero, the release line, then the page's body (before the first <h2>)
+ok    the markup parses (no unclosed tag swallowed the document)
+ok    <h1> ×1 (was ×1)
+ok    <h2> ×1 (was ×1)
+ok    <main> ×1 (was ×1)
+ok    the four cards are still four (×4)
+ok    still no <script>
+ok    the header mark is still the file's own 512×512
+-- the page's paragraphs in <main>: 13 (the published page had 11: the eyebrow, the lead, five body, the register and four cards; the release line and its sentence are the two more)
+VERIFY-INDEX-0.3: OK
+rc=0
+$ sh verify-project.sh --in-repo
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+rc=0
+$ sed 's#^REPO=/workspace/ambrogio/v2/api/android-chrome-512x512.png$#REPO=/nonexistent/sibling-checkout/android-chrome-512x512.png#' verify-logo-files.sh > ./.verify-logo-runner-mode.sh && sh ./.verify-logo-runner-mode.sh; rm -f ./.verify-logo-runner-mode.sh
+== 1. the mark in the site
+site/logo.png  121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+expected       121589 bytes  626654acf4cc90b4b571c9ef49d1e002b60289aaabbb77db4985401e5d766fb9
+sibling        /nonexistent/sibling-checkout/android-chrome-512x512.png is not here (a runner carries this repository only): the pinned digest above is the whole check
+PROGETTO.md    names the same digest
+== 2. the markup, on the five pages
+pages          5 of 5 carry the file's own 512x512
+== 3. the drawn height the stylesheet states
+logo drawn     40 px tall (and as wide), expected 40
+== 4. the favicon left alone
+favicon.ico    15086 bytes  b88644a59fa5dad99bf7aa9371ee52b8e2da5d24f1e6f31d45943500bf40377f
+favicon        unchanged (still the tab's favicon.ico)
+VERIFY-LOGO-FILES: OK
+rc=0
+$ sh /home/tazpod/.cache/ambrogio-tmp/pretend-0.3/review-step67/verify-index-0.3.sh
+FAIL  the page carries «Ambrogio 0.3 — The Butler» exactly once (found 0)
+FAIL  the line is the text of a <p> of its own in <main>, not a comment or an attribute
+FAIL  the sentence sits directly under the line, as the next paragraph
+FAIL  the two paragraphs are marked .release and .release-note (one each)
+ok    the note is one sentence (0 further sentence ends)
+ok    the sentence names: a queue owns a branch and a working directory of its own
+ok    the sentence names: the engine lands the work itself — a push, and a pull request —
+ok    the sentence names: every agent works inside a cage
+FAIL  the order is: the hero, the release line, then the page's body (before the first <h2>)
+ok    the markup parses (no unclosed tag swallowed the document)
+ok    <h1> ×1 (was ×1)
+ok    <h2> ×1 (was ×1)
+ok    <main> ×1 (was ×1)
+ok    the four cards are still four (×4)
+ok    still no <script>
+ok    the header mark is still the file's own 512×512
+-- the page's paragraphs in <main>: 11 (the published page had 11: the eyebrow, the lead, five body, the register and four cards; the release line and its sentence are the two more)
+VERIFY-INDEX-0.3: FAILURES
+rc=1
+$ git status --porcelain
+ M AVANZAMENTO.md
+ M PROGETTO.md
+ M ambrogio-site/site/index.html
+ M ambrogio-site/site/styles.css
+?? review-step67/
+rc=0

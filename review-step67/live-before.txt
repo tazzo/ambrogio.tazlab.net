@@ -1,0 +1,31 @@
+$ date -u +%Y-%m-%dT%H:%M:%SZ
+2026-10-14T22:08:28Z
+rc=0
+$ curl -sS -o review-step67/live-index-before.html -w 'GET / -> %{http_code} %{size_download} bytes\n' https://ambrogio.tazlab.net/
+GET / -> 200 4943 bytes
+rc=0
+$ grep -c 'Ambrogio 0.3' review-step67/live-index-before.html; grep -c 'The Butler' review-step67/live-index-before.html; grep -c 'Personal Agent Orchestrator' review-step67/live-index-before.html
+0
+0
+4
+rc=0
+$ sha256sum review-step67/live-index-before.html ambrogio-site/site/index.html
+15c3ecf0df5dde0dfd6ccbe80122d24ad8d997402e9e957fa59d1a07fdf6f326  review-step67/live-index-before.html
+3babfc7646314ac5283656c5be23784db96a2624a3d1d7481088a9c05af0aef3  ambrogio-site/site/index.html
+rc=0
+$ curl -sS -o /dev/null -w '/ -> %{http_code} %{size_download}\n' https://ambrogio.tazlab.net/
+/ -> 200 4943
+rc=0
+$ git show HEAD:ambrogio-site/site/index.html > review-step67/index-at-HEAD.html && cmp -s review-step67/index-at-HEAD.html review-step67/live-index-before.html && echo 'the live / is byte-identical to index.html at HEAD' || echo 'DIFFER'
+the live / is byte-identical to index.html at HEAD
+rc=0
+$ for p in queues doors agents conversation; do curl -sS -o review-step67/live-$p.html https://ambrogio.tazlab.net/$p.html; cmp -s review-step67/live-$p.html ambrogio-site/site/$p.html && echo "/$p.html  the tree and the live hostname agree, byte for byte" || echo "/$p.html  DIFFER"; done
+/queues.html  the tree and the live hostname agree, byte for byte
+/doors.html  the tree and the live hostname agree, byte for byte
+/agents.html  the tree and the live hostname agree, byte for byte
+/conversation.html  the tree and the live hostname agree, byte for byte
+rc=0
+$ git diff --name-only HEAD -- ambrogio-site/site/
+ambrogio-site/site/index.html
+ambrogio-site/site/styles.css
+rc=0

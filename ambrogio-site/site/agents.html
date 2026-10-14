@@ -46,6 +46,14 @@
         claimed and closed with an outcome and an end cause — so "why did this stop" is a row,
         not a guess.</p>
 
+      <h2>The agent works inside the cage</h2>
+      <p>Every agent the engine starts works inside the <strong>cage</strong> — and not only
+        the workers that carry a step. A launcher applies the <strong>per-role</strong> policy
+        to itself and then <code>exec</code>s the target, so the run <em>is</em> the caged
+        process: what the agent may touch is the allow-list and nothing else. <a
+        href="doors.html">The two doors</a> have the sandbox in full; what matters here is that
+        the agent's work happens in there.</p>
+
       <h2>The pool, and the two lanes</h2>
       <p>The pool is the agents the engine spawns, and it is counted <strong>per lane</strong>:
         an external lane for work on the machine, an internal lane for work inside the hub, and

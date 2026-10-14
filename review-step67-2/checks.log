@@ -1,0 +1,36 @@
+$ sh review-step67-2/verify-0.3-deep-dives.sh > /home/tazpod/.cache/ambrogio-tmp/pos.txt 2>&1; echo rc=$?; grep -c '^ok' /home/tazpod/.cache/ambrogio-tmp/pos.txt; tail -1 /home/tazpod/.cache/ambrogio-tmp/pos.txt
+rc=0
+78
+VERIFY-0.3-DEEP-DIVES: OK
+rc=0
+$ sh /home/tazpod/.cache/ambrogio-tmp/pretend-dives/review-step67-2/verify-0.3-deep-dives.sh > /home/tazpod/.cache/ambrogio-tmp/neg.txt 2>&1; echo rc=$?; grep -c '^FAIL' /home/tazpod/.cache/ambrogio-tmp/neg.txt; tail -1 /home/tazpod/.cache/ambrogio-tmp/neg.txt
+rc=1
+15
+VERIFY-0.3-DEEP-DIVES: FAILURES
+rc=0
+$ sh verify-project.sh --in-repo
+skipped        the mark's digest against the icon set's file (ambrogio/v2/api/android-chrome-512x512.png is a sibling checkout)
+verify-project: checked 8 citations, 0 missing
+verify-project: 24 citations are in sibling trees this checkout does not carry (run without --in-repo on the operator's machine)
+rc=0
+$ sed 's#^REPO=/workspace/ambrogio/v2/api/android-chrome-512x512.png$#REPO=/nonexistent/sibling-checkout/android-chrome-512x512.png#' verify-logo-files.sh > ./.verify-logo-runner-mode.sh && sh ./.verify-logo-runner-mode.sh > /home/tazpod/.cache/ambrogio-tmp/logo.txt 2>&1; echo rc=$?; tail -3 /home/tazpod/.cache/ambrogio-tmp/logo.txt; rm -f ./.verify-logo-runner-mode.sh
+rc=0
+favicon.ico    15086 bytes  b88644a59fa5dad99bf7aa9371ee52b8e2da5d24f1e6f31d45943500bf40377f
+favicon        unchanged (still the tab's favicon.ico)
+VERIFY-LOGO-FILES: OK
+rc=0
+$ git diff --name-only HEAD
+AVANZAMENTO.md
+PROGETTO.md
+ambrogio-site/site/agents.html
+ambrogio-site/site/doors.html
+ambrogio-site/site/queues.html
+rc=0
+$ git status --porcelain
+ M AVANZAMENTO.md
+ M PROGETTO.md
+ M ambrogio-site/site/agents.html
+ M ambrogio-site/site/doors.html
+ M ambrogio-site/site/queues.html
+?? review-step67-2/
+rc=0

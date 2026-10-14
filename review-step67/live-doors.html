@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The two doors, and the sandbox — Ambrogio</title>
+<meta name="description" content="One door for the operator and a smaller one for the agents, and every worker started inside a per-role Landlock sandbox.">
+<meta property="og:title" content="The two doors, and the sandbox — Ambrogio">
+<meta property="og:description" content="One door for the operator and a smaller one for the agents, and every worker started inside a per-role Landlock sandbox.">
+<meta property="og:image" content="https://ambrogio.tazlab.net/logo.png">
+<meta property="og:url" content="https://ambrogio.tazlab.net/doors.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="logo.png" width="512" height="512" alt="">
+      <span class="name">Ambrogio<span class="tld"> — tazlab.net</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shell">
+    <nav class="side-menu" aria-label="Site">
+      <p class="menu-label">The mechanisms</p>
+      <a href="index.html">Home</a>
+      <a href="queues.html">The queues</a>
+      <a href="doors.html" aria-current="page">The two doors</a>
+      <a href="agents.html">The agents</a>
+      <a href="conversation.html">The conversation</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">The two doors</p>
+      <h1>The two doors, and the sandbox</h1>
+      <p class="lead">What may an agent touch on my machine, and who can ask for what? The
+        engine serves two doors, and every worker it starts is caged before it runs.</p>
+
+      <h2>Two doors, one engine</h2>
+      <p>The same handlers are served on two addresses with two different tables of verbs. One
+        door is for the <strong>operator</strong>, and it carries every verb. The second is for
+        the <strong>agents</strong>, and it carries a smaller set, so a worker cannot accept
+        work, cannot change the settings, and cannot read the operator's material.</p>
+      <p>The boundary is held by measurement, not by convention: an operator act on the agents'
+        door answers <strong>403</strong> with a sentence saying why.</p>
+
+      <h2>The wall</h2>
+      <p>The operator's door has a wall in front of it: socket credentials identify the caller,
+        and writes carry a token. The page the binary serves is inside that wall — it is just
+        another client of the same API, and every request it makes is one an operator could
+        type himself.</p>
+
+      <h2>The sandbox</h2>
+      <p>Every worker is started through a launcher that applies a <strong>Landlock</strong>
+        policy to itself and then <code>exec</code>s the target. The process is replaced, so
+        the domain is inherited directly — a live worker shows <code>NoNewPrivs=1</code>.</p>
+      <p>The policy is an <strong>allow-list</strong>, and it is short enough to read: the
+        system directories read-only, TCP 443 (the model), the run's own tree, and the IPC
+        scopes restricted. Everything not named is not there.</p>
+      <p>The policy is <strong>per role</strong>, and it lives in the engine's own database
+        beside the role's tool declarations — so "what this kind of worker may do" is one row
+        to look at, not a convention spread across a machine.</p>
+
+      <h2>The tools, per role</h2>
+      <ul>
+        <li>A <strong>worker-external</strong> runs on the machine: it may read, search and
+          write files, run a shell, drive a browser — and it delivers.</li>
+        <li>A <strong>worker-internal</strong> runs inside the hub, so its cost is a queue and
+          not a machine: it gets the reader tools and the internal APIs, and <strong>no shell
+          and no file writes</strong>.</li>
+        <li>The <strong>operator</strong> is not a role. He is a door.</li>
+      </ul>
+
+      <h2>What the sandbox does not grant</h2>
+      <p>The policy does not give a caged worker what the Go toolchain needs — a writable
+        temporary directory and build cache, and a readable module cache. A caged worker
+        therefore cannot build the project: it fails on the environment before the compiler
+        speaks. That is a declared limit, not a hidden one, and the workaround is a worker
+        outside the cage, on purpose, for that step.</p>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Ambrogio — the Personal Agent Orchestrator of tazlab.net.</span>
+    <span>Part of <a href="https://tazlab.net">tazlab.net</a></span>
+  </div>
+</footer>
+</body>
+</html>
