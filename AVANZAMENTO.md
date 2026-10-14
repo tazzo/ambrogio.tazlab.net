@@ -173,17 +173,59 @@ they land; never rewrite history, append.
   the new sentences present, and the four deep dives are byte-for-byte the ones served before the
   push (`review-step55/`).
 
+- **[step #67] The first page says the new version, in one line and one sentence.** The
+  operator's order (2026-10-14): *«Il sito deve dire la versione nuova. In
+  `ambrogio-site/site/index.html` aggiungi la riga «Ambrogio 0.3 — The Butler» e, sotto, una
+  frase sola su cosa e' cambiato: una coda possiede un ramo e una cartella di lavoro propria,
+  l'engine atterra il suo lavoro (push e pull request), e ogni agente lavora dentro una gabbia.
+  Non toccare le altre pagine.»* The page now carries, between the hero and the body copy
+  (`ambrogio-site/site/index.html:43-46`):
+
+  ```html
+  <p class="release">Ambrogio 0.3 — The Butler</p>
+  <p class="release-note">In 0.3 a queue owns a branch and a working directory of its own,
+    the engine lands the work itself — a push, and a pull request — and every agent works
+    inside a cage.</p>
+  ```
+
+  the line is a paragraph of its own, and the sentence under it is **one** sentence (`". "` →
+  count 0) naming exactly the three changes the order names. Two rules give it its look
+  (`site/styles.css:79-81`: `.release` at the page's own 650, `.release-note` in `--dim`) — one
+  stylesheet, no framework — and the mark's own rule (`.brand img`, 40 px) is untouched. **No
+  other page changed**: `git diff --name-only HEAD -- ambrogio-site/site/` → `index.html` and
+  `styles.css` only, and the four deep dives are **byte-identical** to what the live hostname
+  serves (`cmp` on each, `review-step67/live-*.html`). `PROGETTO.md` §4 documents the page file
+  by file and its `index.html` bullet read *«no version badge»*: the bullet now carries the
+  release line and that phrase went, and §3.4's inventory of the stylesheet gained the two rules
+  (docs only; declared). The checks: `sh verify-project.sh --in-repo` → *checked 8 citations, 0
+  missing*, rc 0; `sh verify-logo-files.sh` → **OK**, rc 0, run in the runner's own mode (this
+  cage carries the sibling checkout and denies reading it, so the byte-compare against
+  `ambrogio/v2/api/android-chrome-512x512.png` — a branch the runner never takes — fires here;
+  the pinned digest, the five pages' markup, the 40 px and the favicon all pass); the step's own
+  check, `review-step67/verify-index-0.3.sh` → **OK**, 16 assertions over the page as the
+  document nginx will serve (`review-step67/checks.log`). **The page was not rendered**: this
+  cage carries no renderer — Chromium aborts on
+  `FATAL:sandbox/linux/services/proc_util.cc:38 … Permission denied` (the policy denies it
+  `/proc`) and the browser bridge is not offered on this transport — so the change is proved as
+  markup, and the visual reading is left to the publish below. The live hostname is still the
+  pre-0.3 page: `curl -sS https://ambrogio.tazlab.net/` → **200 4943**, byte-identical to
+  `index.html` at `HEAD`, `grep -c 'Ambrogio 0.3'` → **0** (`review-step67/live-before.txt`).
+
 ## Next
 
-1. **Publish, and verify the site end to end.** The source is reconciled ([step #46]) and the
-   k8s half is already wired in `/workspace/tazlab-k8s` (`apps/base/ambrogio-site/*`,
-   `apps/cluster/ambrogio-site/*`, `infrastructure/automation/ambrogio-site/*`, the
-   `cluster-instances` registration and `clusters/tazlab-k8s/apps-ambrogio-site.yaml`; the
-   marked image line still reads `:latest`). Push the source to `master`, confirm Docker Hub
-   carries `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>`, confirm Flux commits the tag
-   into `apps/base/ambrogio-site/ambrogio-site.yaml` and rolls the Deployment, then check that
-   the five pages answer **200** over HTTPS with a valid Let's Encrypt chain and that the mark,
-   the favicon and the woff2 are served (PROGETTO §7).
+1. **The four deep dives do not carry 0.3 yet.** The first page states the new version and the
+   three changes it brought ([step #67]); the deep dives say nothing of them: `queues.html`
+   still opens *«It is not a list of messages and not a git branch»*, `doors.html` gives the
+   sandbox to the worker alone, and `agents.html` names no cage at all. Bring each page to what
+   0.3 is, in its own words, with the engine's source read before it is written — the site is
+   the product's public face, and a mechanism the product carries has to be readable there.
+2. **The 0.3 line is in the source; the lane has to carry it.** The live `/` answers **200 4943**
+   and does not carry the line ([step #67]; `review-step67/live-before.txt`). The publish is the
+   one PROGETTO §7 already states, and nothing about it is new: push → the Action builds
+   `tazzo/tazlab-ambrogio-site:ambrogio-site-<N>-<sha>` → Flux commits the tag into
+   `apps/base/ambrogio-site/ambrogio-site.yaml` and rolls the Deployment; then read `/` back,
+   with the line and the sentence on it, and the four deep dives as **200** — byte-for-byte the
+   pages they are today.
 
 ## Open questions
 

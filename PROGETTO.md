@@ -162,7 +162,8 @@ The palette is not a new one: it is the one the engine already draws with, read 
 
 `site/styles.css` — about 150 lines, written by hand, **no framework, no CDN, no build step**.
 It defines exactly: the `@font-face`, the tokens above, a `.wrap` measure (max 720 px), the
-sidebar grid, the type scale (h1/h2/h3/body/lead/eyebrow), lists, `code`/`pre`, one `.card` for
+sidebar grid, the type scale (h1/h2/h3/body/lead/eyebrow, and `.release`/`.release-note` for
+the release line [step #67]), lists, `code`/`pre`, one `.card` for
 the four deep dives, the header/footer, and one media query that collapses the sidebar.
 
 - **No framework:** the whole site is five pages and one author. A framework is more bytes than
@@ -177,7 +178,7 @@ the four deep dives, the header/footer, and one media query that collapses the s
 
 ### `site/index.html` — *Ambrogio — the Personal Agent Orchestrator of tazlab.net*
 
-The main page. The claim, five paragraphs and four cards:
+The main page. The claim, the release line and its sentence, five paragraphs and four cards:
 
 - the claim, in the operator's words §1: it keeps the trace of what is done, gives order and
   documentation to every movement, and its own internal agents keep it correct;
@@ -198,9 +199,13 @@ The main page. The claim, five paragraphs and four cards:
   what and when — against one place where the work is written down and the documents stay
   (`ambrogio/README.md` §1);
 - the register: **not a professional product**, a small thing that does its job well;
+- **the release line, under the hero** [step #67]: `Ambrogio 0.3 — The Butler`, and one
+  sentence under it on what changed in it — a queue owns a branch and a working directory of
+  its own, the engine lands the work itself (a push, and a pull request), and every agent works
+  inside a cage (the operator's words, 2026-10-14);
 - **four cards**, one per deep dive, each one sentence naming the question it answers.
 
-No feature list, no screenshot gallery, no version badge.
+No feature list, no screenshot gallery.
 
 ### `site/queues.html` — *The queues, and who accepts them*
 
