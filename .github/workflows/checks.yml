@@ -1,0 +1,32 @@
+name: The site's own checks
+
+# **The checks run on the pull request, and not only after the merge** (operator, 2026-10-15:
+# *"i check sulla PR: sistema come deve essere"*). `publish.yml` runs on `push` to `main`, so
+# until now the repository's own checks stood *after* the merge: a tree that fails them had
+# already published an image, and the fix was a second commit. The same two scripts run here,
+# on the request — `verify-project.sh --in-repo` (the citations in PROGETTO.md this checkout
+# can be held to) and `verify-logo-files.sh` (the mark's file half: the logo's digest, the five
+# pages' markup, the height the stylesheet states, the favicon) — and they run **offline** and
+# without the sibling trees, exactly as they do in the publish lane, because a runner carries
+# this repository and nothing else.
+#
+# **This is a check, not a gate.** What makes a merge wait for it is a rule on the repository
+# (a ruleset requiring the check), and the operator decided against a ruleset on 2026-10-14:
+# the check is visible on the request, and the engine reads the request's state before it
+# merges (`v2/queue/land.go`). A check nobody can see is not a check; a check that blocks
+# nothing is still the reading that says whether the work holds.
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: The repository's own checks
+        run: |
+          sh verify-project.sh --in-repo
+          sh verify-logo-files.sh
